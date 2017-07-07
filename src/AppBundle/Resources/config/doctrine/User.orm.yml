@@ -1,0 +1,57 @@
+AppBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        firstName:
+            type: string
+            length: '45'
+        lastName:
+            type: string
+            length: '45'
+            nullable: true
+        dob:
+            type: date
+        institution:
+            type: string
+            length: '100'
+        joinDate:
+            type: date
+        sessionCount:
+            type: integer
+            nullable: true
+    oneToMany:
+        logins:
+            targetEntity: Login
+            mappedBy: user
+    oneToMany:
+        sessionCreations:
+            targetEntity: ampedsession
+            mappedBy: createdBy
+    oneToMany:
+        students:
+            targetEntity: User
+            mappedBy: mentor
+    manyToOne:
+        mentor:
+            targetEntity: User
+            inversedBy: students
+    manyToMany:
+      sessions:
+        targetEntity: Session
+        inversedBy: users
+        joinTable:
+          name: users_sessions
+          joinColumns:
+            user_id:
+              referencedColumnName: id
+          inverseJoinColumns:
+            session_id:
+              referencedColumnName: id            
+    lifecycleCallbacks: {  }

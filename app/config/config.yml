@@ -10,10 +10,10 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
-        resource: '%kernel.project_dir%/app/config/routing.yml'
+        resource: '%kernel.root_dir%/config/routing.yml'
         strict_requirements: ~
     form: ~
     csrf_protection: ~
@@ -23,15 +23,12 @@ framework:
         engines: ['twig']
     default_locale: '%locale%'
     trusted_hosts: ~
+    trusted_proxies: ~
     session:
-        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id: session.handler.native_file
-        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        # handler_id set to null will use default session handler from php.ini
+        handler_id: ~
     fragments: ~
     http_method_override: true
-    assets: ~
-    php_errors:
-        log: true
 
 # Twig Configuration
 twig:
@@ -50,7 +47,7 @@ doctrine:
         charset: UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.project_dir%/var/data/data.sqlite"
+        #     e.g. database_path: '%kernel.root_dir%/data/data.db3'
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #path: '%database_path%'
@@ -67,3 +64,73 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "slimaye@uh.edu"
+        sender_name: "lala"
+        
+easy_admin:
+    site_name: 'AMPED online (Admin)'
+    formats:
+        date:     'd/m/Y'
+        time:     'H:i'
+        datetime: 'd/m/Y H:i' 
+    entities:
+        User:
+            class: AppBundle\Entity\User        
+            label: 'Users'
+            new:
+                fields:
+                    - firstName
+                    - lastName
+                    - username
+                    - email
+                    - { property: 'plainPassword', type: 'password', label: 'Password' }
+                    - { property: 'dob', type: 'birthday', label: 'Date of birth' }
+                    - institution
+                    - { property: 'roles', label: 'Roles for this user', type: 'collection', type_options: { entry_type: choice, entry_options:  { choices: [  ROLE_SUPER_ADMIN, ROLE_MENTOR, ROLE_PROTEGE ] } } }
+            list:
+                title: 'Most recent users'
+                fields:
+                    - id
+                    - firstName
+                    - lastName
+                    - username
+                    - email
+                    - institution
+                    - { property: 'dob', label: 'Date of birth' }
+                    - joinDate
+                    - enabled
+                    - lastLogin
+                    - roles
+        AmpedSession:
+            class: AppBundle\Entity\ampedsession
+            label: 'AMPED Session'
+            form:
+                fields:
+                    - { property: 'num', label: 'Session number' }
+                    - title
+                    - description
+            list:
+                title: 'Sessions in AMPED'
+                fields:
+                    - { property: 'num', label: 'Session number' }
+                    - title
+                    - description
+                    - createdAt
+                    - createdBy
+        Session:
+            class: AppBundle\Entity\Session
+            label: 'Sessions'
+            disabled_actions: ['new','edit', 'delete']
+            list:
+                title: 'Sessions in progress'
+                fields:
+                    - users
+                    - ampedSession
+                    - start
+                    - end

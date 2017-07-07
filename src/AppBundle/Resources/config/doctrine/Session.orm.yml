@@ -1,0 +1,27 @@
+AppBundle\Entity\Session:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SessionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        start:
+            type: datetime
+        end:
+            type: datetime
+            nullable: true
+    manyToOne:
+        ampedSession:
+            targetEntity: ampedsession
+            inversedBy: sessions
+    manyToMany:
+        users:
+            targetEntity: User
+            mappedBy: sessions
+   
+    
+    lifecycleCallbacks: {  }
