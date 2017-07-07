@@ -92,7 +92,7 @@ easy_admin:
                     - { property: 'plainPassword', type: 'password', label: 'Password' }
                     - { property: 'dob', type: 'birthday', label: 'Date of birth' }
                     - institution
-                    - { property: 'roles', label: 'Roles for this user', type: 'collection', type_options: { entry_type: choice, entry_options:  { choices: [  ROLE_SUPER_ADMIN, ROLE_MENTOR, ROLE_PROTEGE ] } } }
+                    - { property: 'roles', label: 'Roles for this user', type: 'collection', type_options: { entry_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType, entry_options:  { choices: {  ROLE_SUPER_ADMIN: 'ROLE_SUPER_ADMIN', ROLE_MENTOR: ROLE_MENTOR, ROLE_PROTEGE:ROLE_PROTEGE } } } }
             list:
                 title: 'Most recent users'
                 fields:
