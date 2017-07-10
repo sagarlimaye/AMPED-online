@@ -111,7 +111,23 @@ easy_admin:
                     - joinDate
                     - enabled
                     - lastLogin
+                    - mentor
                     - roles
+            show:
+                fields:
+                    - id
+                    - firstName
+                    - lastName
+                    - username
+                    - email
+                    - institution
+                    - { property: 'dob', label: 'Date of birth' }
+                    - joinDate
+                    - enabled
+                    - lastLogin
+                    - mentor
+                    - roles
+
         AmpedSession:
             class: AppBundle\Entity\ampedsession
             label: 'AMPED Session'
