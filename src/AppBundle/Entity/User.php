@@ -65,8 +65,7 @@ class User extends BaseUser
         $this->sessions = new ArrayCollection();
         $this->logins = new ArrayCollection();
         $this->sessionCreations = new ArrayCollection();
-        $this->dob = new \DateTime('1994-06-11');
-        $this->joinDate = new \DateTime('2017-06-30');
+        $this->joinDate = new \DateTime(date('Y-m-d'));
         $this->plainPassword = $this->generatePassword(9);
         
         parent::__construct();
@@ -258,6 +257,10 @@ class User extends BaseUser
     public function getFirstName()
     {
         return $this->firstName;
+    }
+    public function getName()
+    {
+        return $this->firstName.' '.$this->lastName;
     }
 
     /**

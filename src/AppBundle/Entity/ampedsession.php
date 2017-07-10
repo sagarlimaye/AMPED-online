@@ -28,6 +28,11 @@ class ampedsession
     private $createdBy;
 
     /**
+     * @var \DateTime
+     */
+    private $createdAt;
+    
+    /**
      * @var string
      */
     private $description;
@@ -44,6 +49,12 @@ class ampedsession
         return $this->id;
     }
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
+    }
+    
+    
     /**
      * Set sessions
      *
@@ -164,10 +175,6 @@ class ampedsession
     {
         return $this->description;
     }
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
 
 
     /**
