@@ -89,7 +89,7 @@ easy_admin:
                     - lastName
                     - username
                     - email
-                    - { property: 'plainPassword', type: 'password', label: 'Password' }
+                    - { property: 'plainPassword', help: "A password has been auto-generated for you. When you click 'Save Changes', it will be sent to the email you entered above.", type: 'password', label: 'Password', type_options: { disabled: true, always_empty: true } }
                     - { property: 'dob', type: 'birthday', label: 'Date of birth' }
                     - institution
                     - { property: 'roles', label: 'Roles for this user', type: 'collection', type_options: { entry_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType, entry_options:  { choices: {  ROLE_SUPER_ADMIN: 'ROLE_SUPER_ADMIN', ROLE_MENTOR: ROLE_MENTOR, ROLE_PROTEGE:ROLE_PROTEGE } } } }

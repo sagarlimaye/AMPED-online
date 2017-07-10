@@ -67,10 +67,22 @@ class User extends BaseUser
         $this->sessionCreations = new ArrayCollection();
         $this->dob = new \DateTime('1994-06-11');
         $this->joinDate = new \DateTime('2017-06-30');
+        $this->plainPassword = $this->generatePassword(9);
         
         parent::__construct();
     }
     
+    function generatePassword($length = 8) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $count = mb_strlen($chars);
+
+    for ($i = 0, $result = ''; $i < $length; $i++) {
+        $index = rand(0, $count - 1);
+        $result .= mb_substr($chars, $index, 1);
+    }
+
+    return $result;
+    }
     
     /**
      * Get number of sessions completed
