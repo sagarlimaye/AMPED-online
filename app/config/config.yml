@@ -131,6 +131,7 @@ easy_admin:
         AmpedSession:
             class: AppBundle\Entity\ampedsession
             label: 'AMPED Session'
+            controller: AppBundle\Controller\ampedsessionController
             form:
                 fields:
                     - { property: 'num', label: 'Session number' }
