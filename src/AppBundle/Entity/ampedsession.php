@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * ampedsession
  */
@@ -52,6 +52,7 @@ class ampedsession
     public function __construct()
     {
         $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
+        $this->sessions = new ArrayCollection();
     }
     
     

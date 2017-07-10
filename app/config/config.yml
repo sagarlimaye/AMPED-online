@@ -63,14 +63,18 @@ swiftmailer:
     host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
+    port: 587
+    encryption: tls
     spool: { type: memory }
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.default 
     from_email:
-        address: "slimaye@uh.edu"
+        address: "sagarl3232@hotmail.com"
         sender_name: "lala"
         
 easy_admin:
