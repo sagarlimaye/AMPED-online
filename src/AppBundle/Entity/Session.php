@@ -24,6 +24,14 @@ class Session
     private $end;
     
     private $users;
+
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        parent::__construct();
+    }
+
     
     /**
      * Get id
