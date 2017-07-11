@@ -22,12 +22,21 @@ class Login
      */
     private $status;
 
+    /**
+     * @var User
+     */
     private $user;
+
+    
+    public function __construct() {
+        $this->ts = new \DateTime(date('Y-m-d'));
+    }
+
 
     /**
      * Set user
      *
-     * @param \DateTime $user
+     * @param User $user
      *
      * @return Login
      */
@@ -41,7 +50,7 @@ class Login
     /**
      * Get user
      *
-     * @return \DateTime
+     * @return User
      */
     public function getUser()
     {
