@@ -30,7 +30,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ path('index_list') }}">Home</a></li>
+            <li><a href="{{ path(
+'index_list') }}">Home</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
           </ul>
@@ -44,12 +45,12 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             {% block sidebarOptions %}
+            
             {% endblock %}
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         {% block mainContent %}
-          
         {% endblock %}
         </div>
       </div>
