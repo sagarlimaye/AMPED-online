@@ -11,12 +11,14 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use AppBundle\Entity\Login;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Http\SecurityEvents;
 /**
  * Description of LogoutLogger
  *
  * @author sagar
  */
-class LogoutLogger extends Controller implements LogoutSuccessHandlerInterface
+class Logger extends Controller implements LogoutSuccessHandlerInterface, EventSubscriberInterface
 {
     
     //put your code here
@@ -32,4 +34,24 @@ class LogoutLogger extends Controller implements LogoutSuccessHandlerInterface
         
         return $this->redirect('login');
     }
+    public static function getSubscribedEvents()
+    {
+        // return the subscribed events, their methods and priorities
+        return array(
+        SecurityEvents::INTERACTIVE_LOGIN => array(
+               array('onFirstLogin', 0)
+           )
+        );
+    }
+    public function onFirstLogin()
+    {
+        $attempt = new Login();
+        $attempt->setUser($this->getUser());
+        $attempt->setStatus(1);
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($attempt);
+        $em->flush();       
+    }
+    
 }

@@ -32,7 +32,7 @@ security:
                 # csrf_provider: form.csrf_provider
 
             logout:       
-                success_handler: AppBundle\Controller\LogoutLogger
+                success_handler: AppBundle\Controller\Logger
             anonymous:    true
             # activate different ways to authenticate
 
