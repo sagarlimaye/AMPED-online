@@ -160,3 +160,15 @@ easy_admin:
                     - ampedSession
                     - start
                     - end
+        Login:
+            class: AppBundle\Entity\Login
+            label: 'Login/logout attempts'
+            disabled_actions: ['new','edit', 'delete']
+            list:
+                title: 'Login and logout'
+                fields:
+                    - id
+                    - user
+                    - { property: 'ts', label: 'Timestamp' }
+                    - { property: status, type: 'boolean', label: 'Login: YES | Logout: NO' }
+            
