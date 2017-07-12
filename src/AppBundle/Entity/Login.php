@@ -29,7 +29,8 @@ class Login
 
     
     public function __construct() {
-        $this->ts = new \DateTime(date('Y-m-d'));
+        
+        $this->ts = new \DateTime(null, new \DateTimeZone('America/Chicago'));
     }
 
 
