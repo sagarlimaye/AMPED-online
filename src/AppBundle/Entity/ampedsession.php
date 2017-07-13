@@ -51,7 +51,7 @@ class ampedsession
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
+        $this->createdAt = new \DateTime(null, new \DateTimeZone('America/Chicago'));
         $this->sessions = new ArrayCollection();
     }
     
