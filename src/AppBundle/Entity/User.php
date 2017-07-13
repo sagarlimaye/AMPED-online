@@ -50,6 +50,10 @@ class User extends BaseUser
     
     private $logins;
     private $sessionCreations;
+    public function __toString() {
+        return $this->getName();
+        parent::__toString();
+    }
     /**
      * Get id
      *
