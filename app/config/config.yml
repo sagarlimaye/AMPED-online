@@ -162,12 +162,11 @@ easy_admin:
                     - end
         Login:
             class: AppBundle\Entity\Login
-            label: 'Login/logout attempts'
+            label: 'Login and logout'
             disabled_actions: ['new','edit', 'delete']
             list:
-                title: 'Login and logout'
+                title: 'All successful attempts'
                 fields:
-                    - id
                     - user
                     - { property: 'ts', label: 'Timestamp' }
                     - { property: status, type: 'boolean', label: 'Login: YES | Logout: NO' }
