@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Session
  */
@@ -25,11 +26,11 @@ class Session
     
     private $users;
 
+    private $activitiesCompleted;
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        
-        parent::__construct();
+        $this->users = new ArrayCollection();
+        $this->activitiesCompleted = new ArrayCollection();
     }
 
     
@@ -127,5 +128,30 @@ class Session
         return $this->end;
     }
 
+    /**
+     * Set activitiesCompleted
+     *
+     * @param Activity $activitiesCompleted
+     *
+     * @return Session
+     */
+    public function setActivitiesCompleted($activitiesCompleted)
+    {
+        $this->activitiesCompleted = $activitiesCompleted;
+
+        return $this;
+    }
+
+    /**
+     * Get activitiesCompleted
+     *
+     * @return Activity
+     */
+    public function getActivitiesCompleted()
+    {
+        return $this->activitiesCompleted;
+    } 
+    
+    
 }
 
