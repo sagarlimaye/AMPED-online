@@ -39,6 +39,7 @@ class ampedsession
     
     private $sessions;
 
+    private $has7Words;
     /**
      * Get id
      *
@@ -53,6 +54,7 @@ class ampedsession
     {
         $this->createdAt = new \DateTime(null, new \DateTimeZone('America/Chicago'));
         $this->sessions = new ArrayCollection();
+        $this->has7Words = false;
     }
     
     
@@ -80,6 +82,29 @@ class ampedsession
         return $this->sessions;
     }    
     
+    /**
+     * Set whether this session should contain the 7 Words icebreaker activity
+     *
+     * @param integer $has7Words
+     *
+     * @return ampedsession
+     */
+    public function setHas7Words($has7Words)
+    {
+        $this->has7Words = $has7Words;
+
+        return $this;
+    }
+
+    /**
+     * Get whether this session should contain the 7 Words icebreaker activity
+     *
+     * @return int
+     */
+    public function getHas7Words()
+    {
+        return $this->has7Words;
+    }
     
     /**
      * Set num

@@ -21,6 +21,8 @@ AppBundle\Entity\ampedsession:
             nullable: true  
         createdAt:
             type: datetime
+        has7Words:
+            type: boolean
     manyToOne:
         createdBy:
             targetEntity: User
