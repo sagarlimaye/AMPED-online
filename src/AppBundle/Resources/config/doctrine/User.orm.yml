@@ -30,11 +30,9 @@ AppBundle\Entity\User:
         logins:
             targetEntity: Login
             mappedBy: user
-    oneToMany:
         sessionCreations:
             targetEntity: ampedsession
             mappedBy: createdBy
-    oneToMany:
         students:
             targetEntity: User
             mappedBy: mentor
