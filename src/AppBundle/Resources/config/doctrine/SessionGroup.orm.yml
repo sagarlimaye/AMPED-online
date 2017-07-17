@@ -1,0 +1,21 @@
+AppBundle\Entity\SessionGroup:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SessionGroupRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:
+            type: datetime
+        name:
+            type: string
+            length: '255'
+    manyToMany:
+        ampedSessions:
+            targetEntity: ampedSession
+            indexBy: num                    
+    lifecycleCallbacks: {  }
