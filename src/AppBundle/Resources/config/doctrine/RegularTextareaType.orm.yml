@@ -1,0 +1,5 @@
+AppBundle\Entity\RegularTextareaType:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\RegularTextareaTypeRepository
+    lifecycleCallbacks: {  }

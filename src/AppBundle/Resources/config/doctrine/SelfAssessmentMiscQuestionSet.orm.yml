@@ -1,0 +1,9 @@
+AppBundle\Entity\SelfAssessmentMiscQuestionSet:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SelfAssessmentMiscQuestionSetRepository
+    fields:
+        title:
+            type: string
+            nullable: false
+    lifecycleCallbacks: {  }

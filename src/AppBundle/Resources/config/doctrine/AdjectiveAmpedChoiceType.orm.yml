@@ -1,0 +1,9 @@
+AppBundle\Entity\AdjectiveAmpedChoiceType:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AdjectiveAmpedChoiceTypeRepository
+    fields:
+        adj:
+            type: string
+            nullable: true
+    lifecycleCallbacks: {  }

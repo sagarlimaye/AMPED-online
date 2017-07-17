@@ -1,0 +1,13 @@
+AppBundle\Entity\IcebreakerQuestionSet:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string    
+    discriminatorMap:
+       icebreaker: IcebreakerQuestionSet
+       tic: TICIcebreakerQuestionSet
+       abm: ABMIcebreakerQuestionSet
+    table: null
+    repositoryClass: AppBundle\Repository\IcebreakerQuestionSetRepository
+    lifecycleCallbacks: {  }

@@ -1,0 +1,5 @@
+AppBundle\Entity\DefinitiveAmpedChoiceType:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\DefinitiveAmpedChoiceTypeRepository
+    lifecycleCallbacks: {  }

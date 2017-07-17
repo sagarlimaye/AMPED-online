@@ -1,0 +1,33 @@
+AppBundle\Entity\QuestionSet:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        set: QuestionSet
+        icebreaker: IcebreakerQuestionSet
+        misc: MiscQuestionSet
+        abm: ABMIcebreakerQuestionSet
+        tic: TICIcebreakerQuestionSet
+        change: ChangeFormMiscQuestionSet
+        self: SelfAssessmentMiscQuestionSet
+        maf: MAFMiscQuestionSet
+    table: null
+    repositoryClass: AppBundle\Repository\QuestionSetRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:
+            type: datetime
+#    manyToOne:
+#        createdBy:
+#            targetEntity: User
+#    manyToMany:
+#        questions:
+#            targetEntity: QuestionType  
+    lifecycleCallbacks: {  }

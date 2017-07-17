@@ -1,0 +1,5 @@
+AppBundle\Entity\ABMIcebreakerQuestionSet:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ABMIcebreakerQuestionSetRepository
+    lifecycleCallbacks: {  }

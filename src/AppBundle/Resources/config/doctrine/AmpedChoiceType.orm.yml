@@ -1,0 +1,14 @@
+AppBundle\Entity\AmpedChoiceType:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        ampedchoice: AmpedChoiceType
+        tenchoice: TenAmpedChoiceType
+        adjectivechoice: AdjectiveAmpedChoiceType
+        definitivechoice: DefinitiveAmpedChoiceType
+    table: null
+    repositoryClass: AppBundle\Repository\AmpedChoiceTypeRepository
+    lifecycleCallbacks: {  }

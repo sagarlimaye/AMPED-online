@@ -1,0 +1,14 @@
+AppBundle\Entity\MiscQuestionSet:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string    
+    discriminatorMap:
+        misc: MiscQuestionSet
+        change: ChangeFormMiscQuestionSet
+        self: SelfAssessmentMiscQuestionSet
+        maf: MAFMiscQuestionSet
+    table: null
+    repositoryClass: AppBundle\Repository\MiscQuestionSetRepository
+    lifecycleCallbacks: {  }

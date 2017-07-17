@@ -1,0 +1,28 @@
+AppBundle\Entity\QuestionType:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        question: QuestionType
+        ampedtext: AmpedTextareaType
+        tictext: TICTextareaType
+        regulartext: RegularTextareaType
+        ampedchoice: AmpedChoiceType
+        tenchoice: TenAmpedChoiceType
+        adjectivechoice: AdjectiveAmpedChoiceType
+        definitivechoice: DefinitiveAmpedChoiceType
+    table: null
+    repositoryClass: AppBundle\Repository\QuestionTypeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }

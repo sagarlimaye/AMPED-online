@@ -1,0 +1,5 @@
+AppBundle\Entity\ChangeFormMiscQuestionSet:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ChangeFormMiscQuestionSetRepository
+    lifecycleCallbacks: {  }

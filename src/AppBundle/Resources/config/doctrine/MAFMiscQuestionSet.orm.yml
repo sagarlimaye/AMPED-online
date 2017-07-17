@@ -1,0 +1,5 @@
+AppBundle\Entity\MAFMiscQuestionSet:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\MAFMiscQuestionSetRepository
+    lifecycleCallbacks: {  }
