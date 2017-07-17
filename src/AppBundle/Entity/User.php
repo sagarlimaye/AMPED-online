@@ -52,7 +52,6 @@ class User extends BaseUser
     private $sessionCreations;
     public function __toString() {
         return $this->getName();
-        parent::__toString();
     }
     /**
      * Get id
