@@ -76,6 +76,13 @@ fos_user:
     from_email:
         address: "sagarl3232@hotmail.com"
         sender_name: "lala"
+
+ivory_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            toolbar: standard
+        
         
 easy_admin:
     site_name: 'AMPED online (Admin)'
@@ -140,7 +147,7 @@ easy_admin:
                 fields:
                     - { property: 'num', label: 'Session number' }
                     - title
-                    - description
+                    - {property: 'description', type: 'ckeditor' }
             list:
                 title: 'Sessions in AMPED'
                 fields:
