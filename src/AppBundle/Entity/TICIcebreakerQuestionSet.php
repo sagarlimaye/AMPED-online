@@ -7,5 +7,6 @@ namespace AppBundle\Entity;
  */
 class TICIcebreakerQuestionSet extends QuestionSet
 {
+    
 }
 

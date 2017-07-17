@@ -17,23 +17,23 @@ class QuestionSet
      */
     private $createdAt;
 
-//    /**
-//     * @var \stdClass
-//     */
-//    private $createdBy;
+    /**
+     * @var \stdClass
+     */
+    private $createdBy;
 //
-//    /**
-//     * @var array
-//     */
+    /**
+     * @var array
+     */
 //    private $questions;
 
     
 //    private $session;
     
     
-    public function __construct() {
-        $this->questions = new ArrayCollection();
-    }
+//    public function __construct() {
+//        $this->questions = new ArrayCollection();
+//    }
     
     
     /**
@@ -96,52 +96,52 @@ class QuestionSet
         return $this->createdAt;
     }
 
-//    /**
-//     * Set createdBy
-//     *
-//     * @param \stdClass $createdBy
-//     *
-//     * @return QuestionSet
-//     */
-//    public function setCreatedBy($createdBy)
-//    {
-//        $this->createdBy = $createdBy;
+    /**
+     * Set createdBy
+     *
+     * @param \stdClass $createdBy
+     *
+     * @return QuestionSet
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \stdClass
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
 //
-//        return $this;
-//    }
-//
-//    /**
-//     * Get createdBy
-//     *
-//     * @return \stdClass
-//     */
-//    public function getCreatedBy()
-//    {
-//        return $this->createdBy;
-//    }
-//
-//    /**
-//     * Set questions
-//     *
-//     * @param array $questions
-//     *
-//     * @return QuestionSet
-//     */
-//    public function setQuestions($questions)
-//    {
-//        $this->questions = $questions;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get questions
-//     *
-//     * @return array
-//     */
-//    public function getQuestions()
-//    {
-//        return $this->questions;
-//    }
+    /**
+     * Set questions
+     *
+     * @param array $questions
+     *
+     * @return QuestionSet
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+
+        return $this;
+    }
+
+    /**
+     * Get questions
+     *
+     * @return array
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 }
 

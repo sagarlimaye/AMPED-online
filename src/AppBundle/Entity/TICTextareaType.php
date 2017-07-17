@@ -7,5 +7,6 @@ namespace AppBundle\Entity;
  */
 class TICTextareaType extends AmpedTextareaType
 {
+    
 }
 

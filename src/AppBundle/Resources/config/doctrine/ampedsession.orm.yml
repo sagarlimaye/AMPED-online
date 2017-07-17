@@ -23,14 +23,36 @@ AppBundle\Entity\ampedsession:
             type: datetime
         has7Words:
             type: boolean
+        hasMeShield:
+            type: boolean
+        hasOrgChart:
+            type: boolean
+        hasModules:
+            type: boolean
     manyToOne:
         createdBy:
             targetEntity: User
             inversedBy: sessionsCreated
-
+        tic:
+            targetEntity: TICIcebreakerQuestionSet
+        abm:
+            targetEntity: ABMIcebreakerQuestionSet
+        changeFormQuestions:
+            targetEntity: ChangeFormMiscQuestionSet
+        selfAssessmentQuestions:
+            targetEntity: SelfAssessmentMiscQuestionSet
+        MAFQuestions:
+            targetEntity: MAFMiscQuestionSet
     oneToMany:
         sessions:
             targetEntity: Session
             mappedBy: ampedSession
-
+#    manyToMany:
+#        icebreakerQuestions:
+#            targetEntity: IcebreakerQuestionSet
+#        miscQuestions:
+#            targetEntity: MiscQuestionSet
+    
+    
+    
     lifecycleCallbacks: {  }

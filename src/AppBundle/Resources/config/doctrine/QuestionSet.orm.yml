@@ -24,9 +24,9 @@ AppBundle\Entity\QuestionSet:
     fields:
         createdAt:
             type: datetime
-#    manyToOne:
-#        createdBy:
-#            targetEntity: User
+    manyToOne:
+        createdBy:
+            targetEntity: User
 #    manyToMany:
 #        questions:
 #            targetEntity: QuestionType  
