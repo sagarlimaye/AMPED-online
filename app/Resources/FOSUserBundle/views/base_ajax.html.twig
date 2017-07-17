@@ -1,0 +1,11 @@
+
+    
+{% block title_and_description %}
+{{ session.title | default('') }}    
+{{ activity.title | default('') }}
+{{ activity.description|default('')}}
+{% endblock %}
+{% block all_surveys %}
+{% endblock %}
+
+
