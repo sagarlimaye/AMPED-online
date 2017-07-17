@@ -1,0 +1,11 @@
+{% extends request.ajax ? 'base.html.twig' : 'base_ajax.html.twig' %}
+
+{% block mainContent %}
+
+{{ title | default('') }}
+{{ description|default('')}}
+{% block surveys %}
+{% endblock %}
+
+{% endblock %}
+
