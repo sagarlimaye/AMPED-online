@@ -1,13 +1,5 @@
 AppBundle\Entity\AmpedTextareaType:
     type: entity
-    inheritanceType: SINGLE_TABLE
-    discriminatorColumn:
-        name: discr
-        type: string
-    discriminatorMap:
-        ampedtext: AmpedTextareaType
-        tictext: TICTextareaType
-        regular: RegularTextareaType
     table: null
     repositoryClass: AppBundle\Repository\AmpedTextareaTypeRepository
     lifecycleCallbacks: {  }

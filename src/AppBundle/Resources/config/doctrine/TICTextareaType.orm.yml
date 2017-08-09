@@ -1,5 +1,0 @@
-AppBundle\Entity\TICTextareaType:
-    type: entity
-    table: null
-    repositoryClass: AppBundle\Repository\TICTextareaTypeRepository
-    lifecycleCallbacks: {  }
