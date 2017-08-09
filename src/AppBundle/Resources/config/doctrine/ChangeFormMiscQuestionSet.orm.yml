@@ -2,13 +2,4 @@ AppBundle\Entity\ChangeFormMiscQuestionSet:
     type: entity
     table: null
     repositoryClass: AppBundle\Repository\ChangeFormMiscQuestionSetRepository
-#            targetEntity: AmpedChoiceType
-#            joinTable:
-#                name: changeformquestionset_questions
-#                joinColumns:
-#                    changeform_id:
-#                        referencedColumnName: id
-#                inverseJoinColumns:
-#                    definitivechoice_id:
-#                        referencedColumnName: id
     lifecycleCallbacks: {  }
