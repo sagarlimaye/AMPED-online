@@ -284,7 +284,7 @@ class ampedsession
     {
         return $this->abm;
     }
-    public function getChangeForm()
+    public function getChangeFormQuestions()
     {
         return $this->changeFormQuestions;
     }
