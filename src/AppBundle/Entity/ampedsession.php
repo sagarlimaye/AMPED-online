@@ -2,9 +2,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
-/**
- * ampedsession
- */
+
 class ampedsession
 {
     /**
@@ -17,10 +15,15 @@ class ampedsession
      */
     private $num;
 
-    /**
-     * @var string
-     */
-    private $title;
+//    /**
+//     * @var string
+//     */
+//    private $title;
+//    
+//    /**
+//     * @var string
+//     */
+//    private $description;
 
     /**
      * @var int
@@ -32,12 +35,6 @@ class ampedsession
      */
     private $createdAt;
     
-    /**
-     * @var string
-     */
-    private $description;
-    
-    private $sessions;
 
     private $has7Words;
     
@@ -281,30 +278,54 @@ class ampedsession
         return $this->num;
     }
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return ampedsession
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
+//    /**
+//     * Set title
+//     *
+//     * @param string $title
+//     *
+//     * @return ampedsession
+//     */
+//    public function setTitle($title)
+//    {
+//        $this->title = $title;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get title
+//     *
+//     * @return string
+//     */
+//    public function getTitle()
+//    {
+//        return $this->title;
+//    }
+//
+//    /**
+//     * Set description
+//     *
+//     * @param string $description
+//     *
+//     * @return ampedsession
+//     */
+//    public function setDescription($description)
+//    {
+//        $this->description = $description;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get description
+//     *
+//     * @return string
+//     */
+//    public function getDescription()
+//    {
+//        return $this->description;
+//    }
+//
     /**
      * Set createdBy
      *
@@ -329,29 +350,6 @@ class ampedsession
         return $this->createdBy;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return ampedsession
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
 
     /**

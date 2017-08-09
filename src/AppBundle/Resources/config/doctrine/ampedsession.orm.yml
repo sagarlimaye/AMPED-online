@@ -12,13 +12,13 @@ AppBundle\Entity\ampedsession:
         num:
             type: integer
             unique: true
-        title:
-            type: string
-            length: '255'
-            nullable: true
-        description:
-            type: text
-            nullable: true  
+#        title:
+#            type: string
+#            length: '255'
+#            nullable: true
+#        description:
+#            type: text
+#            nullable: true  
         createdAt:
             type: datetime
         has7Words:
