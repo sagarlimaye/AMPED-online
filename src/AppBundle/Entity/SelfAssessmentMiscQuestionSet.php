@@ -12,6 +12,7 @@ class SelfAssessmentMiscQuestionSet extends QuestionSet
     
     public function __construct() {
         $this->title = 'Self-assessment sheet';
+        parent::__construct();
     }
     
     public function getTitle()

@@ -8,10 +8,10 @@ AppBundle\Entity\QuestionSet:
         set: QuestionSet
         icebreaker: IcebreakerQuestionSet
         misc: MiscQuestionSet
+        self: SelfAssessmentMiscQuestionSet
         abm: ABMIcebreakerQuestionSet
         tic: TICIcebreakerQuestionSet
         change: ChangeFormMiscQuestionSet
-        self: SelfAssessmentMiscQuestionSet
         maf: MAFMiscQuestionSet
     table: null
     repositoryClass: AppBundle\Repository\QuestionSetRepository
@@ -24,10 +24,14 @@ AppBundle\Entity\QuestionSet:
     fields:
         createdAt:
             type: datetime
+        name:
+            type: string
+            nullable: false
     manyToOne:
         createdBy:
             targetEntity: User
-#    manyToMany:
-#        questions:
-#            targetEntity: QuestionType  
+    manyToMany:
+        questions:
+           targetEntity: QuestionType  
+           cascade: [persist, remove]
     lifecycleCallbacks: {  }

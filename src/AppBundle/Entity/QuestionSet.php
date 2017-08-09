@@ -25,15 +25,18 @@ class QuestionSet
     /**
      * @var array
      */
-//    private $questions;
-
+   private $questions;
+   
+   
+   private $name;
     
 //    private $session;
     
     
-//    public function __construct() {
-//        $this->questions = new ArrayCollection();
-//    }
+   public function __construct() {
+       $this->questions = new ArrayCollection();
+       $this->createdAt = new \DateTime(null, new \DateTimeZone('America/Chicago'));
+   }
     
     
     /**
@@ -99,7 +102,7 @@ class QuestionSet
     /**
      * Set createdBy
      *
-     * @param \stdClass $createdBy
+     * @param User $createdBy
      *
      * @return QuestionSet
      */
@@ -113,35 +116,64 @@ class QuestionSet
     /**
      * Get createdBy
      *
-     * @return \stdClass
+     * @return User
      */
     public function getCreatedBy()
     {
         return $this->createdBy;
     }
 //
-    /**
-     * Set questions
-     *
-     * @param array $questions
-     *
-     * @return QuestionSet
-     */
+//    /**
+//     * Add question
+//     *
+//     * @param AppBundle\Entity\QuestionType $questions
+//     *
+//     * 
+//     */
+//    public function addQuestion($question)
+//    {
+//        $this->questions->add($question);
+//    }
+//
+//    /**
+//     * Remove question
+//     *
+//     * @param array $questions
+//     *
+//     * 
+//     */
+//    public function removeQuestion($question)
+//    {
+//        $this->questions->removeElement($question);
+//    }
+
     public function setQuestions($questions)
     {
         $this->questions = $questions;
-
-        return $this;
+        return $questions;
     }
 
+    
     /**
-     * Get questions
+     * Get all questions
      *
      * @return array
      */
     public function getQuestions()
     {
         return $this->questions;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+    public function __toString() {
+        return $this->getName();
     }
 }
 

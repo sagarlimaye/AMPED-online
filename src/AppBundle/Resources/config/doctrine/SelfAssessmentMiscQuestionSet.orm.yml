@@ -5,5 +5,13 @@ AppBundle\Entity\SelfAssessmentMiscQuestionSet:
     fields:
         title:
             type: string
-            nullable: false
+            nullable: true
+#            joinTable:
+#                name: selfquestionset_questions
+#                joinColumns:
+#                    selfquestionset_id:
+#                        referencedColumnName: id
+#                inverseJoinColumns:
+#                    question_id:
+#                        referencedColumnName: id
     lifecycleCallbacks: {  }
