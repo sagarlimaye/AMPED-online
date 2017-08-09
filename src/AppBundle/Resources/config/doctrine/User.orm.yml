@@ -23,33 +23,45 @@ AppBundle\Entity\User:
             length: '100'
         joinDate:
             type: date
-        sessionCount:
-            type: integer
-            nullable: true
     oneToMany:
         logins:
             targetEntity: Login
             mappedBy: user
-        sessionCreations:
-            targetEntity: ampedsession
-            mappedBy: createdBy
-        students:
-            targetEntity: User
-            mappedBy: mentor
+            cascade: ["remove"]
+#        students:
+#            targetEntity: User
+#            mappedBy: mentor
+#            cascade: ["remove"]
+#    manyToOne:
+#        mentor:
+#            targetEntity: User
+#            inversedBy: students
+#            cascade: ["persist"]
     manyToOne:
         mentor:
             targetEntity: User
-            inversedBy: students
-    manyToMany:
-      sessions:
-        targetEntity: Session
-        inversedBy: users
-        joinTable:
-          name: users_sessions
-          joinColumns:
-            user_id:
-              referencedColumnName: id
-          inverseJoinColumns:
-            session_id:
-              referencedColumnName: id            
+
+#    manyToMany:
+#      sessions:
+#        orderBy: {'start': 'ASC'}
+#        targetEntity: Session
+#        joinTable:
+#          name: users_sessions
+#          joinColumns:
+#            user_id:
+#              referencedColumnName: id
+#          inverseJoinColumns:
+#            session_id:
+#              referencedColumnName: id                     
+#      students:
+#        targetEntity: User
+#        joinTable:
+#          name: mentors_students
+#          joinColumns:
+#            mentor_id:
+#              referencedColumnName: id
+#          inverseJoinColumns:
+#            student_id:
+#              referencedColumnName: id
+#              unique: true              
     lifecycleCallbacks: {  }
