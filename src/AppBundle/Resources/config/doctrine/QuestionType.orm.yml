@@ -23,6 +23,6 @@ AppBundle\Entity\QuestionType:
                 strategy: AUTO
     fields:
         text:
-            type: text
+            type: string
             nullable: true
     lifecycleCallbacks: {  }
