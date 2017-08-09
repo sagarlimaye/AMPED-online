@@ -1,0 +1,5 @@
+AppBundle\Entity\SevenWordsAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SevenWordsAnswersRepository
+    lifecycleCallbacks: {  }

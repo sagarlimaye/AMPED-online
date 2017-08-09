@@ -1,0 +1,5 @@
+AppBundle\Entity\GoalSheetAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\GoalSheetAnswersRepository
+    lifecycleCallbacks: {  }

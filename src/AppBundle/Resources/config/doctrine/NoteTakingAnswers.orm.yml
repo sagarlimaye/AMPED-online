@@ -1,0 +1,6 @@
+AppBundle\Entity\NoteTakingAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\NoteTakingAnswersRepository
+
+    lifecycleCallbacks: {  }

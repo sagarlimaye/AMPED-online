@@ -1,0 +1,5 @@
+AppBundle\Entity\ChangeSurveyAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ChangeSurveyAnswersRepository
+    lifecycleCallbacks: {  }

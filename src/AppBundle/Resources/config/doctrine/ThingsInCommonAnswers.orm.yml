@@ -1,0 +1,5 @@
+AppBundle\Entity\ThingsInCommonAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ThingsInCommonAnswersRepository
+    lifecycleCallbacks: {  }

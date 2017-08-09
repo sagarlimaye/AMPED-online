@@ -1,0 +1,5 @@
+AppBundle\Entity\TimeTravelingAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\TimeTravelingAnswersRepository
+    lifecycleCallbacks: {  }

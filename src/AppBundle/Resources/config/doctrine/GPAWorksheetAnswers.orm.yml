@@ -1,0 +1,5 @@
+AppBundle\Entity\GPAWorksheetAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\GPAWorksheetAnswersRepository
+    lifecycleCallbacks: {  }

@@ -1,0 +1,5 @@
+AppBundle\Entity\BackpackScavengerAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\BackpackScavengerAnswersRepository
+    lifecycleCallbacks: {  }

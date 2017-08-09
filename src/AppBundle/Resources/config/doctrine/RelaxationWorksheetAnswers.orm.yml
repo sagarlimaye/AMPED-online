@@ -1,0 +1,6 @@
+AppBundle\Entity\RelaxationWorksheetAnswers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\RelaxationWorksheetAnswersRepository
+
+    lifecycleCallbacks: {  }

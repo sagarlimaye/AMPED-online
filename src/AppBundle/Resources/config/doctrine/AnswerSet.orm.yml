@@ -1,0 +1,47 @@
+AppBundle\Entity\AnswerSet:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: dtype
+        type: string
+    discriminatorMap:
+        answerset: AnswerSet
+        qsanswers: QuestionSetAnswers
+        mafanswers: MAFAnswers
+        selfassessanswers: SelfAssessmentAnswers
+        changeanswers: ChangeSurveyAnswers
+        abmanswers: ABMAnswers
+        ticanswers: ThingsInCommonAnswers
+        meshieldanswers: MeShieldAnswers
+        sevenwordsanswers: SevenWordsAnswers
+        timetravelanswers: TimeTravelingAnswers
+        goalsheetanswers: GoalSheetAnswers
+        behaviourloganswers: BehaviourLogAnswers
+        abcworksheetanswers: ABCWorksheetAnswers
+        backpackscavenger: BackpackScavengerAnswers
+        brainstorming: BrainstormingWorksheetAnswers
+        conflict: ConflictResAnswers
+        abcworksheet: ABCWorksheetAnswers
+        gpaworksheet: GPAWorksheetAnswers
+        motivation: MotivationWorksheetAnswers
+        scrol: ScrolAnswers
+        timetravel: TimeTravelingAnswers
+        relaxation: RelaxationWorksheetAnswers
+        notetaking: NoteTakingAnswers
+    table: null
+    repositoryClass: AppBundle\Repository\AnswerSetRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        answers:
+            type: array
+    manyToOne:
+        user:
+            targetEntity: User
+        session:
+            targetEntity: Session
+    lifecycleCallbacks: {  }
