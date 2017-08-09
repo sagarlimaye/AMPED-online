@@ -1,0 +1,19 @@
+AppBundle\Entity\SimplePage:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SimplePageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '255'
+            nullable: true
+        description:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }
