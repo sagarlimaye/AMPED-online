@@ -52,6 +52,7 @@ class ampedsession
     private $changeFormQuestions;
     private $selfAssessmentQuestions;
     private $MAFQuestions;
+    private $pages;
     
     /**
      * Get id
@@ -331,8 +332,16 @@ class ampedsession
 //        $this->miscQuestions = $miscQuestions;
 //        return $this;
 //    }
-    
-    
+
+    public function getPages()
+    {
+        return $this->pages;
+    }
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
+        return $this;
+    }
     
     
     /**

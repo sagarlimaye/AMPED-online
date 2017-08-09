@@ -52,10 +52,10 @@ AppBundle\Entity\ampedsession:
             targetEntity: SelfAssessmentMiscQuestionSet
         MAFQuestions:
             targetEntity: MAFMiscQuestionSet
-    oneToMany:
-        sessions:
-            targetEntity: Session
-            mappedBy: ampedSession
+
+    manyToMany:
+        pages:
+            targetEntity: SimplePage
 #    manyToMany:
 #        icebreakerQuestions:
 #            targetEntity: IcebreakerQuestionSet
