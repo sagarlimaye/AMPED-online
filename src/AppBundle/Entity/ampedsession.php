@@ -35,16 +35,20 @@ class ampedsession
      */
     private $createdAt;
     
-
-    private $has7Words;
     
     private $tic;
     private $abm;
 //    private $icebreakerQuestions;
 //    private $miscQuestions;
     private $hasMeShield;
+    private $has7Words;
+    private $hasBackpack;
+    private $hasTimeTravel;
+    private $hasBackToBack;
+    
     private $hasOrgChart;
     private $hasModules;
+    private $hasGoalSheet;
     private $changeFormQuestions;
     private $selfAssessmentQuestions;
     private $MAFQuestions;
@@ -69,29 +73,33 @@ class ampedsession
     }
     
     
+        $this->hasModules = false;
+        $this->hasMeShield = false;
+        $this->hasOrgChart = false;
     /**
-     * Set sessions
+     * Set whether this session should contain goal sheet survey
      *
-     * @param integer $sessions
+     * @param bool $hasGoalSheet
      *
      * @return ampedsession
      */
-    public function setSessions($sessions)
+    public function setHasGoalSheet($hasGoalSheet)
     {
-        $this->sessions = $sessions;
+        $this->hasGoalSheet = $hasGoalSheet;
 
         return $this;
     }
 
     /**
-     * Get sessions
+     * Get whether this session should contain goal sheet survey
      *
-     * @return int
+     * @return bool
      */
-    public function getSessions()
+    public function getHasGoalSheet()
     {
-        return $this->sessions;
-    }    
+        return $this->hasGoalSheet;
+    }
+
     
     /**
      * Set whether this session should contain the 7 Words icebreaker activity
@@ -165,6 +173,79 @@ class ampedsession
         return $this->hasMeShield;
     }
 
+    /**
+     * Set whether this session should contain the Backpack scavenger hunt activity
+     *
+     * @param bool $hasBackpack
+     *
+     * @return ampedsession
+     */
+    public function setHasBackpack($hasBackpack)
+    {
+        $this->hasBackpack = $hasBackpack;
+
+        return $this;
+    }
+
+    /**
+     * Get whether this session should contain the Me Shield Icebreaker activity
+     *
+     * @return bool
+     */
+    public function getHasBackpack()
+    {
+        return $this->hasBackpack;
+    }
+
+     /* Set whether this session should contain the Back To Back icebreaker activity
+     *
+     * @param bool $hasBackToBack
+     *
+     * @return ampedsession
+     */
+    public function setHasBackToBack($hasBackToBack)
+    {
+        $this->hasBackToBack = $hasBackToBack;
+
+        return $this;
+    }
+
+    /**
+     * Get whether this session should contain the Me Shield Icebreaker activity
+     *
+     * @return bool
+     */
+    public function getHasBackToBack()
+    {
+        return $this->hasBackToBack;
+    }
+    
+    
+    
+    /**
+     * Set whether this session should contain the Time Traveling Icebreaker activity
+     *
+     * @param bool $hasTimeTravel
+     *
+     * @return ampedsession
+     */
+    public function setHasTimeTravel($hasTimeTravel)
+    {
+        $this->hasTimeTravel = $hasTimeTravel;
+
+        return $this;
+    }
+
+    /**
+     * Get whether this session should contain the Time Traveling Icebreaker activity
+     *
+     * @return bool
+     */
+    public function getHasTimeTravel()
+    {
+        return $this->hasTimeTravel;
+    }
+    
     /**
      * Set whether this session should contain a module seleciton
      *
@@ -377,5 +458,8 @@ class ampedsession
     }
     public function __toString() {
         return $this->num;
+    public function hasIcebreakers()
+    {
+        return $this->has7Words || $this->hasMeShield || (null !== $this->abm) || (null !== $this->tic);
     }
 }

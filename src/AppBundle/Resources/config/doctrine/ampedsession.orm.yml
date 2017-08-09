@@ -25,9 +25,18 @@ AppBundle\Entity\ampedsession:
             type: boolean
         hasMeShield:
             type: boolean
+        hasTimeTravel:
+            type: boolean
+        hasBackpack:
+            type: boolean
+        hasBackToBack:
+            type: boolean
+            
         hasOrgChart:
             type: boolean
         hasModules:
+            type: boolean
+        hasGoalSheet:
             type: boolean
     manyToOne:
         createdBy:
