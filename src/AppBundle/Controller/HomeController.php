@@ -319,6 +319,66 @@ class HomeController extends Controller
 
     /**
      * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE') and type in ['academic', 'emotional', 'self-reg', 'social']")
+     */    
+    public function SelfAssessAction(ampedsession $amped, Request $request, $type)
+    {
+        $user = $this->getUser();
+        $session = $this->queryForStudentSession($amped, $user);
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\SelfAssessmentAnswers');
+        
+        switch($type)
+        {
+            case 'academic':
+                $questionSet = $amped->getSelfAssessmentAcademicQuestions();
+                break;
+            case 'social':
+                $questionSet = $amped->getSelfAssessmentSocialQuestions();
+                break;
+            case 'emotional':
+                $questionSet = $amped->getSelfAssessmentBehaviourQuestions();
+                break;                
+            case 'self-reg':
+                $questionSet = $amped->getSelfAssessmentSelfRegQuestions();
+                break;                
+        }
+        
+        $answers = $rep->findOneBy(['session'=>$session, 'questionSet' => $questionSet]);
+        $questions = $questionSet->getQuestions()->toArray();
+        
+        if(null === $answers)
+        {
+            //create form
+            $form = $this->createForm(Form\SelfAssessmentFormType::class, null, array('questions'=> $questions,
+                    'action'=> $this->generateUrl('self_assess', ['num'=>$amped->getNum(), 'type' => $type])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $selfassessanswerSet = new \AppBundle\Entity\SelfAssessmentAnswers();
+                $selfassessanswerSet->setUser($user);
+                $selfassessanswerSet->setQuestionSet($questionSet);
+                $answers = $form->getData();
+                $selfassessanswerSet->setAnswers($answers);
+                $selfassessanswerSet->setSession($session);
+                $em->persist($selfassessanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/self_assessment_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers), 'title' => ucfirst($type)]);
+            }
+            return $this->render('student/self_assessment.html.twig', array('form'=>$form->createView(), 'title' => ucfirst($type)));
+        }
+        return $this->render('student/self_assessment_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers->getAnswers()), 'title' => ucfirst($type)]);
+    } 
+    
     private function ScrolAction(ampedsession $amped, Request $request, Session $session)
     {   
         // check if already completed

@@ -16,6 +16,16 @@ use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdmin
 class ampedsessionController extends BaseAdminController {
     //put your code here
     
+    public function prePersistEntity($entity) {
+        
+        if(null !== $this->getSelfAssessmentAcademicQuestions())
+        $entity->getSelfAssessmentAcademicQuestions()->setTitle('Self Assessment: Academic');
+        if (null !== $this->getSelfAssessmentSocialQuestions())
+        $entity->getSelfAssessmentSocialQuestions()->setTitle('Self Assessment: Social');
+        if (null !== $this->getSelfAssessmentBehaviourQuestions())
+        $entity->getSelfAssessmentBehaviourQuestions()->setTitle('Self Assessment: Behaviour');
+        if (null !== $this->getSelfAssessmentSelfRegQuestions())
+        $entity->getSelfAssessmentSelfRegQuestions()->setTitle('Self Assessment: Self-regulation');   
         
         parent::prePersistEntity($entity);
     }
