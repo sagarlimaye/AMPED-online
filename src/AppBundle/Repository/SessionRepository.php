@@ -11,4 +11,55 @@ namespace AppBundle\Repository;
 class SessionRepository extends \Doctrine\ORM\EntityRepository
 {
     
+    public function getModulesCompleted($user)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder('s');
+        $modulesArray = $qb
+                ->select('s.moduleCompleted')
+                ->from('AppBundle\Entity\Session', 's')
+                ->where($qb->expr()->eq('s.student', '?1'))
+                ->andWhere($qb->expr()->isNotNull('s.moduleCompleted'))
+                ->setParameter(1, $user)
+                ->getQuery()
+            ->getArrayResult();
+        $result = [];
+        foreach($modulesArray as $row)
+        {
+            $result[] = $row['moduleCompleted'];
+        }
+        return $result;
+    }
+    
+    public function getAllStudentSessions($user)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb
+                ->select('s')
+                ->from('AppBundle\Entity\Session', 's')
+                ->join('s.student', 't')
+                ->join('s.ampedSession', 'a')
+                ->where($qb->expr()->eq('t', '?1'))
+                ->setParameter(1, $user)
+                ->orderBy('a.num', 'ASC')
+                ->getQuery()
+        ->getResult();        
+    }
+    
+    
+    public function getStudentSessionByAmped($user, $amped)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb
+                ->select('s')
+                ->from('AppBundle\Entity\Session', 's')
+                ->join('s.ampedSession', 'a')
+                ->join('s.student', 't')
+                ->where($qb->expr()->eq('a', '?1'))
+                ->andWhere($qb->expr()->eq('t', '?2'))
+                ->setParameter(1, $amped)
+                ->setParameter(2, $user)
+                ->setMaxResults(1)
+                ->getQuery()
+        ->getOneOrNullResult();
+    }
 }
