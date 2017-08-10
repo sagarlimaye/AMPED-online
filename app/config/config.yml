@@ -182,9 +182,33 @@ easy_admin:
             controller: AppBundle\Controller\ampedsessionController
             form:
                 fields:
-                    - { property: 'num', label: 'Session number' }
-                    - title
-                    - {property: 'description', type: 'ckeditor' }
+                    - { property: 'num', label: 'Session number', help: 'This must be unique amongst all sessions' }
+                    - { type: 'group', label: 'Question sets for this session', css_class: 'col-sm-12', help: 'Leave the field blank if you do not want to include that question set in this session'}
+                    - { property: 'tic', label: 'Select the "Things in common" icebreaker question set' }
+                    - { property: 'abm', label: 'Select the "All about me" icebreaker question set' }
+                    - { property: 'MAFQuestions', label: 'Select the mentorship agreement form' }
+                    - { property: 'changeFormQuestions', label: 'Select the change plan survey' }
+                   # - { property: 'selfAssessmentQuestions', type: 'entity', type_options: { class: 'AppBundle\Entity\SelfAssessmentMiscQuestionSet' } }
+                   # - { property: 'selfAssessmentQuestions', label: 'Select the self-assessment question set', type: 'easyadmin_autocomplete', type_options: { class: 'AppBundle\Entity\SelfAssessmentMiscQuestionSet' } }
+                    - { type: 'group', label: 'Self-assessment question sets' }
+                    - { property: 'selfAssessmentBehaviourQuestions', label: 'Emotional' }
+                    - { property: 'selfAssessmentAcademicQuestions', label: 'Academic' }
+                    - { property: 'selfAssessmentSocialQuestions', label: 'Social' }                    
+                    - { property: 'selfAssessmentSelfRegQuestions', label: 'Self-regulation' }
+                    - { type: 'group', label: 'Informational pages' }                    
+                    - { property: 'pages', label: 'Select the informational pages for this session', help: 'These pages will appear before any question sets or modules in the navigation menu under this session, and students will see the first page when they resume a session' } 
+                    #, type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle\Entity\SimplePage }, allow_add: true, allow_delete: true } }
+                    - { type: 'group', label: 'Include other surveys' }
+                    - { property: 'has7Words', label: 'Include the "7 Words" icebreaker activity in this session' }
+                    - { property: 'hasMeShield', label: 'Include the "Me Shield" icebreaker activity in this session' }
+                    - { property: 'hasTimeTravel', label: 'Include the "Time traveling" icebreaker activity in this session' }
+                    - { property: 'hasBackpack', label: 'Include the "Backpack scavenger hunt" icebreaker activity in this session' }
+                    - { property: 'hasBackToBack', label: 'Include the "Back to back drawings" icebreaker activity in this session' }                    
+                    #- { property: 'hasOrgChart', label: 'Include the Organization Chart form in this session' }
+                    - { property: 'hasGoalSheet', label: 'Include the Goal Sheet in this session' }                    
+                    - { property: 'hasModules' , label: 'Students should complete a module in this session' }
+            new:
+                title: 'Add a new AMPED session'
             list:
                 title: 'Sessions in AMPED'
                 fields:
@@ -193,6 +217,8 @@ easy_admin:
                     - description
                     - createdAt
                     - createdBy
+                actions:
+                    - { name: 'new', label: 'Add' }                    
         Session:
             class: AppBundle\Entity\Session
             label: 'Sessions'
