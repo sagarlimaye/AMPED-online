@@ -1,0 +1,42 @@
+{% extends 'student/base.html.twig' %}
+{% block main_content %}
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+    <div class="row">
+      <h2 class="sub-header">Learn New Skills: Self Regulation</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+
+    <select id="selectOption" class="form-control" >
+      <option selected disabled>Choose Module</option>
+      <option value="../Modules/module" id="1">Learning your A.B.C.s</option>
+      <option value="../Modules/module" id="3">Changing your G.P.A.</option>
+      <option  value="../Modules/module" id="4">Motivation</option>
+      <option  value="../Modules/module" id="7">Relaxation</option>
+      <option  value="../Modules/module" id="11">Conflict Resolution</option>
+      <option  value="../Modules/module" id="12">Time Management</option>
+
+    </select>
+        <br>
+
+
+
+      <div class="navButtons">
+        <button id="prevButton" type="button" class="btn btn-lg btn-primary" onclick="options()"> Select </button>
+      </div>          
+{% endblock %}
+
+{% block custom_scripts %}
+    <script type="text/javascript">
+      function options() {
+        var e = document.getElementById("selectOption");
+        var strUser = e.options[e.selectedIndex].value;
+        var moduleNumber = e.options[e.selectedIndex].id + '.html';
+        strUser += moduleNumber;
+        console.log(strUser);
+        window.location=strUser;
+      }
+    </script>
+{% endblock %}
+

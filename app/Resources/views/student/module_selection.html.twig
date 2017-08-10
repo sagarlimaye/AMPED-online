@@ -1,0 +1,37 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <div class="row">    
+    <h2 class="sub-header">Learn New Skills: {{ category_name }}</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    {% for row in category|batch(3) %}
+    <div class="row placeholder">
+        {% for moduleNo in row %}
+            <div class="col-sm-4">
+                <a class="xhrl module thumbnail" data-module-id ="{{moduleNo}}" href="{{ path('module', {'num':amped.num, 'module': moduleNo} )}}">
+                    <h4 class="text-center">{{ modules[moduleNo] }}</h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <br>          
+{% endblock %}
+{% block custom_scripts %}
+    <script>
+    $(function() {
+        $('a.module').click(function(e)
+        {
+            var url = $(this).attr('href');
+            var newModuleLink = $('#sidebar a.new-module');
+            if($.inArray($(this).data('moduleId'), [5, 9, 10, 12]) > -1)
+            {
+                newModuleLink.attr('href', url);
+                newModuleLink.text('Skill Building');                
+            }
+        });
+    })
+    </script>
+{% endblock %}

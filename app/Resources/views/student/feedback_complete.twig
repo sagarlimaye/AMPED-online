@@ -1,0 +1,121 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+        <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+        <div class="row">
+          <h2 class="sub-header"  >Feedback</h2>
+          <img src="../images/topRight.png" width="100" height="100" style="float:right" >
+        </div>
+
+        <div class="row">
+
+        <h4>Rationale and Preparation</h4>
+        <p>Asking for help and asking for performance feedback can help students be more successful with academics, but many students do not do this. It may be intimidating for them, or they may not know how. </p>
+        <p>The truth is, most teachers would be more than willing to offer help or tell students how they can increase their grade if the students would just ask.</p>
+        <h4>Defining with your Protégé </h4>
+        <p class="toItalic">What do you think feedback means?</p>
+        <p>This means asking about what you did well and what you could improve on. What kinds of things might it be helpful to get feedback on from your teacher?</p>
+        <p>If the protégé is struggling with coming up with ideas ask if you can give a few. (tests, papers, presentations, behavior).</p>
+        <h4> Timing</h4>
+        <p>When do you think would be a good time to approach teachers for feedback? </p>
+        <ul>
+          <li>Before school</li>
+          <li>After school</li>
+          <li>After class during the passing period</li>
+          <li>When the class is working on independent seatwork</li>
+          <li>Another way to make sure it is a good time to talk to your teacher is to make an appointment with them. This shows maturity, that you are committed to improving, and that you respect their time.</li>
+
+        </ul>
+
+        </div>
+
+        <div class="row">
+          <h2 class="sub-header">Asking for feedback</h2>
+          <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+        </div>
+
+        <div class="row">
+           <p>Sometimes, asking for feedback can be intimidating for students. In order to help them feel more comfortable with asking for feedback, go through the following steps to show them how the feedback process works.</p>
+           <ol>
+            <li><h4>Identify the problem</h4>
+              <ul>
+                <li>To identify the problem, ask yourself the following questions:
+                  <ul>
+                    <li>Is there something I struggle with?</li>
+                    <li>Is there something I avoid?</li>
+                    <li>Is there something I prefer not to do?</li>
+                    <li>What might be helpful to get feedback on from my teacher?</li>
+                  </ul>
+                <li>After identifying the problem, think about what you want to change about the problem. This will be your goal. Ask yourself the following questions:</li>  <ul>
+                    <li>What do I want to change about my problem?</li>  
+                    <li>What do I want to do instead?</li>
+                  </ul>
+                </li>
+                <li>Tell your teacher the problem you are having, identify what you would like to change, and ask your teacher how you can change the problem.</li>
+                <li><p>Example:<br>
+                <span class="toItalic">Student: I’ve been getting marks for my behavior in this class. My goal is to improve my behavior so I don’t get marks. I was wondering if you could tell me what I’ve been doing well and what are some things I could work on?</span></p>
+                </p></li>
+              </ul>
+            </li>
+            <li><h4>Brainstorm with the teacher how to solve the problem.</h4>
+            <ul>
+              <li>Listen to your teacher and the suggestions they present.</li>
+              <li>Restate the suggestions in your own words, so the teacher knows that you understand their suggestions.</li>
+              <li>If you have any ideas about how to solve the problem, present them to the teacher, and ask the teacher what they think about your ideas.</li>
+              <li><p>Example: <br>
+              <span class="toItalic">
+              Teacher: You do a really good job of being a team player when we are working on a group project; however, I would like to see you working quietly and independently when we are doing individual work.<br>
+              Student: I need to work on completing individual work on my own without talking to my friends. Would it help if I stayed at my own desk, too?<br>
+              Teacher: That is a great idea. Thanks for your suggestion! 
+              <span></p></li>                
+            </ul>
+            </li>
+            <li><h4>Discuss a solution.</h4>
+            <ul>
+              <li>Talk with your teacher about the different solutions, and choose together which ones would work best</li>
+              <li><p>Example: <br>
+              <span class="toItalic">
+                Teacher: You mentioned that you could stay at your own desk during individual work. Another solution would be to sit at the front of the room so you are not tempted to talk with your friends. <br>
+                Student: Those are great solutions. Thank you for your feedback, and I will strive to sit in the front of the room and not leave my desk during individual work time.
+              </span></p></li>
+            </ul>
+            </li>
+           </ol>
+
+        </div>
+        <br>
+      <p>Now we are going to try an activity that will help us start thinking about what we want to get feedback on from our teacher.</p>
+      <p> In the following chart, the questions will help you identify a problem that you may want to get feedback on. In the first row, an example is provided to get you started.</p>
+        <div class="col-sm-10 well">
+            <table class="table table-striped table-hover align">
+                <thead>
+                    <th class="text-center">What am I struggling with?</th>
+                    <th class="text-center">What do I want to change? What is my goal?</th>
+                    <th class="text-center">How should I ask my teacher for feedback?</th>
+                </thead>
+                <tbody>
+        {% for row in answers.brainstorming %}
+            <tr>
+                <td>{{row.struggle}}</td>
+                <td>{{row.goal}}</td>
+                <td>{{row.feedback}}</td>                
+            </tr>
+        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    <div class="row">
+       <p>Practice #1: I’ll pretend to be the teacher, you ask me for feedback on something. Pick one of the problems you identified on the previous page. </p>
+       <p>Practice #2: Now it’s my turn, you be the teacher this time: 
+        Hello Mrs. B, do you have a couple minutes to talk about my paper? I got a 75 and my goal is to make a B on my next paper. I was wondering if you could tell me what was good about it and how I could improve for next time.</p>
+        <h4>Helpful tool</h4>
+        <p>What do you think you could do to remember what your teacher says? Here is a chart that would be really easy for you to write on a piece of notebook paper to take with you.</p>
+        <p><span class="toBold">Remember: </span>don’t be afraid to ask your teachers for help. They as well as your mentor want you to succeed.</p>
+        <p>What we are talking about: ____________</p>
+        <img src="../images/module6.png">
+    </div>
+    <br>      
+      
+{% endblock %}

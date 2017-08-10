@@ -1,0 +1,45 @@
+{% extends 'student/base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block main_content %}
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+    <div class="row">
+      <h2 class="sub-header" style="display: inline-block;">Active Note Taking</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+      <p>Have you ever wondered how to take good notes in class? Being able to organize and summarize information we learn through active note taking is an important skill. It allows us to reinforce what we learn in class and review the material in the future.</p>
+      <h4>Introduction</h4>
+      <p>Have you ever wondered how to take good notes in class? Being able to organize and summarize information we learn through active note taking is an important skill. It allows us to reinforce what we learn in class and review the material in the future.</p>
+      <h4>Self Assessment</h4>
+      <p><span class="toBold">Directions: </span>Ask your protégé to answer the following questions.</p>
+      {{ form(form) }}
+      <p><span class="toBold">Review: </span>When your protégé is finished, ask questions in a motivational interviewing style. Examples are below:</p>
+      <ol>
+        <li>How are each of the questions relevant to taking effective notes?</li>
+        <li>I see you put “Sometimes” for this question (point to question or read it aloud). Tell me why you did not put “Never.” [Do not ask, I see you put “Sometimes” for this question. Tell me why you did not put “Always.”]</li>
+        <li>Which one of these questions is most important when you want to take effective notes and why?</li>
+      </ol>
+
+      <h4>When Should I Use Note Taking?</h4> 
+      <ol>
+        <li>When my teacher is talking in class</li>
+        <li>When I am preparing for a test or quiz</li>
+        <li>When I am reading and want to remember what I read</li>
+      </ol>
+    </div>
+
+    <div class="row">
+      <h2 class="sub-header">Cornell Notes Practice</h2>
+      <img src="../images/topRight.png" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+      <p><span class="toBold">Introduction: </span>Cornell Note Taking is a special method that can help us take notes when we are in class, when we are reading, or when we are studying for a test. We will learn how to use this method by completing the following exercise. </p>
+      <p><span class="toBold">Direction: </span>Proceed to read the following passage while using the Left side of the active worksheet to take reading notes. Then after reading, complete the Right side of the worksheet.</p>
+    </div>
+    <br>
+{% endblock %}

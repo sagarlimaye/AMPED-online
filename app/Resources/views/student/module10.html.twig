@@ -1,0 +1,118 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+    <div class="row">
+      <h2 class="sub-header">Coping with stress</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+      <p>Everyone experiences stress or worry at some point in time. A small amount of stress can be a positive thing if it keeps you motivated and determined. However, it becomes problematic when it becomes overwhelming and we feel a loss of control. Knowing the symptoms and sources of stress will help us identify when we are having stress. Identifying ways we can prevent and deal with stress will help us respond appropriately to stress.</p>
+      <img src="{{asset('module10.1.png')}}" width="100%" height="100%">
+      <img src="{{asset('module10.2.png')}}" width="100%" height="100%">
+      <img src="{{asset('module10.3.png')}}" width="100%" height="100%">
+
+      <h4>Reflection</h4>
+      <p>Can you think of a time that you were stressed? Using the examples from above or others that you come up with, what symptoms did you have? Where did you think the source of the stress came from? How did you deal with the stress?</p>
+    </div>
+    <div class="row">
+      <h2 class="sub-header">Self talk</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+
+    <p>Self talk is our inner voice, our conversation we think and hear in our mind. It can be either positive or negative. Self talk can control the way you feel about yourself and your thought process. Positive self talk can help you make friends, build self-esteem, boost your confidence, and feel in control. Negative self talk can make you feel down about yourself, depressed, or inferior compared to others. When negative self talk occurs it can be a weight on you and increase your amount of stress.</p>
+
+    <p class="toBold">Examples of Self-Talk</p>
+    <img src="{{asset('module10.2.png')}}" width="100%" height="100%">
+
+    <h4>Exercise</h4>
+    <p>In the exercise on the next page, we will think about different situations, what we are thinking about in response to those situations (self-talk), and our stress level.</p>
+
+    <p class="toBold">Behavior Log</p>
+
+    <p><span class="toBold">Description: </span>A Behavior Log allows us to document when a certain behavior took place, how the behavior made us feel, and the stress level we were experiencing during the behavior. It enables us to see which behaviors and thoughts make us have lower and higher stress levels.</p>
+
+    <p><span class="toBold">Instructions: </span>In the Behavior Log on the next page, look at the examples of how to document behaviors, how they made you feel, and your stress level. Then, either on the page or a separate piece of paper, make your own Behavior Log. Write the day, time, situation, what you are thinking, and your stress level.</p>
+
+    </div>
+    <br>    
+    <div class="row">
+      <h2 class="sub-header">My Behavior Log</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+      Name: <input type="text" name="Name"> Week of: <input type="text" name="Week of">
+      <div class="table-responsive">
+        <table class="table table-responsive">
+          <thead>
+            <td><h4>Day</h4></td>
+            <td><h4>Time</h4></td>
+            <td><h4>Behavior/Situation</h4></td>
+            <td><h4>Self talk/What am I thinking</h4></td>
+            <td><h4>Stress Level</h4></td>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+              <td>2 p.m.</td>
+              <td>Working on Social studies review</td>
+              <td>I do not know any of this, I'm going to fail the test tomorrow</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+              <td>6 p.m.</td>
+              <td>Watching Disney Channel and eating pizza</td>
+              <td>My two favorite things to do, eat and relax</td>
+              <td>Low</td>
+            </tr>
+
+            <tr>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+            </tr>
+
+            <tr>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+            </tr>
+
+            <tr>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+            </tr>
+
+            <tr>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+            </tr>
+
+            <tr>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+              <td><input type="text" name="answer" placeholder="Enter your answer here"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>  
+    </div>
+    <br>    
+{% endblock %}

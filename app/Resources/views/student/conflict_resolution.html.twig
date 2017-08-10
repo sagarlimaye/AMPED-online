@@ -1,0 +1,95 @@
+{% extends 'student/base.html.twig' %}
+
+{% form_theme form with ['bootstrap_3_layout.html.twig', _self] %}
+
+{% block main_content %}
+          <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+          <div class="row">
+            <h2 class="sub-header">Conflict Resolution</h2>
+          <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+          </div>
+
+          <div class="row">
+            
+              <p>The Conflict Resolution Module will teach you about the different types of issues people face, cool down strategies, and conflict resolution strategies.  In addition, this module will allow you an opportunity to identify conflicts and solutions.</p>
+              <h4>Introduction</h4>
+              <p>Conflict is a normal part of the human experience.  It occurs when two or more people want different things.  Conflict can occur between friends, family members, and even strangers.</p>
+              <h4>Negative Results of Conflict</h4>
+              <p>Sometimes when people disagree on something or want different things, the following negative consequences occur: </p>
+              <div class="table-responsive">
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul>
+                          <li>Intimidation (verbal or physical)</li>
+                          <li>Harassment (verbal or physical)</li>
+                          <li>Vandalizing property</li>
+                        </ul>
+                      </td>
+
+                      <td>
+                        <ul>
+                          <li>Threats (verbal or physical)</li>
+                          <li>Stealing property</li>
+                          <li>Physical assault</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Immediate Cool Down Strategies </h4>
+              <p>In order to prevent the negative results of conflict from occurring, we can use the following techniques:</p>
+              <p class="toBold">Two-Step Deep Breath Exercise</p>
+              <p>Inhale slowly counting: 1…2…3…4…5 and exhale slowly counting: 1…2…3…4…5.</p>
+              <p class="toBold">Peaceful Muscle Movement:</p>
+              <p>Close your eyes.  Take a deep breath and tighten all of your muscles.  Slowly exhale and release the tension.</p>
+              <p class="toBold">Mindfulness</p>
+              <p>Know and own your thoughts, feelings, sensations and surrounding environment.</p>
+              <h4>Conflict Resolution Strategies Lesson</h4>
+              <p>Conflict resolution strategies will vary depending on who is the source of the conflict.  In some cases, avoidance might not be an appropriate strategy and collaboration might work better in your situation. </p>
+
+              <p>Your approach to the conflict will also depend on the outcome you hope to achieve.  Doing a quick cool down exercise will give you a moment to create a successful game plan. </p>
+
+              <p class="toBold">Terms:</p>
+              <p><span class="toBold">Avoidance-</span>avoiding the conflict environment.</p>
+              <p><span class="toBold">Compromise-</span>this happens when both parties have a portion of their needs meet and they compromise on what is not that important to them.  Each person agrees to meet in the middle to solve the problem.</p>
+              <p><span class="toBold">Accommodation-</span>can be used with friends.  It occurs when you put aside your own needs to meet the needs of your friend. </p>
+              <p><span class="toBold">Collaboration-</span> means to work together to find a solution to the problem. </p>
+          </div>
+          <div class="row">
+            <h4>Other tips</h4>    
+            <ul>
+              <li>Remember to take deep mindful breaths.</li>
+              <li>Think about the person as a person and not a stereotype</li>
+              <li>Keep your focus.  Try and stick to the issue at hand. </li>
+              <li>Be respectful of what the other person is saying.</li>
+              <li>Never assume the other person knows what you are thinking. </li>
+              <li>Focus on the future.  Do not let past disagreements muddle the argument</li>
+            </ul>
+
+            <h4>Exercise</h4>
+            <p class="toBold">Clenched Fist - Quick Cool Down Exercise</p>
+            <p>It is important to know how to quickly calm down if someone is trying to get you to fight.  This exercise combines the muscle movement and breathing techniques.  </p>
+            <ol>
+              <li>Clench your fist with the mentor</li>
+              <li>Slowly take a deep breath and count to 5.</li>
+              <li>Slowly exhale and release your fist. </li>
+              <li>Repeat as many times as necessary, until you feel able to approach the conflict calmly.  </li>
+            </ol>
+
+            <p class="toBold">Conflict Resolution Strategies</p>
+            <p>Collaboration &nbsp Avoidance</p>
+            <p>Compromise &nbsp Accomodation</p>
+            {{ form(form) }}
+          </div>
+          <br>
+  
+{% endblock %}

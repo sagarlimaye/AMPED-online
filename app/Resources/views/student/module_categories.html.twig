@@ -1,0 +1,38 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}    
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+    <h2 class="sub-header">Learn New Skills</h2>
+
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <a class="xhrl thumbnail" href='{{ path('module_select', { 'num' : amped.num, 'slug': 'emotional' }) }}'>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          </a>
+          <h4>Emotional</h4>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <a class="xhrl thumbnail" href='{{ path('module_select', { 'num' : amped.num, 'slug': 'social' }) }}'>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          </a>
+          <h4>Social</h4>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <a class="xhrl thumbnail" href='{{ path('module_select', { 'num' : amped.num, 'slug': 'self-regulation' }) }}'>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          </a>
+          <h4>Self Regulation</h4>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <a class="xhrl thumbnail" href='{{ path('module_select', { 'num' : amped.num, 'slug': 'academic' }) }}'>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          </a>
+          <h4>Academic</h4>
+        </div>
+    </div>
+{% endblock %}
+
+

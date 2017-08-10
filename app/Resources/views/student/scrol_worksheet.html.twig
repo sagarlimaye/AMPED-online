@@ -1,0 +1,84 @@
+{% extends 'student/base.html.twig' %}
+
+{% form_theme form with ['bootstrap_3_layout.html.twig', _self] %}
+
+{% block main_content %}
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+    <div class="row">
+      <h2 class="sub-header">Expository Reading</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+       <p>Material list</p>
+       <ul>
+        <li>Notebook Paper</li>
+        <li>Pencils</li>
+        <li>Reading Materials (text books copies, pages w/ headers and bold terms)</li>
+       </ul>
+       <p>Reading is one of the most common and most important skills needed for success in school. However, simply being able to read is not enough; understanding and remembering what you read are just as important.  Explain to your protégé that remembering requires practicing both repetition and recall.  A great method for understanding and recalling readings is the SCROL method:</p>
+       <br>
+       <h3>SCROL</h3>
+
+       <div class="table-responsive">
+        <table class="table table-striped">
+        <tbody>
+        <tr>
+          <td><h4>Survey the headings:</h4></td>
+          <td><p>Read each heading and subheading and then ask yourself</p>
+          <p>What do I already know about this topic?</p>
+          <p>What information might the writer present?</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td><h4>Connect</h4></td>
+          <td><p>Ask yourself how the headings relate to one another.</p>
+          <p>Write down key words from the headings that might be connected.</p>
+          <ul>
+            <li>How are the headings similar?</li>
+            <li>What ideas are the same in each of the headings?</li>
+          </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td><h4>Read the text</h4></td>
+          <td><p>Look for words that express important information about the headings. </p>
+                 <p>Write down important facts on your paper.</p>
+                 <p>Pause to make sure you understand the major ideas and supporting details.</p>
+                  <p>Don’t understand something? Reread it! </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td><h4>Outline</h4></td>
+          <td><p>Using indentions to reflect structure, outline the major ideas and supporting      details in the heading segment. Write the heading and then try to outline each      heading segment without looking back at the text.</p>
+
+          </td>
+        </tr>
+
+        <tr>
+          <td><h4>Look back:</h4></td>
+          <td><p>Look back at the text and check the accuracy of the major ideas and details you      you wrote and correct any inaccurate information in your outline.</p>                
+          </td>
+        </tr>
+        </tbody>
+        </table>
+       </div>    
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">SCROL Worksheet</h2>
+        <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+        {{form_start(form)}}
+       <p>{{ form_label(form.scrol_answer) }}(</p>
+       {{ form_widget(form.scrol_answer, {'attr' : {'class' : 'textArea' } } ) }}
+       {{ form_rest(form) }}
+    </div>
+
+{% endblock %}

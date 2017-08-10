@@ -1,0 +1,104 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+    <div class="row">
+      <h2 class="sub-header">Motivation</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+      <p>Sometimes students have trouble getting started on their homework or studying. They may feel like they don’t have enough time to study, or that they would rather do something else. Do you ever feel this way? If so, don’t worry: there are ways to increase your motivation!</p> 
+      <h4>What is motivation?</h4>
+      <p>Motivation is the desire or willingness to do something. The following chart outlines examples of activities that happen because of motivation.</p>
+      <div class="table-responsive">
+        <table class="table table-stripped">
+          <thead>
+            <td><span style="font-weight: bold">Examples</span></td>
+            <td><span style="font-weight: bold">Motivation</span></td>
+          </thead>
+
+          <tbody>
+            <tr><td><p>You may be motivated to play sports or create artwork because you enjoy these activities.</p></td>
+            <td><p>Enjoyment</p></td></tr>
+            <tr><td><p>You may be motivated to hang out with your friends because it makes you happy.</p></td>
+            <td><p>Happiness</p></td></tr>
+            <tr><td><p>You may be motivated to study every day so you get good grades.</p></td>
+            <td><p>The reward of good grades</p></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4> Where does the motivation come frome?</h4>
+      <p>Your motivation can start in (1) your emotions, (2) your thoughts, and (3) your actions.</p>
+
+      <p><span style="font-weight: bold">Emotions:</span>Your emotions are your feelings. Examples of emotions are happiness, pride, excitement, etc.</p>
+      <p><span style="font-weight: bold">Thoughts:</span>Your thoughts are beliefs and considerations that happen in your head. Examples of thoughts are, “I really enjoy this activity” or “This activity is fun”</p>
+      <p><span style="font-weight: bold">Actions:</span>Your actions are your behaviors. An example of an action is rewarding yourself for doing something you needed to do.</p>
+
+      <img src="../images/motivation.png" align="middle">
+      <p>Look at the above examples of motivation. Which example is a motivation that starts in your emotions? What about your thoughts or actions?</p>
+      <p><span style="font-weight: bold">Emotion:</span>Hanging out with your friends because it <u>makes you happy.</u></p>
+      <p><span style="font-weight: bold">Thought:</span>Playing sports or creating artwork because you <u>enjoy these activities.</u></p>
+      <p><span style="font-weight: bold">Action:</span>Studying every day so you <u>get good grades.</u></p>
+    </div>
+    <div class="row">
+       <h4>Increasing motivation</h4>
+       <p>There are several steps you can take to increase your motivation. First, you must identify if you want to increase your motivation by changing your (1) emotions, (2) thoughts, or (3) actions. Which one do you think would be easiest to change? </p>
+       <p>Thoughts and actions are the easiest to change. Feelings are hard to change, but when you change thoughts and actions, your feelings might change as well.</p>
+       <h4>Controlling your Actions</h4>
+       <p>First let’s go over how to control your actions so you increase your motivation to do something. One of the most effective actions you can take is giving yourself a reward. This works really well for things you are not interested in doing or things you find challenging.</p>
+       <p style="font-weight: bold">Examples of rewards</p>
+       <ul>
+        <li>Hanging out with friends</li>
+        <li>Doing an activity that you enjoy</li>
+        <li>Watching your favorite TV show</li>
+        <li>taking a snack break</li>
+       </ul>
+       <h4>Controlling your thoughts</h4>
+       <p>Now let’s talk about how you can control your thoughts. First think about the goal that you want to accomplish. This could be completing your homework, for example. Then, think about how accomplishing that goal will be beneficial to you in the future. For example, instead of thinking that doing your homework is boring, think about how doing your homework will give you more practice and help you perform well on your next test.</p>
+       <p style="font-weight: bold">Questions to ask?</p>
+       <ul>
+        <li>What goal should I accomplish?</li>
+        <li>How will accomplishing this goal help me in the future?</li>
+       </ul>
+    </div>
+    <div class="row">
+        {{form_start(form) }}
+       <p>Where are the three places motivation starts? ** Mention the two that are the easiest to control. **</p>
+       <ol>
+        <li>{{ answers.motivation_place_1 }}</li>
+        <li>{{ answers.motivation_place_2 }}</li>
+        <li>{{ answers.motivation_place_3 }}</li>
+       </ol>
+
+       <p>List of some rewards you can give yourself.</p>
+       {{ answers.rewards }}
+
+       <h4>Motivation Chart</h4>
+       <p>In the following chart, think of some activities that may require motivation to complete. Think
+about where you can change your motivation (e.g. in your thoughts, emotions, or actions). Then,
+write down what you will change about your thoughts, emotions, or actions that will increase your
+motivation. An example is provided.</p>
+
+        <div class="col-sm-10 well">
+            <table class="table table-striped table-hover align">
+                <thead>
+                    <th class="text-center">Activities</th>
+                    <th class="text-center">Thought, emotion or action</th>
+                    <th class="text-center">What will you change?</th>
+                </thead>
+                <tbody>
+        {% for row in answers.motivation_activity %}
+            <tr>
+                <td>{{row.activities}}</td>
+                <td>{{row.thought_emotions}}</td>
+                <td>{{row.change}}</td>                
+            </tr>
+        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}

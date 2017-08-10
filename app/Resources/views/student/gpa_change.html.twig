@@ -1,0 +1,85 @@
+{% extends 'student/base.html.twig' %}
+
+{% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', 'jquery.collection.html.twig'] %}
+
+{% form_theme form.interactions _self %}
+{% form_theme form.achievements _self %}
+{% block textarea_label %}
+{%endblock%}
+
+
+{#{% block collection_widget %}
+    <div class="row">
+        <div class="col-md-5">
+            {{ form_widget(form) }}
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="collection-remove btn btn-default" title="Delete fruit"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="#" class="collection-add btn btn-default" title="Add fruit"><span class="glyphicon glyphicon-plus-sign"></span></a>
+        </div>
+    </div>
+{% endblock %}
+#}
+{% block main_content %}
+    <h1 class="page-header" > Review Progress and Learn New Skills</h1>
+
+    <div class="row">
+      <h2 class="sub-header">Changing your G.P.A.</h2>
+    <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <p>Have you ever noticed that certain activities affect how you feel? For example, if you hang out with your friends and have a fun time, you feel happy. If you play on a sports team and score a goal, you feel proud. In this module, G.P.A. stands for “Goal for Positive Activities.” You will learn types of positive activities, and you will make goals to increase the amount of positive activities you participate in each day.</p>
+    <h4>Types of Positive activities</h4>
+    <ol>
+      <li> <p><span style="font-weight: bold">Interactions </span> are activities that allow you to interact with other people in a positive way. </p>
+      <p>Examples: hanging out with friends; spending time with your family</p></li>
+
+      <li> <p><span style="font-weight: bold">Achievements </span> are activities that make you feel as though you accomplished a goal or skill. </p>
+      <p>Examples: completing a homework assignment; baking a cake</p></li>
+    </ol>
+
+    <h4>Brainstorming Positive Activities</h4>
+    {{ form_start(form) }}
+    <p>Can you think of any interactions or achievements that cause you to be happy, proud, excited, or motivated? </p>
+        {{ form_row(form.interactions) }}
+        {{ form_row(form.achievements) }}
+    <div class="row">
+       <h4>Mood and Positive Activities</h4>
+       <p>If we participate in many positive activities during the day, our mood will be more positive. The more we participate in positive activities, the better we feel. Some positive feelings we experience include happiness, pride, hope, excitement, motivation, satisfaction, joyful, optimism, peace, and encouragement. Think about the positive activities you listed above. What positive mood or feeling will result from participating in those activities? In the chart, write the positive mood next to the activity.</p>
+       <h4>Increasing Positive Activities</h4>
+       <p>Think about how many times you participated in these activities yesterday. Was the number low?
+       Increasing the amount of positive activities will improve your mood. On the next page, you will be able to set a goal for how many positive activities you will strive to complete every day.</p>
+    </div>
+    <div class="row">
+       <h4> Changing your G.P.A. worksheet</h4>
+       <p>Brainstorm some positive activities that you would enjoy doing every week in the box below. Next to the activities you list, write down the positive mood that is associated with that activity.</p>
+       {{ form_widget(form.pos_activities) }}
+
+       <p>Now, think about how many positive activities you want to strive to complete every day. Write that number in the box below.</p>
+       <h4>Goal Number of Positive Activities (G.P.A.) Every Day:</h4>
+       {{ form_widget(form.gpa) }}
+       <p>Over the next few weeks, record how many activities you complete each day in your agenda. Strive to participate in your goal number of activities at least 4 times each week. You can create a checkbox next to your GPA count to see if you met the GPA Goal for the day. An example is provided below.</p>
+       {{ form_rest(form) }}
+       <h4>Agenda Example</h4> 
+       <img src="{{asset('agenda.png')}}" width="100%">
+    </div>          
+{% endblock %}
+{% block custom_scripts %}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.interactions-collection').collection({add: '<a href="#" class="btn btn-default" title="Add element"><span class="glyphicon glyphicon-plus-sign"></span></a>',
+            remove: '<a href="#" class="btn btn-default" title="Delete element"><span class="glyphicon glyphicon-trash"></span></a>',
+            allow_duplicate: false,
+            allow_up: false,
+            allow_down: false,
+});
+        $('.achievements-collection').collection({add: '<a href="#" class="btn btn-default" title="Add element"><span class="glyphicon glyphicon-plus-sign"></span></a>',
+            remove: '<a href="#" class="btn btn-default" title="Delete element"><span class="glyphicon glyphicon-trash"></span></a>',
+            allow_duplicate: false,
+            allow_up: false,
+            allow_down: false,
+            });
+    </script>
+{% endblock %}
+

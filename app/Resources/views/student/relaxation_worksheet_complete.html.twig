@@ -1,0 +1,77 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+    <div class="row">
+      <h2 class="sub-header">Relaxation</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="row">
+       <p>Have you ever felt anxious, tense, or frustrated? Sometimes we feel this way when something goes wrong, an event happens that we did not expect, or we enter a new situation. Some situations where we can feel this way are listed below.</p>
+       <h4>Examples</h4>
+       <ul>
+         <li>Getting in an argument with your parents </li>
+         <li>Receiving a bad grade on a test</li>
+         <li>Giving a presentation in front of a class</li>
+         <li>Disagreeing with something your friend said or did</li>
+       </ul>
+       <h4>How to respond?</h4>
+       <p>Even though these types of situations may happen again, there is a relaxation method* that we can reduce our anxiety and frustration that result from these events. If we follow the steps of the following method, we can feel less stressed and less frustrated.</p>
+       <img src="../images/module7.png" width="70%" height="70%">
+       <h4>Why use this method?</h4>
+       <p>Anxiety, tension, and frustration can (1) prevent us from doing certain activities or (2) lead us to partake in disruptive behaviors. For example, if we feel anxious about a situation, we may choose to not participate in that situation. Likewise, if we feel frustrated, we may say something negative. If we use the relaxation method above, we can reduce these feelings and change these outcomes.</p>
+    </div>
+    <div class="row">
+      <p>Can you think of any situations that made you feel anxious, tense, or frustrated? Write some examples in the following box. </p> 
+      <h4>Situations that made me anxious, tense, or frustrated:</h4>
+      <i>{{ answers.situations }}</i>
+      <p>Think about how many times a week the above situations occur. Now, make a goal for yourself about how many times you will respond to the above situations using the relaxation method.</p>
+      <h4>Goal:</h4>
+      <p class="toBold">When situations occur that make me feel anxious, tense, or frustrated, I will respond <span><input type="text" name="answer1" placeholder="Enter your answer here" required></span> out of <span><input type="text" name="answer1" placeholder="Enter your answer here" required></span>times with the relaxation method within the next <span><input type="number" name="quantity" min="1" max="10" placeholder="1-10" required></span>days/week (Circle days or weeks).</p>
+    </div>
+    <br>
+    <div class="row">
+
+      <h4>Exercise:</h4>
+      <p>Over the next couple of weeks, when you encounter a situation similar to the ones you listed above, try to use the relaxation method. Remember how you felt before relaxing, and think about how you feel afterwards. Record your feelings in the chart below.</p>
+      <div class="table-responsive">
+        <table class="table table-responsive">
+        <thead>
+          <td>Situation</td> 
+          <td>How did I feel before?</td>
+          <td>How did I feel afterwards?</td>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+            <td><input type="text" name="answer1" placeholder="Enter your answer here" required></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    <br>    
+{% endblock %}
