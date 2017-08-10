@@ -16,16 +16,8 @@ use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdmin
 class ampedsessionController extends BaseAdminController {
     //put your code here
     
-    protected function prePersistEntity($entity)
-    {
-        $usr= $this->getUser();
         
-        if (method_exists($entity, 'setCreatedBy'))
-        {
-            $entity->setCreatedBy($usr);
-        }       
         parent::prePersistEntity($entity);
     }
-
     
 }
