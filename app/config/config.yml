@@ -218,6 +218,21 @@ easy_admin:
                     - pages
                 actions:
                     - { name: 'new', label: 'Add' }                    
+        SimplePage:
+            class: AppBundle\Entity\SimplePage
+            label: 'Session information pages'
+            form:
+                fields:
+                    - title
+                    - {property: 'description', type: 'ckeditor' }
+            list:
+                title: 'All pages'
+                fields:
+                    - title
+                actions:
+                    - { name: 'new', label: 'Add page' }
+            new:
+                title: 'Create new page'                    
         Session:
             class: AppBundle\Entity\Session
             label: 'Sessions'
