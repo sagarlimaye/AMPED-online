@@ -7,3 +7,26 @@
     {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
     </div>    
 {% endblock %}
+{% block scripts %}
+    {{parent()}}
+    <script>
+        $(function()
+        {
+            function onMainAnchorClick(e)
+            {
+                e.preventDefault();
+                var href = jQuery(this).attr('href');
+                $( '#main' ).load( href );
+                console.log(href);                
+            }
+            $('#sidebar a').click(function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+
+                $('#main').load(url);
+            });
+            $('a.xhrl').click(onMainAnchorClick)      
+        })          
+    </script>  
+{%endblock%}
+    
