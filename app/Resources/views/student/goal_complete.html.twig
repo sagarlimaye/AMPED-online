@@ -1,0 +1,49 @@
+{% extends 'student/base.html.twig' %}
+
+
+{% block main_content %}
+    <h2 class="sub-header">Weekly Goal Sheet</h2>
+          <div class = "subDiv form-horizontal" id="agreement">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Weekly Goal Sheet for: </label>
+                    <div class="col-sm-10 well"><i>{{ answers.date }}</i></div>                    
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">My Goal is to… </label>
+                    <div class="col-sm-10 well"><i>{{ answers.question2 }}</i></div>                    
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Things I am already doing that will help me reach my goal: </label>
+                    <div class="col-sm-10 well"><i>{{ answers.things_done}}</i></div>                    
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">My plan to help me reach my goal: </label>
+                    <div class="col-sm-10 well"><i>{{ answers.plan }}</i></div>                    
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Obstacles and solutions: </label>
+                    <div class="col-sm-10 well">
+                        <table class="table table-striped table-hover align">
+                            <thead>
+                                <th class="text-center">Obstacle</th>
+                                <th class="text-center">Solution</th>
+                            </thead>
+                            <tbody>
+                    {% for row in answers.obstacle_solution %}
+                        <tr>
+                            <td>{{row.obstacle}}</td>
+                            <td>{{row.solution}}</td>
+                        </tr>
+                    {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">How will I know if my plan is working?</label>
+                    <div class="col-sm-10 well"><i>{{ answers.plan_valid}}</i></div>                    
+                </div>                            
+          </div>
+{% endblock %}
+
+

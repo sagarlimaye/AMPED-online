@@ -1,0 +1,21 @@
+{% extends 'student/base.html.twig' %}
+
+{% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', _self] %}
+
+
+{#{% block ampedchoicetype_widget %}
+    <div {{ block('widget_container_attributes') }}>
+    {% for child in form %}
+        {{ form_widget(child) }}
+        {{- form_label(child, null, {'translation_domain': choice_translation_domain, 'label_attr': {'class': 'radio-inline'} }) }}
+    {% endfor %}
+    </div>
+{% endblock %}
+#}
+{% block main_content %}
+    <h2 class="sub-header">Change plan</h2>          
+    {{ form(form, {'label_attr' : { 'class': 'form-horizontal'} }) }}
+
+{% endblock %}
+
+

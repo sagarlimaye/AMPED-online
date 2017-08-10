@@ -1,0 +1,87 @@
+{% extends 'student/base.html.twig' %}
+
+
+{% form_theme form with ['bootstrap_3_layout.html.twig',_self] %}
+
+{#{% block form_row -%}
+
+    <div class="form-group step{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+
+        {{- form_label(form) -}}
+
+        {{- form_widget(form) -}}
+
+        {{- form_errors(form) -}}
+
+    </div>
+
+{%- endblock form_row %}#}
+
+{% block main_content %}
+    <div class="row">
+      <h2 class="sub-header">Self Assessment ({{title}}) </h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    {{ form(form, {'label_attr' : { 'class': 'form-horizontal'} }) }}
+{% endblock %}
+
+{#{% block custom_scripts %}
+    $(document).ready(function(){
+	var current = 5;
+	
+	widget      = $(".step");
+	btnnext     = $(".next");
+	btnback     = $(".back"); 
+	btnsubmit   = $(".submit");
+ 
+	// Init buttons and UI
+	widget.not(':lt(5)').hide();
+	hideButtons(current);
+	setProgress(current);
+ 
+	// Next button click action
+	btnnext.click(function(){
+		if(current < widget.length)
+                { 			
+                   widget.show(); 		
+                
+                   widget.not(':gt('+(current++)+')').hide();
+                   current += 5;
+                   widget.not(':lt('+(current)+') ').hide();
+  		   setProgress(current); 
+	       } 		
+               hideButtons(current); 	
+       }) 	
+       // Back button click action 	
+       btnback.click(function(){
+                if(current >= 9)
+                {
+                    console.log(current);
+                    current -= 5;
+                    btnnext.trigger('click');
+		}
+		hideButtons(current);
+	})			
+});
+ 
+// Change progress bar action
+setProgress = function(currstep){
+	var percent = parseFloat(100 / widget.length) * currstep;
+	percent = percent.toFixed();
+	$(".progress-bar")
+        .css("width",percent+"%")
+        .html(percent+"%");		
+}
+ 
+// Hide buttons according to the current step
+hideButtons = function(current){
+	var limit = parseInt(widget.length); 
+ 
+	$(".submit").hide();
+ 
+	if(current < limit) btnnext.show(); 	if(current > 5) btnback.show();
+	if (current > limit) { btnnext.hide(); btnsubmit.show(); }
+}
+{% endblock %}
+#}

@@ -1,0 +1,34 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h2 class="sub-header">Change plan</h2>
+          <div class = "subDiv" id="agreement">
+              <p class="test"><b>What is the change you are considering? Write it here: </b></p>
+              <i>{{ answers[0] }}</i>
+              {% set choiceAnswers = answers|slice(1) %}
+            {% for answerBatch in choiceAnswers|batch(questions|length, 'Couldn\'t retrieve answer for this question') %}
+                {% for key, answer in answerBatch %}
+                    <p class = "test"><b>{{questions[key].text}}</b></p> 
+                    <p class ="test"><i>
+                            {{answer}}
+                            (
+                            {% if answer in range(0, 1, 1) %}
+                                Definitely not
+                            {% elseif answer in range(2, 3, 1) %}
+                                Probably not
+                            {% elseif answer in range(4, 6, 1) %}
+                                Maybe
+                            {% elseif answer in range(7, 8, 1) %}
+                                Probably
+                            {% elseif answer in range(9, 10, 1) %}
+                                Definitely                
+                            {% endif %}
+                            )
+                    </i></p>
+                {% endfor %}
+            {% endfor %}
+              
+          </div>
+{% endblock %}
+
+
