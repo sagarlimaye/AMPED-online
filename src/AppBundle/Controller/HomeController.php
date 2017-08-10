@@ -746,9 +746,6 @@ class HomeController extends Controller
             case 7:
                 return $this->relaxationAction($amped, $request, $session);
                 break;
-            case 8:
-                
-                break;
             case 9:
                 $session->setModuleCompleted(9);
                 $this->getDoctrine()->getEntityManager()->flush();                
@@ -765,10 +762,13 @@ class HomeController extends Controller
             case 12:
                 $session->setModuleCompleted(12);
                 $this->getDoctrine()->getEntityManager()->flush();
-                return $this->render('module12.html.twig');
+                return $this->render('student/module12.html.twig');
                 break;
             case 13:
                 return $this->noteTakeAction($amped, $request, $session);
+                break;
+            default:
+                throw $this->createNotFoundException('We\'re sorry, this module is currently unavailable. Please go back and select a different one.');
                 break;
         }        
     }    
@@ -788,9 +788,9 @@ class HomeController extends Controller
         
         $allModules = [
             'academic' => [2,4,5,6,9,13,12],
-            'emotional' => [4,7,10,11,3],
-            'self-regulation' => [3,4,7,11,12],
-            'social' => [3,5,10,4]
+            'emotional' => [1, 4,7,10,11,3],
+            'self-regulation' => [1, 3,4,7,11,12],
+            'social' => [3,5,10,1,4]
         ];
         $moduleNames = [
             1 => 'Learning your ABC\'s',
