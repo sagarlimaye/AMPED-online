@@ -50,7 +50,10 @@ class ampedsession
     private $hasModules;
     private $hasGoalSheet;
     private $changeFormQuestions;
-    private $selfAssessmentQuestions;
+    private $selfAssessmentBehaviourQuestions;
+    private $selfAssessmentAcademicQuestions;
+    private $selfAssessmentSelfRegQuestions;
+    private $selfAssessmentSocialQuestions;    
     private $MAFQuestions;
     private $pages;
     
@@ -64,6 +67,8 @@ class ampedsession
         return $this->id;
     }
 
+  
+    
     public function __construct()
     {
         $this->createdAt = new \DateTime(null, new \DateTimeZone('America/Chicago'));
@@ -77,6 +82,9 @@ class ampedsession
         $this->hasModules = false;
         $this->hasMeShield = false;
         $this->hasOrgChart = false;
+     
+    }    
+
     /**
      * Set whether this session should contain goal sheet survey
      *
@@ -294,16 +302,47 @@ class ampedsession
         $this->changeFormQuestions = $changeFormQuestions;
         return $this;
     }
-    public function getSelfAssessmentQuestions()
+    public function getSelfAssessmentSocialQuestions()
     {
-        return $this->selfAssessmentQuestions;
+        return $this->selfAssessmentSocialQuestions;
     }
-    public function setSelfAssessmentQuestions($selfAssessmentQuestions)
+    public function setSelfAssessmentSocialQuestions($selfAssessmentSocialQuestions)
     {
-        $this->selfAssessmentQuestions = $selfAssessmentQuestions;
+        $this->selfAssessmentSocialQuestions = $selfAssessmentSocialQuestions;
         return $this;
     }
 
+    public function getSelfAssessmentBehaviourQuestions()
+    {
+        return $this->selfAssessmentBehaviourQuestions;
+    }
+    public function setSelfAssessmentBehaviourQuestions($selfAssessmentBehaviourQuestions)
+    {
+        $this->selfAssessmentBehaviourQuestions = $selfAssessmentBehaviourQuestions;
+        return $this;
+    }
+    public function getSelfAssessmentAcademicQuestions()
+    {
+        return $this->selfAssessmentAcademicQuestions;
+    }
+    public function setSelfAssessmentAcademicQuestions($selfAssessmentAcademicQuestions)
+    {
+        $this->selfAssessmentAcademicQuestions = $selfAssessmentAcademicQuestions;
+        return $this;
+    }
+    public function getSelfAssessmentSelfRegQuestions()
+    {
+        return $this->selfAssessmentSelfRegQuestions;
+    }
+    public function setSelfAssessmentSelfRegQuestions($selfAssessmentSelfRegQuestions)
+    {
+        $this->selfAssessmentSelfRegQuestions = $selfAssessmentSelfRegQuestions;
+        return $this;
+    }
+    
+    
+    
+    
     public function getMAFQuestions()
     {
         return $this->MAFQuestions;
@@ -467,6 +506,14 @@ class ampedsession
     }
     public function __toString() {
         return $this->num;
+    public function hasSelfAssessment()
+    {
+        return (null !== $this->selfAssessmentAcademicQuestions)
+            && (null !== $this->selfAssessmentBehaviourQuestions)
+            && (null !== $this->selfAssessmentSocialQuestions)
+            && (null !== $this->selfAssessmentSelfRegQuestions);        
+    }
+    
     public function hasIcebreakers()
     {
         return $this->has7Words || $this->hasMeShield || (null !== $this->abm) || (null !== $this->tic);

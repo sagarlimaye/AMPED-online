@@ -48,7 +48,13 @@ AppBundle\Entity\ampedsession:
             targetEntity: ABMIcebreakerQuestionSet
         changeFormQuestions:
             targetEntity: ChangeFormMiscQuestionSet
-        selfAssessmentQuestions:
+        selfAssessmentBehaviourQuestions:
+            targetEntity: SelfAssessmentMiscQuestionSet
+        selfAssessmentAcademicQuestions:
+            targetEntity: SelfAssessmentMiscQuestionSet
+        selfAssessmentSelfRegQuestions:
+            targetEntity: SelfAssessmentMiscQuestionSet
+        selfAssessmentSocialQuestions:
             targetEntity: SelfAssessmentMiscQuestionSet
         MAFQuestions:
             targetEntity: MAFMiscQuestionSet
@@ -60,8 +66,6 @@ AppBundle\Entity\ampedsession:
 #        icebreakerQuestions:
 #            targetEntity: IcebreakerQuestionSet
 #        miscQuestions:
-#            targetEntity: MiscQuestionSet
-    
-    
+#            targetEntity: MiscQuestionSet  
     
     lifecycleCallbacks: {  }
