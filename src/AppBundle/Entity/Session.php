@@ -14,6 +14,10 @@ class Session
      */
     private $ampedSession;
 
+  
+    private $student;
+    private $mentor;
+    
     /**
      * @var \DateTime
      */
@@ -24,13 +28,11 @@ class Session
      */
     private $end;
     
-    private $users;
+//    private $users;
 
-    private $activitiesCompleted;
     public function __construct()
     {
-        $this->users = new ArrayCollection();
-        $this->activitiesCompleted = new ArrayCollection();
+//        $this->users = new ArrayCollection();
     }
 
     
@@ -62,24 +64,29 @@ class Session
         return $this;
     }
 
-    public function getUsers()
-    {
-        return $this->users;
-    }
-    /**
-     * Set users
-     *
-     * @param integer $users
-     *
-     * @return Session
-     */
-    public function setUsers($users)
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
+//    public function getUsers()
+//    {
+//        return $this->users;
+//    }
+//    /**
+//     * Set users
+//     *
+//     * @param integer $users
+//     *
+//     * @return Session
+//     */
+//    public function setUsers($users)
+//    {
+//        $this->users = $users;
+//
+//        return $this;
+//    }
+//    public function addUser($user)
+//    {
+//        $this->users->add($user);
+//        return $this;
+//    }
+    
     /**
      * Set start
      *
@@ -105,33 +112,52 @@ class Session
     }
 
     /**
-     * Set end
+     * Set student
      *
-     * @param \DateTime $end
+     * @param User $end
      *
      * @return Session
      */
-    public function setEnd($end)
+    public function setStudent($student)
     {
-        $this->end = $end;
+        $this->student = $student;
 
         return $this;
     }
 
     /**
-     * Get end
+     * Get student
      *
-     * @return \DateTime
+     * @return User
      */
-    public function getEnd()
+    public function getStudent()
     {
-        return $this->end;
+        return $this->student;
+    } 
+
+    /**
+     * Set mentor
+     *
+     * @param User $mentor
+     *
+     * @return Session
+     */
+    public function setMentor($mentor)
+    {
+        $this->mentor = $mentor;
+
+        return $this;
     }
 
     /**
-     * Set activitiesCompleted
+     * Get mentor
      *
-     * @param Activity $activitiesCompleted
+     * @return User
+     */
+    public function getMentor()
+    {
+        return $this->mentor;
+    }    
      *
      * @return Session
      */

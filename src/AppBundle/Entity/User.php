@@ -44,9 +44,9 @@ class User extends BaseUser
     private $joinDate;
    
     private $mentor;
-    private $students;
+//    private $students;
     
-    private $sessions;
+//    private $sessions;
     
     private $logins;
     private $sessionCreations;
@@ -64,12 +64,11 @@ class User extends BaseUser
     }
     
     public function __construct() {
-        $this->students = new ArrayCollection();
+//        $this->students = new ArrayCollection();
         $this->sessions = new ArrayCollection();
         $this->logins = new ArrayCollection();
-        $this->sessionCreations = new ArrayCollection();
-        $this->joinDate = new \DateTime(date('Y-m-d'));
-        $this->plainPassword = $this->generatePassword(9);
+        $this->joinDate = new \DateTime(null, new \DateTimeZone('America/Chicago'));
+        $this->dob = new \DateTime(null, new \DateTimeZone('America/Chicago'));
         
         parent::__construct();
     }
@@ -85,27 +84,7 @@ class User extends BaseUser
 
     return $result;
     }
-    
-    /**
-     * Get number of sessions completed
-     *
-     * @return int
-     */
-    public function getSessionCount()
-    {
-        return $this->sessionCount;
-    }
-
-    /**
-     * Decrease number of sessions
-     *
-     * @return User
-     */
-    public function decreaseSessionCount()
-    {
-        $this->firstName--;
-    }
-        
+            
     /**
      * Get all logins
      *
@@ -116,55 +95,86 @@ class User extends BaseUser
         return $this->logins;
     }
     
-        /**
-     * Get session of this mentee
-     *
-     * @return User
-     */
-    public function getSessions()
+//        /**
+//     * Get session of this mentee
+//     *
+//     * @return User
+//     */
+//    public function getSessions()
+//    {
+//        return $this->sessions;
+//    }
+// 
+//    /**
+//     * Set session of this mentee
+//     *
+//     * @param int $mentor
+//     *
+//     * @return User
+//     */
+//    public function setSessions($sessions)
+//    {
+//        $this->sessions = $sessions;
+//        
+//        return $this;
+//    }
+
+    public function addSession($session)
     {
-        $this->sessions;
+        $this->sessions->add($session);
     }
- 
-    /**
-     * Set session of this mentee
-     *
-     * @param int $mentor
-     *
-     * @return User
-     */
-    public function setSessions($sessions)
+    public function removeSession($session)
     {
-        $this->sessions = $sessions;
-        
-        return $this;
+        $this->sessions->removeElement($session);
     }
 
-    /**
-     * Get students
-     *
-     * @return User
-     */
-    public function getStudents()
-    {
-        $this->students;
-    }
- 
-    /**
-     * Set students
-     *
-     * @param User $students
-     *
-     * @return User
-     */
-    public function setStudents($students)
-    {
-        $this->students = $students;
-        
-        return $this;
-    }
-    
-    
+//    /**
+//     * Remove student
+//     *
+//     * @return User
+//     */
+//    public function removeStudent($student)
+//    {
+//        $this->students->removeElement($student);
+//        $student->setMentor(null);
+//    }
+// 
+//    /**
+//     * Add a student
+//     *
+//     * @param User $students
+//     *
+//     * @return User
+//     */
+//    public function addStudent($student)
+//    {
+//        $this->students->add($student);
+//        $student->setMentor($this);
+//    }
+//
+//    /**
+//     * Get students
+//     *
+//     * @return ArrayCollection
+//     */
+//    public function getStudents()
+//    {
+//        return $this->students;
+//    }
+// 
+//    /**
+//     * Set students
+//     *
+//     * @param ArrayCollection $students
+//     *
+//     * @return User
+//     */
+//    public function setStudents($students)
+//    {
+//        $this->students = $students;
+//        
+//        return $this;
+//    }    
     
     /**
      * Get Mentor
@@ -173,13 +183,13 @@ class User extends BaseUser
      */
     public function getMentor()
     {
-        $this->mentor;
+        return $this->mentor;
     }
  
     /**
      * Set mentor
      *
-     * @param int $mentor
+     * @param User $mentor
      *
      * @return User
      */
@@ -189,31 +199,7 @@ class User extends BaseUser
         
         return $this;
     }
-    
-    
-    
-    /**
-     * Increase number of sessions
-     *
-     * @return User
-     */
-    public function increaseSessionCount()
-    {
-        $this->firstName++;
-    }
-    /**
-     * Set number of sessions
-     *
-     * @param int $sessionCount
-     *
-     * @return User
-     */
-    public function setSessionCount($sessionCount)
-    {
-        $this->firstName = $sessionCount;
-        
-        return $this;
-    }
+   
     
     /**
      * Set sessionCreations
