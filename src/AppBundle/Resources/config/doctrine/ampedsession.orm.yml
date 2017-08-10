@@ -41,7 +41,6 @@ AppBundle\Entity\ampedsession:
     manyToOne:
         createdBy:
             targetEntity: User
-            inversedBy: sessionsCreated
         tic:
             targetEntity: TICIcebreakerQuestionSet
         abm:
