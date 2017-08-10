@@ -6,11 +6,71 @@ index_list:
     path: /
     defaults: {_controller: AppBundle:Home:index }
 
+amped_start:
+    path: /ampedstart
+    defaults: { _controller: AppBundle:Home:start }
+
+mentorship_agreement:
+    path: /session/{num}/mentorship-agree
+    defaults: { _controller: AppBundle:Home:MAF }
+
+change_survey:
+    path: /session/{num}/change-survey
+    defaults: { _controller: AppBundle:Home:ChangeForm }
+
+self_assess:
+    path: /session/{num}/self-assess/{type}
+    defaults: { _controller: AppBundle:Home:SelfAssess }    
+
+things_common:
+    path: /session/{num}/things-common
+    defaults: { _controller: AppBundle:Home:TIC }
+seven_words:
+    path: /session/{num}/seven-words
+    defaults: { _controller: AppBundle:Home:sevenWords }
+all_about_me:
+    path: /session/{num}/all-about-me
+    defaults: { _controller: AppBundle:Home:ABM }
+backpack:
+    path: /session/{num}/backpack
+    defaults: { _controller: AppBundle:Home:backpack }
+time_travel:
+    path: /session/{num}/time_traveling
+    defaults: { _controller: AppBundle:Home:timeTravel }
+me_shield:
+    path: /session/{num}/me-shield
+    defaults: { _controller: AppBundle:Home:meShield }
+back_to_back:
+    path: /session/{num}/back-to-back
+    defaults: { _controller: AppBundle:Home:backToBack }
+    
+module:
+    path: /session/{num}/modules/{module}
+    defaults: { _controller: AppBundle:Home:module }
+    requirements:
+        module: '\d+'
+module_select:
+    path: /session/{num}/modules/{slug}
+    defaults: { _controller: AppBundle:Home:moduleSelect, slug: 'select' }
+    
+goal_sheet:
+    path: /session/{num}/goal-sheet
+    defaults: { _controller: AppBundle:Home:GoalSheet }    
+    
+simple_page:
+    path: /session/{num}/page{pageno}
+    defaults: { _controller: AppBundle:Home:GoalSheet }    
+
+icebreaker_select:
+    path: /session/{num}/icebreaker-select
+    defaults: { _controller: AppBundle:Home:icebreaker }        
+
 # app/config/routing.yml
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     
 easy_admin_bundle:
-    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    resource: "@AppBundle/Controller/AdminController.php"
     type:     annotation
     prefix:   /admin    
+     
