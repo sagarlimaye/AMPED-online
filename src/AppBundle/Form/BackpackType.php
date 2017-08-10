@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 /**
  * SevenWordsType
  */
-class SevenWordsType extends AbstractType
+class BackpackType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +21,7 @@ class SevenWordsType extends AbstractType
 //                    ->add('question' . $i, TextType::class, array('label' => 'Question for the above answer: '))
 //                    ->add('answer' . $i, TextType::class, array('label' => 'Your answer to the above question: '));
 //        }
-        $builder->add('issue', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class)
+        $builder->add('item', \Symfony\Component\Form\Extension\Core\Type\TextareaType::class)
                 ->add('Submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
     }
    
