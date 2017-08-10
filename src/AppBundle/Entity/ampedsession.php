@@ -73,8 +73,8 @@ class ampedsession
     {
         $this->createdAt = new \DateTime(null, new \DateTimeZone('America/Chicago'));
         $this->sessions = new ArrayCollection();
-        $this->icebreakerQuestions = new ArrayCollection();
-        $this->miscQuestions = new ArrayCollection();
+//        $this->icebreakerQuestions = new ArrayCollection();
+//        $this->miscQuestions = new ArrayCollection();
         $this->has7Words = false;
     }
     
