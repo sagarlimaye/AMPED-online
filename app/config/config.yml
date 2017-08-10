@@ -235,13 +235,13 @@ easy_admin:
                 title: 'Create new page'                    
         Session:
             class: AppBundle\Entity\Session
-            label: 'Sessions'
-            disabled_actions: ['new','edit', 'delete']
+            label: 'Sessions in progress'
             list:
-                title: 'Sessions in progress'
+                title: 'All mentoring sessions in progress'
                 fields:
                     - users
                     - ampedSession
+                    - { property: 'ampedSession', label: 'Session' }
                     - start
                     - end
         Login:
