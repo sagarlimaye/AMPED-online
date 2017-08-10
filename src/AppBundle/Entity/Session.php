@@ -18,6 +18,7 @@ class Session
     private $student;
     private $mentor;
     
+//    private $otherAnswers;
     /**
      * @var \DateTime
      */
@@ -30,9 +31,12 @@ class Session
     
 //    private $users;
 
+//    private $activitiesCompleted;
     public function __construct()
     {
 //        $this->users = new ArrayCollection();
+//        $this->activitiesCompleted = new ArrayCollection();
+//          $this->otherAnswers = new ArrayCollection();
     }
 
     
@@ -51,9 +55,9 @@ class Session
         return $this->ampedSession;
     }
     /**
-     * Set mentee
+     * Set amped session
      *
-     * @param integer $mentee
+     * @param ampedsession $ampedsession
      *
      * @return Session
      */
@@ -158,26 +162,89 @@ class Session
     {
         return $this->mentor;
     }    
+    
+    /**
+     * Set end
+     *
+     * @param \DateTime $end
      *
      * @return Session
      */
-    public function setActivitiesCompleted($activitiesCompleted)
+    public function setEnd($end)
     {
-        $this->activitiesCompleted = $activitiesCompleted;
+        $this->end = $end;
 
         return $this;
     }
 
     /**
-     * Get activitiesCompleted
+     * Get end
      *
-     * @return Activity
+     * @return \DateTime
      */
-    public function getActivitiesCompleted()
+    public function getEnd()
     {
-        return $this->activitiesCompleted;
+        return $this->end;
     } 
     
     
+//
+//    public function addOtherAnswers($otherAnswer)
+//    {
+//        $key = '';
+//        if($otherAnswer instanceof MAFAnswers)
+//            $key = 'maf';
+//        else if($otherAnswer instanceof ChangeSurveyAnswers)
+//            $key = 'change';
+//        else if($otherAnswer instanceof GoalSheetAnswers)
+//            $key = 'goal';
+//        else if($otherAnswer instanceof SelfAssessmentAnswers)
+//            $key = 'self';
+//        $this->otherAnswers->set($key, $otherAnswer);
+//    }
+//    public function removeOtherAnswers($otherAnswers)
+//    {
+//        $this->otherAnswers->removeElement($otherAnswers);
+//    }
+//    public function getAnswers()
+//    {
+//        return $this->otherAnswers->toArray();
+//    }
+//    
+//    public function getMAF()
+//    {
+//        return $this->otherAnswers->get('maf');
+//    }
+//    
+//    public function getChangeSurvey()
+//    {
+//        return $this->otherAnswers->get('change');
+//    }
+//
+//    public function getGoalSheet()
+//    {
+//        return $this->otherAnswers->get('goal');
+//    }
+//    public function getSelfAssessment()
+//    {
+//        return $this->otherAnswers->get('self');
+//    }
+//    
+//    public function completedMAF()
+//    {
+//        return !$this->otherAnswers->isEmpty() && $this->otherAnswers->containsKey('maf');
+//    }
+//    public function completedChangeSurvey()
+//    {
+//        return !$this->otherAnswers->isEmpty() && $this->otherAnswers->containsKey('change');
+//    }    
+//    public function completedGoalSheet()
+//    {
+//        return !$this->otherAnswers->isEmpty() && $this->otherAnswers->containsKey('goal');
+//    }    
+//    public function completedSelfAssessment()
+//    {
+//        return !$this->otherAnswers->isEmpty() && $this->otherAnswers->containsKey('self');
+//    }    
 }
 
