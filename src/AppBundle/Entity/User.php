@@ -69,6 +69,7 @@ class User extends BaseUser
         $this->logins = new ArrayCollection();
         $this->joinDate = new \DateTime(null, new \DateTimeZone('America/Chicago'));
         $this->dob = new \DateTime(null, new \DateTimeZone('America/Chicago'));
+//        $this->plainPassword = $this->generatePassword(9);
         
         parent::__construct();
     }
