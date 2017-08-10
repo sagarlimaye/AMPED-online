@@ -105,6 +105,22 @@ easy_admin:
         date:     'd/m/Y'
         time:     'H:i'
         datetime: 'd/m/Y H:i' 
+    design:
+        menu:
+            - User
+            - AmpedSession
+            - SimplePage
+            - Session
+            - Login
+            - { label: 'Question sets' }
+            - TICIcebreakerQuestionSet
+            - ABMIcebreakerQuestionSet
+            - MAFMiscQuestionSet
+            - SelfAssessmentMiscQuestionSet
+            - ChangeFormMiscQuestionSet
+            - { label: 'Questions' }
+            - AmpedTextareaType
+            - AmpedChoiceType
     entities:
         User:
             class: AppBundle\Entity\User        
