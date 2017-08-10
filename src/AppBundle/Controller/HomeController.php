@@ -788,9 +788,9 @@ class HomeController extends Controller
         
         $allModules = [
             'academic' => [2,4,5,6,9,13,12],
-            'emotional' => [1,4,7,10,11,3],
-            'self-regulation' => [1,3,4,7,11,12],
-            'social' => [3,5,10,1,4]
+            'emotional' => [4,7,10,11,3],
+            'self-regulation' => [3,4,7,11,12],
+            'social' => [3,5,10,4]
         ];
         $moduleNames = [
             1 => 'Learning your ABC\'s',
