@@ -1,0 +1,18 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <div class="row placeholders">
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="{{asset('iceb.png') }}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+      </div>
+    </div>
+
+    <div class="row">
+      <h2 class="sub-header">Me shield</h2>
+      <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+    </div>
+
+    <div class="col-sm-12 options">
+      <img src="{{asset('shield.jpeg') }}" class="iceb" alt="image1">
+    </div>
+{% endblock %}

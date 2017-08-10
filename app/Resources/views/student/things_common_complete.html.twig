@@ -1,0 +1,39 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h2 class="sub-header">Things in Common</h2>
+    <div class="table-responsive">
+      {% if questions|length == answers|length %}  
+      <table class="table table-striped">
+      <tbody>
+        <tr>
+            
+        {% for answerBatch in answers|batch(questions|length, 'Couldn\'t retrieve answer for this question') %}    
+        
+            {% for key,answer in answerBatch %}
+                <td>
+                    {% if answers[key] is empty %}
+                    <button class="btn" disabled="true"><b>{{questions[key].text}}</b><br>
+                        <div><i> No answer given </i></div>
+                    </button>    
+                    {% else %} 
+                    <button class="btn btn-success" disabled="true"><b>{{questions[key].text}}</b><br>    
+                        <div><i>     
+                        {{answers[key]}} 
+                        </i></div>
+                    </button>
+                    {% endif %}
+                </td>
+                {% if loop.index is divisibleby(3) and not loop.last %}
+                <tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}            
+        </tr>
+      </tbody>  
+      </table>
+      {% else %}
+          <div class="alert alert-danger" role="alert">We're sorry, there was a problem retrieving your answers. Please contact the website owner for assistance.</div>
+      {% endif %}    
+    </div>
+{% endblock %}

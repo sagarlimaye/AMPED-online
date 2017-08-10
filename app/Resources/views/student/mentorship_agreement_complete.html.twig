@@ -1,0 +1,23 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h2 class="sub-header">Mentorship Agreement Form</h2>
+        <div class = "subDiv" id="agreement">
+            {#{% if questions|length == answers|length %}
+            {% for key,question in questions %}
+                <p class = "test">{{question.text}}</p> 
+                <p class ="test"><i>{{answers[key]}}</i></p>
+            {% endfor %}
+            {% else %}
+              <div class="alert alert-danger" role="alert">We're sorry, there was a problem retrieving your answers. Please contact the website owner for assistance.</div>
+            {% endif %}#}
+            {% for answerBatch in answers|batch(questions|length, 'Couldn\'t retrieve answer for this question') %}
+                {% for key, answer in answerBatch %}
+                    <p class = "test"><b>{{questions[key].text}}</b></p> 
+                    <p class ="test"><i>{{answer}}</i></p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+{% endblock %}
+
+

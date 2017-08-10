@@ -1,0 +1,34 @@
+{% extends 'student/base.html.twig' %}
+
+{% form_theme form _self 'bootstrap_3_layout.html.twig' %}
+
+{% block ampedtextareatype_label %}
+    <p class = "test">
+        label
+    </p>      
+{% endblock %}
+
+{% block main_content %}
+    <h2 class="sub-header">Things in Common</h2>
+    <div class="table-responsive">
+      {{ form_start(form) }}
+      
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+          {% for child in form.children|slice(0, form.children|length - 2) %}
+              <td>
+                  <button id="{{loop.index0}}" class="btn" onclick="thingsInCommon(this.id);">{{form_label(child)}}<br>
+                      <div class="hidden">{{form_widget(child)}}</div>
+                  </button>
+              </td>
+              {% if loop.index is divisibleby(3) and not loop.last %}
+              <tr>
+              {% endif %}
+          {% endfor %}
+          </tr>
+        </tbody>  
+     </table>
+          {{ form_rest(form) }}
+    </div>
+{% endblock %}
