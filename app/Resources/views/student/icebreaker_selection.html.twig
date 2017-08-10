@@ -1,0 +1,90 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+{#
+<div class="col-xs-6 col-sm-3 placeholder">
+    <button type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='../iceBreaker/thingsInCommon.html';">
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+    </button>
+    <h4>Things in Common</h4>
+</div>
+
+<div class="col-xs-6 col-sm-3 placeholder">
+    <button type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='../iceBreaker/backpackScavengerHunt.html';">
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+    </button>
+    <h4>Backpack Scavenger Hunt</h4>
+</div>
+#}
+
+{% set icebreakers = {}%}
+{% set num = current.num %}
+
+{% if current.tic is not null %}
+    {% set new %}
+        <a class="btn" href="{{path('things_common', {'num': num})}}">Things in Common</a>
+    {% endset %}
+    {% set icebreakers = icebreakers|merge({ 'Things in common': path('things_common', {'num': num}) }) %}
+{% endif %}
+
+{% if current.abm is not null %}
+    {% set new %}
+        <a class="btn" href="{{path('all_me', {'num': num})}}">All about me</a>
+    {% endset %}
+    {% set icebreakers = icebreakers|merge({ 'Things in common': path('things_common', {'num': num}) }) %}
+{% endif %}
+
+{% if current.has7Words %}
+    {% set new %}
+        <a class="btn" href="{{path('seven_words', {'num': num})}}">Seven Words</a>
+    {% endset %}
+    {% set icebreakers = icebreakers|merge({ '7 Words': path('seven_words', {'num': num}) }) %}
+{% endif %}
+
+{% if current.hasBackpack %}
+    {% set new %}
+        <a class="btn" href="{{path('backpack', {'num': num})}}">Backpack scavenger hunt</a>
+    {% endset %}
+    {% set icebreakers = icebreakers|merge({ 'Backpack scavenger hunt': path('backpack', {'num': num}) }) %}
+{% endif %}
+
+{% if current.hasTimeTravel %}
+    {% set new %}
+        <a class="btn" href="{{path('time_travel', {'num': num})}}">Time traveling</a>
+    {% endset %}
+    {% set icebreakers = icebreakers|merge({ 'Time traveling': path('time_travel', {'num': num}) }) %}
+{% endif %}
+
+{% if current.hasMeShield %}
+    {% set new %}
+        <a class="btn" href="{{path('me_shield', {'num': num})}}">Me Shield</a>
+    {% endset %}
+    {% set icebreakers = icebreakers|merge({ 'Me shield': path('me_shield', {'num': num}) }) %}
+{% endif %}
+
+{% for row in icebreakers|batch(3) %}
+    <div class="row placeholder">
+        {% for name, icebreaker in row %}
+            <div class="col-sm-4">
+                <a class="thumbnail" href="{{icebreaker}}">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                    <h4 class="text-center">{{ name }}</h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+    
+{% endblock %}
+
+{% block scripts %}
+    {{parent()}}
+    <script>
+       $(function() {
+            $("a.btn").click(function() {
+                var link = $(this).attr("href");
+                $("div#main").load(link);
+            })
+       });
+    </script>
+{% endblock %}

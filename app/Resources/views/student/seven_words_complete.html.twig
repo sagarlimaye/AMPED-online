@@ -1,0 +1,14 @@
+{% extends 'student/base.html.twig' %}
+
+{% block main_content %}
+    <h2 class="sub-header">Seven Words</h2>
+
+    <div class="row">
+       <p>Think of a goal or an issue (however big or small) that you would like some clarity on or to mae a decision around</p>
+       <p>Express the issue/goal in EXACTLY 7 words</p>
+    </div>
+    <div class="row well">
+        {{ answers.issue}}
+    </div>
+    
+{% endblock %}

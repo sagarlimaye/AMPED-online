@@ -1,0 +1,20 @@
+{% extends 'student/base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig'  %}
+{% block main_content %}
+    <div class="row placeholders">
+      <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="{{asset('iceb.png') }}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+      </div>
+    </div>
+
+    <h2 class="sub-header">Seven Words</h2>
+
+    <div class="row">
+       <p>Think of a goal or an issue (however big or small) that you would like some clarity on or to mae a decision around</p>
+       <p>Express the issue/goal in EXACTLY 7 words</p>
+    </div>
+    <div class="row">
+        {{ form(form) }}
+    </div>
+    
+{% endblock %}
