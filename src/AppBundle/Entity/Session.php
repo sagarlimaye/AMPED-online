@@ -18,7 +18,11 @@ class Session
     private $student;
     private $mentor;
     
+    private $icebreakerCompleted;
+    private $moduleCompleted;
 //    private $otherAnswers;
+    
+    
     /**
      * @var \DateTime
      */
@@ -187,7 +191,25 @@ class Session
         return $this->end;
     } 
     
-    
+    public function getIcebreakerCompleted()
+    {
+        return $this->icebreakerCompleted;
+    }
+    public function setIcebreakerCompleted($icebreakerCompleted)
+    {
+        $this->icebreakerCompleted = $icebreakerCompleted;
+        return $this;
+    }
+
+    public function getModuleCompleted()
+    {
+        return $this->moduleCompleted;
+    }
+    public function setModuleCompleted($moduleCompleted)
+    {
+        $this->moduleCompleted = $moduleCompleted;
+        return $this;
+    }
 //
 //    public function addOtherAnswers($otherAnswer)
 //    {
