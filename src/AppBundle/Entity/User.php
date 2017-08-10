@@ -347,12 +347,4 @@ class User extends BaseUser
     {
         return $this->joinDate;
     }
-
-    /**
-     * Set role
-     *
-     * @param string $role
-     *
-     * @return User
-     */
 }

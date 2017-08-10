@@ -10,4 +10,5 @@ namespace AppBundle\Repository;
  */
 class ampedsessionRepository extends \Doctrine\ORM\EntityRepository
 {
+    
 }

@@ -13,7 +13,6 @@ class Session
      * @var int
      */
     private $ampedSession;
-
   
     private $student;
     private $mentor;

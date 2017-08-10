@@ -76,9 +76,6 @@ class ampedsession
 //        $this->icebreakerQuestions = new ArrayCollection();
 //        $this->miscQuestions = new ArrayCollection();
         $this->has7Words = false;
-    }
-    
-    
         $this->hasModules = false;
         $this->hasMeShield = false;
         $this->hasOrgChart = false;
@@ -505,7 +502,9 @@ class ampedsession
         return $this->createdAt;
     }
     public function __toString() {
-        return $this->num;
+        return (string) $this->num;
+    }
+
     public function hasSelfAssessment()
     {
         return (null !== $this->selfAssessmentAcademicQuestions)
