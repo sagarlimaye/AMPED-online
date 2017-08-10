@@ -53,6 +53,7 @@ class HomeController extends Controller
         // go to the icebreaker selection page
         return $this->render('student/icebreaker_selection.html.twig', ['current' => $amped] );
     }
+    
     private function resumeSession($session)
     {
         $ampedSession = $session->getAmpedSession();
@@ -122,6 +123,54 @@ class HomeController extends Controller
     {
         return $this->getDoctrine()->getRepository(Session::class)->getStudentSessionByAmped($user, $amped);
     }
+    
+    
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE') and null !== amped.getMAFQuestions()")
+     */    
+    public function MAFAction(ampedsession $amped, Request $request)
+    {
+        $user = $this->getUser();
+        $questions = $amped->getMAFQuestions()->getQuestions()->toArray();
+
+        $session = $this->queryForStudentSession($amped, $user);
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');        
+        
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\MAFAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+
+        if(null === $answers)
+        {
+            //create MAF form
+            $form = $this->createForm(Form\MAFFormType::class, null, array('questions'=> $questions,
+                    'action'=> $this->generateUrl('mentorship_agreement', ['num'=>$amped->getNum()])));
+
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $mafanswerSet = new \AppBundle\Entity\MAFAnswers();
+                $mafanswerSet->setUser($user);
+                $mafanswerSet->setQuestionSet($amped->getMAFQuestions());
+                $answers = $form->getData();
+                $mafanswerSet->setAnswers($answers);
+                $mafanswerSet->setSession($session);
+                $em->persist($mafanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+            }
+            return $this->render('student/mentorship_agreement.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/mentorship_agreement_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers->getAnswers())]);
+    }
+   
     /**
      * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
      * @Security("has_role('ROLE_PROTEGE') and null !== amped.getTic()")
@@ -217,6 +266,57 @@ class HomeController extends Controller
         }
         return $this->render('student/all_about_me_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers->getAnswers())]);
     }    
+    
+    
+    
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE')")
+     */    
+    public function ChangeFormAction(ampedsession $amped, Request $request)
+    {
+        $user = $this->getUser();
+        $questions = $amped->getChangeFormQuestions()->getQuestions()->toArray();
+        
+        $session = $this->queryForStudentSession($amped, $user);
+        
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');
+        
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ChangeSurveyAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        
+        if(null === $answers)
+        {
+            //create MAF form
+            $form = $this->createForm(Form\ChangeSurveyType::class, null, array('questions'=> $questions,
+                    'action'=> $this->generateUrl('change_survey', ['num'=>$amped->getNum()])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $changeanswerSet = new \AppBundle\Entity\ChangeSurveyAnswers();
+                $changeanswerSet->setUser($user);
+                $changeanswerSet->setQuestionSet($amped->getChangeFormQuestions());
+                $answers = $form->getData();
+                $changeanswerSet->setAnswers($answers);
+                $changeanswerSet->setSession($session);
+                $em->persist($changeanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/change_survey_complete.html.twig', ['questions'=>$questions, 'answers'=>$answers]);
+            }
+            return $this->render('student/change_survey.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/change_survey_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers->getAnswers())]);
+    }
+
     /**
      * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
      * @Security("has_role('ROLE_PROTEGE')")
@@ -383,6 +483,50 @@ class HomeController extends Controller
     }   
 
     
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE')")
+     */    
+    public function GoalSheetAction(ampedsession $amped, Request $request)
+    {   
+        $user = $this->getUser();
+        
+        $session = $this->queryForStudentSession($amped, $user);
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\GoalSheetAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\GoalSheetType::class, null, array('action'=> $this->generateUrl('goal_sheet', ['num'=>$amped->getNum()])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $goalsheetAnswerSet = new \AppBundle\Entity\GoalSheetAnswers();
+                $goalsheetAnswerSet->setUser($user);
+                $answers = $form->getData();
+                date_default_timezone_set('America/Chicago');
+                $answers['date'] = date('l - F j, Y');
+                $goalsheetAnswerSet->setAnswers($answers);
+                $goalsheetAnswerSet->setSession($session);
+                $em->persist($goalsheetAnswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/goal_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/goal_sheet.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/goal_complete.html.twig', ['answers'=>$answers->getAnswers()]);
+    }   
+  
     public function checkIfSessionComplete($session)
     {
         $amped = $session->getAmpedSession();
