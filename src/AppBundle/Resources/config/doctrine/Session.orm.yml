@@ -14,14 +14,22 @@ AppBundle\Entity\Session:
         end:
             type: datetime
             nullable: true
+        moduleCompleted:
+            type: integer
+            nullable: true
+        icebreakerCompleted:
+            type: boolean
+            nullable: true
     manyToOne:
         ampedSession:
             targetEntity: ampedsession
-            inversedBy: sessions
-    manyToMany:
-        users:
+        student:
             targetEntity: User
-            mappedBy: sessions
-   
-    
+        mentor:
+            targetEntity: User
+#    oneToOne:
+#        icebreakerAnswers:
+#            targetEntity: AnswerSet
+#        moduleAnswers:
+#            targetEntity: AnswerSet
     lifecycleCallbacks: {  }
