@@ -19,19 +19,3 @@
     {% endfor %}
     <br>          
 {% endblock %}
-{% block custom_scripts %}
-    <script>
-    $(function() {
-        $('a.module').click(function(e)
-        {
-            var url = $(this).attr('href');
-            var newModuleLink = $('#sidebar a.new-module');
-            if($.inArray($(this).data('moduleId'), [5, 9, 10, 12]) > -1)
-            {
-                newModuleLink.attr('href', url);
-                newModuleLink.text('Skill Building');                
-            }
-        });
-    })
-    </script>
-{% endblock %}
