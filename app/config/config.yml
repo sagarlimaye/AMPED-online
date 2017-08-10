@@ -89,8 +89,8 @@ fos_user:
     service:
         mailer: fos_user.mailer.default 
     from_email:
-        address: "sagarl3232@hotmail.com"
-        sender_name: "lala"
+        address: sagarl3232@hotmail.com
+        sender_name: lala
 
 ivory_ck_editor:
     default_config: my_config
@@ -142,7 +142,6 @@ easy_admin:
                     - { property: 'roles', label: 'Role for this user', type: 'collection', type_options: { entry_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType, allow_delete: false, allow_add: false, entry_options:  { choices: {  Admin: ROLE_SUPER_ADMIN, Mentor: ROLE_MENTOR, Student: ROLE_PROTEGE } } } }
                     #- { property: 'roles', label: 'Role for this user', type: 'choice', type_options: { choices: {  Admin: ROLE_SUPER_ADMIN, Mentor: ROLE_MENTOR, Student: ROLE_PROTEGE} } }
             edit:
-                actions: ['show']
                 fields:
                     - '-plainPassword'
             list:
@@ -260,4 +259,141 @@ easy_admin:
                     - user
                     - { property: 'ts', label: 'Timestamp' }
                     - { property: status, type: 'boolean', label: 'Login: YES | Logout: NO' }
+        TICIcebreakerQuestionSet:
+            class: AppBundle\Entity\TICIcebreakerQuestionSet
+            #controller: AppBundle\Controller\TICIcebreakerQuestionSetAdminController
+            label: 'Things in common'
+            list:
+                title: 'Question sets for "Things in common" icebreaker'
+                actions:
+                    - { name: 'new', label: 'Add question set' }
+                fields:
+                    - name
+                    - createdAt
+                    - createdBy
+                    - questions
+            form:
+                title: 'New question set'
+                fields:
+                    - name
+                    #- { property: 'questions', help: 'Add some text entry questions to this set', type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle:AmpedTextareaType }, allow_add: true, allow_delete: true, by_reference: true } }
+                    - { property: 'questions', type: 'easyadmin_autocomplete', type_options: { class: 'AppBundle\Entity\AmpedTextareaType' } }
+                    #- questions
             
+        AmpedChoiceType:
+            class: AppBundle\Entity\AmpedChoiceType
+            label: 'Rating questions'
+            form:
+                fields:
+                    - { property: text, label: 'Question' , help: 'You are limited to 255 characters' }
+                    - { property: groupType, label: 'Style', type: 'choice', type_options: { choices: 
+                        {
+                        'Grades: A,B,C,D,F': 1,
+                        '1-10: No grouping': 2,
+                        '1-10: Not at all, Somewhat, Very': 3,
+                        '0-10: Definitely Not, Probably Not, Maybe, Probably, Definitely': 4
+                        }
+                      } }
+            list:
+                title: 'All rating-type questions'
+                actions:
+                    - { name: 'new', label: 'Add a new question' }
+                fields:
+                    - text
+            new:
+                title: 'Create new rating-type question'
+            edit:
+                title: 'Edit rating-type question'                
+                    
+        AmpedTextareaType:
+            class: AppBundle\Entity\AmpedTextareaType
+            label: 'Text entry questions'
+            form:
+                title: 'New regular text input question'
+                form_options: { validation_groups: ['Default'] }
+                fields:
+                    - { property: text, label: 'Question' , help: 'You are limited to 255 characters' }
+            list:   
+                title: 'All text-entry questions'
+                fields:
+                    - text
+                actions:
+                    - { name: 'new', label: 'Add a new question' }
+        MAFMiscQuestionSet:
+            class: AppBundle\Entity\MAFMiscQuestionSet
+            label: 'Mentorship agreement form'
+            list:
+                title: 'Question sets for Mentorship Agreement Forms'
+                actions:
+                    - { name: 'new', label: 'Add question set' }
+                fields:
+                    - name
+                    - createdAt
+                    - createdBy
+                    - questions
+            form:
+                title: 'New question set'
+                fields:
+                    - name
+                    #- { property: 'questions', help: 'Add some text entry questions to this set', type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle:AmpedTextareaType }, allow_add: true, allow_delete: true, by_reference: true } }
+                    - { property: 'questions', type: 'easyadmin_autocomplete', type_options: { class: 'AppBundle\Entity\AmpedTextareaType' } }
+                    #- questions
+        ABMIcebreakerQuestionSet:
+            class: AppBundle\Entity\ABMIcebreakerQuestionSet
+            label: 'All about me'
+            list:
+                title: 'Question sets for the "All about me" icebreaker'
+                actions:
+                    - { name: 'new', label: 'Add question set' }
+                fields:
+                    - name
+                    - createdAt
+                    - createdBy
+                    - questions
+            form:
+                title: 'New question set'
+                fields:
+                    - name
+                    #- { property: 'questions', help: 'Add some text entry questions to this set', type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle:AmpedTextareaType }, allow_add: true, allow_delete: true, by_reference: true } }
+                    - { property: 'questions', type: 'easyadmin_autocomplete', type_options: { class: 'AppBundle\Entity\AmpedTextareaType' } }            
+        SelfAssessmentMiscQuestionSet:
+            class: AppBundle\Entity\SelfAssessmentMiscQuestionSet
+            label: 'Self-Assessment'
+            list:
+                title: 'Question sets for self-assessment surveys'
+                actions:
+                    - { name: 'new', label: 'Add question set' }
+                fields:
+                    - name
+                    - createdAt
+                    - createdBy
+                    - questions
+            form:
+                title: 'New question set'
+                fields:
+                    - name
+                    - questions
+                    #- { property: 'questions', help: 'Add some text entry questions to this set', type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle:AmpedTextareaType }, allow_add: true, allow_delete: true, by_reference: true } }
+                    #- { property: 'questions', type: 'easyadmin_autocomplete', type_options: { class: 'AppBundle\Entity\QuestionType' } }
+        QuestionType:
+            class: AppBundle\Entity\QuestionType
+            show:
+                max_results: 100
+        ChangeFormMiscQuestionSet:
+            class: AppBundle\Entity\ChangeFormMiscQuestionSet
+            label: 'Change plan surveys'
+            list:
+                title: 'Question sets for Change Plan Surveys'
+                actions:
+                    - { name: 'new', label: 'Add question set' }
+                fields:
+                    - name
+                    - createdAt
+                    - createdBy
+                    - questions
+            form:
+                title: 'New question set'
+                fields:
+                    - name
+                    #- { property: 'questions', help: 'Add some text entry questions to this set', type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle:AmpedTextareaType }, allow_add: true, allow_delete: true, by_reference: true } }
+                    - { property: 'questions', type: 'easyadmin_autocomplete', type_options: { class: 'AppBundle\Entity\AmpedChoiceType' } }
