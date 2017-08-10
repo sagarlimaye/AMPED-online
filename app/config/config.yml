@@ -102,9 +102,9 @@ ivory_ck_editor:
 easy_admin:
     site_name: 'AMPED online (Admin)'
     formats:
-        date:     'd/m/Y'
+        date:     'm/d/Y'
         time:     'H:i'
-        datetime: 'd/m/Y H:i' 
+        datetime: 'm/d/Y g:i A' 
     design:
         menu:
             - User
