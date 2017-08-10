@@ -7,12 +7,7 @@ AppBundle\Entity\QuestionType:
     discriminatorMap:
         question: QuestionType
         ampedtext: AmpedTextareaType
-        tictext: TICTextareaType
-        regulartext: RegularTextareaType
         ampedchoice: AmpedChoiceType
-        tenchoice: TenAmpedChoiceType
-        adjectivechoice: AdjectiveAmpedChoiceType
-        definitivechoice: DefinitiveAmpedChoiceType
     table: null
     repositoryClass: AppBundle\Repository\QuestionTypeRepository
     id:
