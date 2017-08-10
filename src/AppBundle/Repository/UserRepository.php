@@ -9,7 +9,18 @@ namespace AppBundle\Repository;
  * repository methods below.
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
-{
-    
-    
+{    
+    public function findSessionByAmpedNum($num)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb
+                ->select('s')
+                ->from('User', 'u')
+                ->join('u.sessions', 's')
+                ->join('s.ampedSession', 'a')
+                ->where($qb->expr()->eq('a.num', '?1'))
+                ->setParameter(1, $num)
+                ->getQuery()
+                ->getOneOrNullResult();
+    }
 }
