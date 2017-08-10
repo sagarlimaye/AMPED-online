@@ -131,11 +131,16 @@ easy_admin:
                     - lastName
                     - username
                     - email
-                    - { property: 'plainPassword', help: "A password has been auto-generated for you. When you click 'Save Changes', it will be sent to the email you entered above.", type: 'password', label: 'Password', type_options: { disabled: true, always_empty: true } }
+                    - { property: 'plainPassword', type: 'password', label: 'Password' }
+                    #- { property: 'plainPassword', help: "A password has been auto-generated for you. When you click 'Save Changes', it will be sent to the email you entered above.", type: 'password', label: 'Password', type_options: { disabled: true, always_empty: true } }
                     - { property: 'dob', type: 'birthday', label: 'Date of birth' }
                     - institution
-                    - { property: mentor, help: "Leave this blank if you're adding a mentor." }
-                    - { property: 'roles', label: 'Role for this user', type: 'collection', type_options: { entry_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType, allow_delete: false, allow_add: false, entry_options:  { choices: {  ROLE_SUPER_ADMIN: Admin, ROLE_MENTOR: Mentor, ROLE_PROTEGE: Student } } } }
+                    #- students
+                    #- { property: 'students', type: 'easyadmin_autocomplete' }
+                    #- { property: 'students', type: 'collection', type_options: { entry_type: Symfony\Bridge\Doctrine\Form\Type\EntityType, entry_options: { class: AppBundle\Entity\User }, allow_add: true, allow_delete: true, by_reference: true } , label: 'Students', help: "If this is a mentor you're adding, add the students they will be mentoring" }
+                    - { property: mentor, help: "If this is a student you're adding, select their mentor" }
+                    - { property: 'roles', label: 'Role for this user', type: 'collection', type_options: { entry_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType, allow_delete: false, allow_add: false, entry_options:  { choices: {  Admin: ROLE_SUPER_ADMIN, Mentor: ROLE_MENTOR, Student: ROLE_PROTEGE } } } }
+                    #- { property: 'roles', label: 'Role for this user', type: 'choice', type_options: { choices: {  Admin: ROLE_SUPER_ADMIN, Mentor: ROLE_MENTOR, Student: ROLE_PROTEGE} } }
             edit:
                 actions: ['show']
                 fields:
@@ -153,6 +158,7 @@ easy_admin:
                     - joinDate
                     - enabled
                     - lastLogin
+                    #- students
                     - mentor
                     - roles
             show:
