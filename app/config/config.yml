@@ -236,6 +236,7 @@ easy_admin:
         Session:
             class: AppBundle\Entity\Session
             label: 'Sessions in progress'
+            disabled_actions: ['new', 'delete']
             list:
                 title: 'All mentoring sessions in progress'
                 fields:
