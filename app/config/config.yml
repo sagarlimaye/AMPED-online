@@ -245,6 +245,11 @@ easy_admin:
                     - { property: 'ampedSession', label: 'Session' }
                     - start
                     - end
+            edit:
+                title: 'Edit session in progress'
+                fields:
+                    - start
+                    - end
         Login:
             class: AppBundle\Entity\Login
             label: 'Login and logout'
