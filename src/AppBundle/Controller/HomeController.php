@@ -142,4 +142,28 @@ class HomeController extends Controller
         }
         return $complete;
     }
+    
+    public function advanceSession($session, $user)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $session->setEnd(new \DateTime(null, new \DateTimeZone('America/Chicago')));
+        $amped = $em->getRepository('AppBundle\Entity\ampedsession')
+                ->findOneBy(['num' => $session->getAmpedSession()->getNum() + 1]);
+        if(null !== $amped)
+        {
+            $newSession = new Session();
+            $start = new \DateTime(null, new \DateTimeZone('America/Chicago'));
+            $start->add(new \DateInterval('P3D'));
+            
+            $newSession->setStart($start);
+            $newSession->setAmpedSession($amped);
+            $newSession->setStudent($user);
+            $newSession->setMentor($user->getMentor());
+            
+            $em->persist($newSession);
+        }
+        $em->flush();            
+    }    
+}
+?>
 
