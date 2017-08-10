@@ -215,6 +215,7 @@ easy_admin:
                     - { property: 'num', label: 'Session number' }
                     - createdAt
                     - createdBy
+                    - pages
                 actions:
                     - { name: 'new', label: 'Add' }                    
         Session:
