@@ -319,6 +319,42 @@ class HomeController extends Controller
 
     /**
      * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+    private function ScrolAction(ampedsession $amped, Request $request, Session $session)
+    {   
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ScrolAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\ScrolWorksheetType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 2])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $scrolAnswerSet = new \AppBundle\Entity\ScrolAnswers();
+                $scrolAnswerSet->setUser($user);
+                $answers = $form->getData();
+                $scrolAnswerSet->setAnswers($answers);
+                $scrolAnswerSet->setSession($session);
+                $session->setModuleCompleted(2);
+                $em->persist($scrolAnswerSet);
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                $em->flush();
+                return $this->render('student/scrol_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/scrol_worksheet.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/scrol_complete.html.twig', ['answers'=>$answers->getAnswers()]);
+    }
+
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
      * @Security("has_role('ROLE_PROTEGE')")
      */        
     public function backpackAction(ampedsession $amped, Request $request)
@@ -403,6 +439,320 @@ class HomeController extends Controller
             return $this->render('student/seven_words.html.twig', array('form'=>$form->createView()));
         }
         return $this->render('student/seven_words_complete.html.twig', ['answers'=>$answers->getAnswers()]);
+    }
+
+    
+    
+    private function gpaChangeAction(ampedsession $amped, Request $request, Session $session)
+    {   
+        $user = $this->getUser();
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\GPAWorksheetAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\GPAWorksheetType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 3])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $gpaanswerSet = new \AppBundle\Entity\GPAWorksheetAnswers();
+                $gpaanswerSet->setUser($user);
+                $answers = $form->getData();
+                $gpaanswerSet->setAnswers($answers);
+                $gpaanswerSet->setSession($session);
+                $session->setModuleCompleted(3);
+                $em->persist($gpaanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/gpa_change_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/gpa_change.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/gpa_change_complete.html.twig', ['answers'=>$answers->getAnswers()]);                
+    }    
+    
+    public function motivationAction(ampedsession $amped, Request $request, Session $session)
+    {   
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\MotivationWorksheetAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\MotivationWorksheetType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 4])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $motivationanswerSet = new \AppBundle\Entity\MotivationWorksheetAnswers();
+                $motivationanswerSet->setUser($user);
+                $answers = $form->getData();
+                $motivationanswerSet->setAnswers($answers);
+                $motivationanswerSet->setSession($session);
+                $session->setModuleCompleted(4);
+                $em->persist($motivationanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/motivation_worksheet_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/motivation_worksheet.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/motivation_worksheet_complete.html.twig', ['answers'=>$answers->getAnswers()]);                
+    }    
+ 
+    public function feedbackAction($amped, $request, $session)
+    {
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\BrainstormingWorksheetAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\BrainstormingWorksheetType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 6])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $brainstormanswerSet = new \AppBundle\Entity\BrainstormingWorksheetAnswers();
+                $brainstormanswerSet->setUser($user);
+                $answers = $form->getData();
+                $brainstormanswerSet->setAnswers($answers);
+                $brainstormanswerSet->setSession($session);
+                $session->setModuleCompleted(6);                
+                $em->persist($brainstormanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/feedback_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/feedback.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/feedback_complete.html.twig', ['answers'=>$answers->getAnswers()]); 
+    }
+
+    public function relaxationAction($amped, $request, $session)
+    {
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\RelaxationWorksheetAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\RelaxationWorksheet::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 7])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $relaxationanswerSet = new \AppBundle\Entity\RelaxationWorksheet();
+                $relaxationanswerSet->setUser($user);
+                $answers = $form->getData();
+                $relaxationanswerSet->setAnswers($answers);
+                $relaxationanswerSet->setSession($session);
+                $session->setModuleCompleted(7);                
+                $em->persist($relaxationanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/relaxation_worksheet_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/relaxation_worksheet.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/relaxation_worksheet_complete.html.twig', ['answers'=>$answers->getAnswers()]); 
+    }
+
+    public function conflictAction($amped, $request, $session)
+    {
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ConflictResAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\ConflictResType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 11])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $conflictanswerSet = new \AppBundle\Entity\ConflictResAnswers();
+                $conflictanswerSet->setUser($user);
+                $answers = $form->getData();
+                $conflictanswerSet->setAnswers($answers);
+                $conflictanswerSet->setSession($session);
+                $session->setModuleCompleted(11);                
+                $em->persist($conflictanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/conflict_resolution_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/conflict_resolution.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/conflict_resolution_complete.html.twig', ['answers'=>$answers->getAnswers()]); 
+    }    
+
+    public function noteTakeAction($amped, $request, $session)
+    {
+        $user = $this->getUser();
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\NoteTakingAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\ActiveNoteType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 11])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $notetakinganswerSet = new \AppBundle\Entity\NoteTakingAnswers();
+                $notetakinganswerSet->setUser($user);
+                $answers = $form->getData();
+                $notetakinganswerSet->setAnswers($answers);
+                $notetakinganswerSet->setSession($session);
+                $notetakinganswerSet->setUser($user);
+                $session->setModuleCompleted(13);                
+                $em->persist($notetakinganswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/active_note_worksheet_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/active_note_worksheet.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/active_note_worksheet_complete.html.twig', ['answers'=>$answers->getAnswers()]); 
+    }    
+      
+    
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE')")
+     */    
+    public function moduleAction(ampedsession $amped, Request $request, $module)
+    {   
+        $user = $this->getUser();
+        
+        $session = $this->queryForStudentSession($amped, $user);
+
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');
+        
+        switch($module)
+        {
+            case 2:        
+                return $this->ScrolAction($amped, $request, $session);
+                break;
+            case 3:
+                return $this->gpaChangeAction($amped, $request, $session);
+                break;
+            case 4:
+                return $this->motivationAction($amped, $request, $session);
+                break;
+            case 5:
+                $session->setModuleCompleted(5);
+                $this->getDoctrine()->getEntityManager()->flush();                
+                return $this->render('student/module5.html.twig');
+                break;
+            case 6:
+                return $this->feedbackAction($amped, $request, $session);
+                break;
+            case 7:
+                return $this->relaxationAction($amped, $request, $session);
+                break;
+            case 8:
+                
+                break;
+            case 9:
+                $session->setModuleCompleted(9);
+                $this->getDoctrine()->getEntityManager()->flush();                
+                return $this->render('student/module9.html.twig');
+                break;
+            case 10:
+                $session->setModuleCompleted(10);
+                $this->getDoctrine()->getEntityManager()->flush();
+                return $this->render('student/module10.html.twig');
+                break;
+            case 11:
+                return $this->conflictAction($amped, $request, $session);
+                break;
+            case 12:
+                $session->setModuleCompleted(12);
+                $this->getDoctrine()->getEntityManager()->flush();
+                return $this->render('module12.html.twig');
+                break;
+            case 13:
+                return $this->noteTakeAction($amped, $request, $session);
+                break;
+        }        
+    }    
+    
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE') and slug in ['select', 'academic', 'emotional', 'self-regulation', 'social']")
+     */    
+    public function moduleSelectAction(ampedsession $amped, $slug)
+    {
+        if($slug == 'select')
+            return $this->render('student/module_categories.html.twig', ['amped' => $amped]);
+        $user = $this->getUser();
+        $session = $this->queryForStudentSession($amped, $user);
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');
+        
+        $allModules = [
+            'academic' => [2,4,5,6,9,13,12],
+            'emotional' => [1,4,7,10,11,3],
+            'self-regulation' => [1,3,4,7,11,12],
+            'social' => [3,5,10,1,4]
+        ];
+        $moduleNames = [
+            1 => 'Learning your ABC\'s',
+            2 => 'Expository Reading',
+            3 => 'Changing your GPA',
+            4 => 'Motivation',
+            5 => 'Planning for the future',
+            6 => 'Feedback',
+            7 => 'Relaxation',
+            8 => 'Technology and Self',
+            9 => 'Study Skills',
+            10 => 'Coping with stress',
+            11 => 'Conflict Resolution',
+            12 => 'Time Management',
+            13 => 'Active Note Taking'
+        ];
+        $completed = $this->getDoctrine()->getRepository('AppBundle\Entity\Session')->getModulesCompleted($user);
+        
+        var_dump($completed);
+        $category = array_diff($allModules[$slug], $completed);
+        
+        return $this->render('student/module_selection.html.twig', ['amped' => $amped, 'category_name'=> ucfirst($slug), 'category'=>$category, 'modules' => $moduleNames]);
     }
 
     /**
