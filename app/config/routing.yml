@@ -59,7 +59,7 @@ goal_sheet:
     
 simple_page:
     path: /session/{num}/page{pageno}
-    defaults: { _controller: AppBundle:Home:GoalSheet }    
+    defaults: { _controller: AppBundle:Home:view }    
 
 icebreaker_select:
     path: /session/{num}/icebreaker-select

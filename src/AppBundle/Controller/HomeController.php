@@ -53,6 +53,27 @@ class HomeController extends Controller
         // go to the icebreaker selection page
         return $this->render('student/icebreaker_selection.html.twig', ['current' => $amped] );
     }
+
+    /**
+     * @ParamConverter("num", class="AppBundle\Entity\ampedsession", options={"id" = "num"})
+     * @Security("has_role('ROLE_PROTEGE') and null !== amped.getPages()")
+     */        
+    public function viewAction(ampedsession $amped, $num,$pageno)
+    {
+        $user = $this->getUser();
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\AnswerSet');
+        $session = $this->queryForStudentSession($amped, $user);
+        if(null === $session || !$this->isAllowedToStart($session))
+            return $this->redirectToRoute ('index_list');        
+        
+        
+        $pages = $amped->getPages();
+        
+        if($pages->containsKey($pageno))
+        return $this->render('student/simple_page.html.twig', ['page'=>$pages[$pageno]]);
+        else throw $this->createNotFoundException ();
+    }
+
     
     private function resumeSession($session)
     {
@@ -62,7 +83,7 @@ class HomeController extends Controller
         {
             // go to the first page
             $firstPage = $ampedSession->getPages()[0];
-            return $this->render('simple_page.html.twig', ['page' => $firstPage]);
+            return $this->render('student/simple_page.html.twig', ['page' => $firstPage]);
         }
         // check if MAF form exists
         if (null !== $ampedSession->getMAFQuestions())

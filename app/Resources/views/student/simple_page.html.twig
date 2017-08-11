@@ -1,0 +1,16 @@
+{% extends app.request.isXmlHttpRequest ? 'base_ajax.html.twig' : 'base.html.twig' %}
+{% block sidebar_options %}
+    <div class="row">
+    {{ knp_menu_render('AppBundle:Builder:completedMenu') }}
+    </div>
+    <div class="row">
+    {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
+    </div>    
+{% endblock %}
+{% block main_content %}
+    
+    <h1 class="header"> {{page.title}} </h1>
+    <div class ="row">
+    {{page.description | raw }}    
+    </div>
+{% endblock %}
