@@ -21,9 +21,6 @@
 {% set num = current.num %}
 
 {% if current.tic is not null %}
-    {% set new %}
-        <a class="btn" href="{{path('things_common', {'num': num})}}">Things in Common</a>
-    {% endset %}
     {% set icebreakers = icebreakers|merge({ 'Things in common': path('things_common', {'num': num}) }) %}
 {% endif %}
 
@@ -32,30 +29,18 @@
 {% endif %}
 
 {% if current.has7Words %}
-    {% set new %}
-        <a class="btn" href="{{path('seven_words', {'num': num})}}">Seven Words</a>
-    {% endset %}
     {% set icebreakers = icebreakers|merge({ '7 Words': path('seven_words', {'num': num}) }) %}
 {% endif %}
 
 {% if current.hasBackpack %}
-    {% set new %}
-        <a class="btn" href="{{path('backpack', {'num': num})}}">Backpack scavenger hunt</a>
-    {% endset %}
     {% set icebreakers = icebreakers|merge({ 'Backpack scavenger hunt': path('backpack', {'num': num}) }) %}
 {% endif %}
 
 {% if current.hasTimeTravel %}
-    {% set new %}
-        <a class="btn" href="{{path('time_travel', {'num': num})}}">Time traveling</a>
-    {% endset %}
     {% set icebreakers = icebreakers|merge({ 'Time traveling': path('time_travel', {'num': num}) }) %}
 {% endif %}
 
 {% if current.hasMeShield %}
-    {% set new %}
-        <a class="btn" href="{{path('me_shield', {'num': num})}}">Me Shield</a>
-    {% endset %}
     {% set icebreakers = icebreakers|merge({ 'Me shield': path('me_shield', {'num': num}) }) %}
 {% endif %}
 
@@ -64,7 +49,6 @@
         {% for name, icebreaker in row %}
             <div class="col-sm-4">
                 <a class="thumbnail" href="{{icebreaker}}">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
                     <h4 class="text-center">{{ name }}</h4>
                 </a>
             </div>
