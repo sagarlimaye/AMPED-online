@@ -23,11 +23,10 @@ class TICFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $questions = $options['questions'];
         foreach ($questions as $key=>$question) {
-            $builder->add('question'.$key, AmpedTextareaType::class, array('label'=>$question->getText(), 'required' => false,
-                'attr' => ['class' => 'btn']
+            $builder->add('question'.$key, AmpedTextareaType::class, array('label'=>$question->getText(), 'required' => false
                 ));
         }
-                $builder->add('submit', SubmitType::class, ['label'=>'Submit', 'attr'=>['id'=>'next'] ]);                    
+                $builder->add('submit', SubmitType::class, ['label'=>'Submit']);                    
     }
     public function configureOptions(OptionsResolver $resolver)
     {

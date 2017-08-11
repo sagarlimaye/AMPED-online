@@ -18,7 +18,7 @@
           <tr>
           {% for child in form.children|slice(0, form.children|length - 2) %}
               <td>
-                  <button id="{{loop.index0}}" class="btn" onclick="thingsInCommon(this.id);">{{form_label(child)}}<br>
+                  <button type="button" id="{{loop.index0}}" class="btn">{{form_label(child)}}<br>
                       <div class="hidden">{{form_widget(child)}}</div>
                   </button>
               </td>
@@ -31,4 +31,16 @@
      </table>
           {{ form_rest(form) }}
     </div>
+{% endblock %}
+{% block custom_scripts %}
+<script>
+    $(function() {    
+        $("button.btn").click(function(e)
+        {
+            var button = $(this);
+            button.attr("disabled", true);
+            button.children("div.hidden").removeClass("hidden");
+        });
+    });
+</script>
 {% endblock %}
