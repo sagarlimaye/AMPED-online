@@ -42,7 +42,7 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
                 $pages = $amped->getPages();
                 for($i=0;$i<$pages->count();$i++)
                 {
-                    $menu[$sessionMenu]->addChild($page->getTitle(), [
+                    $menu[$sessionMenu]->addChild($pages[$i]->getTitle(), [
                         'route' => 'simple_page',
                         'routeParameters' => ['num' => $amped->getNum(), 'pageno' => $i]
                     ]);
@@ -154,7 +154,7 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
                 $pages = $amped->getPages();
                 for($i=0;$i<$pages->count();$i++)
                 {
-                    $menu[$sessionMenu]->addChild($page->getTitle(), [
+                    $menu[$sessionMenu]->addChild($pages[$i]->getTitle(), [
                         'route' => 'simple_page',
                         'routeParameters' => ['num' => $amped->getNum(), 'pageno' => $i]
                     ]);
