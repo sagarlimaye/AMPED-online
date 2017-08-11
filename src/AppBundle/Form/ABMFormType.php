@@ -9,7 +9,7 @@
 namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use AppBundle\Entity\AdjectiveAmpedChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\AmpedTextareaType;
 /**
  * Description of TICFormType
@@ -22,21 +22,15 @@ class ABMFormType extends AbstractType
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $questions = $options['questions'];
-        foreach ($questions as $question) {
-            $builder->add($question, $question instanceof AdjectiveAmpedChoiceType ? AdjectiveAmpedChoiceType::class : AmpedTextareaType::class, array('label'=>$question->text));
+        foreach ($questions as $key=>$question) {
+            $builder->add('question'.$key, AmpedTextareaType::class, array('label'=>$question->getText()));
         }
         $builder->add('Submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
     }
-//    public function __construct($questions) {
-//        $this->questions = $questions;
-//    }
-//    public function setQuestions($questions)
-//    {
-//        $this->questions = $questions;
-//        return $this;
-//    }
-//    public function getQuestions()
-//    {
-//        return $this->questions;
-//    }
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'questions' => null
+        ));
+    }
 }

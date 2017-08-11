@@ -28,10 +28,7 @@
 {% endif %}
 
 {% if current.abm is not null %}
-    {% set new %}
-        <a class="btn" href="{{path('all_me', {'num': num})}}">All about me</a>
-    {% endset %}
-    {% set icebreakers = icebreakers|merge({ 'Things in common': path('things_common', {'num': num}) }) %}
+    {% set icebreakers = icebreakers|merge({ 'All about me': path('all_about_me', {'num': num}) }) %}
 {% endif %}
 
 {% if current.has7Words %}
