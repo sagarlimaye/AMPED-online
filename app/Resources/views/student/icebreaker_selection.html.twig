@@ -44,6 +44,10 @@
     {% set icebreakers = icebreakers|merge({ 'Me shield': path('me_shield', {'num': num}) }) %}
 {% endif %}
 
+{% if current.hasBackToBack %}
+    {% set icebreakers = icebreakers|merge({ 'Back to back drawings': path('back_to_back', {'num': num}) }) %}
+{% endif %}
+
 {% for row in icebreakers|batch(3) %}
     <div class="row placeholder">
         {% for name, icebreaker in row %}
