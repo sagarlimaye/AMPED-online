@@ -1008,7 +1008,6 @@ class HomeController extends Controller
         {
             $newSession = new Session();
             $start = new \DateTime(null, new \DateTimeZone('America/Chicago'));
-            $start->add(new \DateInterval('P3D'));
             
             $newSession->setStart($start);
             $newSession->setAmpedSession($amped);
