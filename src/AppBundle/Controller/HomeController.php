@@ -595,6 +595,7 @@ class HomeController extends Controller
  
     public function feedbackAction($amped, $request, $session)
     {
+        $user = $this->getUser();
         // check if already completed
         $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\BrainstormingWorksheetAnswers');
         $answers = $rep->findOneBy(['session'=>$session]);

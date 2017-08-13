@@ -85,9 +85,9 @@
 
         </div>
         <br>
-      <p>Now we are going to try an activity that will help us start thinking about what we want to get feedback on from our teacher.</p>
-      <p> In the following chart, the questions will help you identify a problem that you may want to get feedback on. In the first row, an example is provided to get you started.</p>
-        <div class="col-sm-10 well">
+        <p>Now we are going to try an activity that will help us start thinking about what we want to get feedback on from our teacher.</p>
+        <p> In the following chart, the questions will help you identify a problem that you may want to get feedback on. In the first row, an example is provided to get you started.</p>
+        <div class="row well">
             <table class="table table-striped table-hover align">
                 <thead>
                     <th class="text-center">What am I struggling with?</th>
@@ -95,7 +95,7 @@
                     <th class="text-center">How should I ask my teacher for feedback?</th>
                 </thead>
                 <tbody>
-        {% for row in answers.brainstorming %}
+        {% for row in answers.brainstorm %}
             <tr>
                 <td>{{row.struggle}}</td>
                 <td>{{row.goal}}</td>
