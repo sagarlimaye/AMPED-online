@@ -39,6 +39,7 @@ class ActiveNoteType extends AbstractType
                         [
                             'label' => 'Do you avoid listening when difficult information is presented?',
                             'choices' => ['Always' => 'Always', 'Sometimes' => 'Sometimes', 'Never' => 'Never']
-                        ]);
+                        ])
+                ->add('Submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
     }
 }
