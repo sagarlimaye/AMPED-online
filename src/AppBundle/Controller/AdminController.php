@@ -25,6 +25,11 @@ class AdminController extends BaseAdminController {
         }       
         parent::prePersistEntity($entity);
     }
+    public function createNewUserEntity()
+    {
+        return $this->get('fos_user.user_manager')->createUser();
+    }
+
     public function prePersistUserEntity($user)
     {
         $mailer = $this->get('swiftmailer.mailer');
@@ -52,6 +57,7 @@ class AdminController extends BaseAdminController {
     ;
 
         $mailer->send($message);
+        $this->get('fos_user.user_manager')->updateUser($user, false);
     }
     
     public function preUpdateUserEntity($user)
@@ -80,5 +86,6 @@ class AdminController extends BaseAdminController {
     ;
 
         $mailer->send($message);        
+        $this->get('fos_user.user_manager')->updateUser($user, false);
     }
 }
