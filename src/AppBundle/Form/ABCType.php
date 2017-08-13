@@ -23,13 +23,16 @@ class ABCType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('active_event', TextareaType::class)
-                ->add('neg_belief', TextareaType::class)
-                ->add('pos_belief', TextareaType::class)
-                ->add('neg_cons', TextareaType::class)
-                ->add('pos_cons', TextareaType::class);
+                ->add('neg_belief', TextareaType::class, ['label' => 'Negative'])
+                ->add('pos_belief', TextareaType::class, ['label' => 'Positive'])
+                ->add('neg_cons', TextareaType::class, ['label'=>'Negative']) 
+                ->add('pos_cons', TextareaType::class, ['label'=>'Positive']);
     }
     public function getParent()
     {
         return FormType::class;
+    }
+    public function getBlockPrefix() {
+        return 'abc';
     }
 }

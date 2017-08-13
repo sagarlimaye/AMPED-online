@@ -695,6 +695,41 @@ class HomeController extends Controller
         return $this->render('student/conflict_resolution_complete.html.twig', ['answers'=>$answers->getAnswers()]); 
     }    
 
+    private function ABCAction($amped, $request, $session)
+    {
+        $user = $this->getUser();
+        // check if already completed
+        $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ABCWorksheetAnswers');
+        $answers = $rep->findOneBy(['session'=>$session]);
+        if(null === $answers)
+        {
+            //create goal sheet form
+            $form = $this->createForm(Form\ABCWorksheetType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 1])));
+                
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $abcanswerSet = new \AppBundle\Entity\ABCWorksheetAnswers();
+                $answers = $form->getData();
+                $abcanswerSet->setAnswers($answers);
+                $abcanswerSet->setSession($session);
+                $abcanswerSet->setUser($user);
+                $session->setModuleCompleted(1);                
+                $em->persist($abcanswerSet);
+                $em->flush();
+                if($this->checkIfSessionComplete($session))
+                {
+                    $this->advanceSession($session, $user);
+                    return $this->render ('student/session_complete.html.twig');
+                }
+                return $this->render('student/abc_worksheet_complete.html.twig', ['answers'=>$answers]);
+            }
+            return $this->render('student/abc_worksheet.html.twig', array('form'=>$form->createView()));
+        }
+        return $this->render('student/abc_worksheet_complete.html.twig', ['answers'=>$answers->getAnswers()]); 
+    }        
+    
     public function noteTakeAction($amped, $request, $session)
     {
         $user = $this->getUser();
@@ -746,6 +781,9 @@ class HomeController extends Controller
         
         switch($module)
         {
+            case 1:
+                return $this->ABCAction($amped, $request, $session);
+                break;
             case 2:        
                 return $this->ScrolAction($amped, $request, $session);
                 break;

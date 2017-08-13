@@ -1,0 +1,190 @@
+{% extends 'student/base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig'  %}
+{% form_theme form.abc_entries _self %}
+
+{% block abc_widget %}
+    <tr {{ block('widget_attributes') }}>
+    <div><td>{{ form_widget(form.active_event) }}</td></div>
+        <td>
+            <div>
+            {{ form_row(form.neg_belief) }}
+            </div>
+            <div>
+            {{ form_row(form.pos_belief) }}
+            </div>
+        </td>
+        <td>
+            <div>
+            {{ form_row(form.neg_cons) }}
+            </div>
+            <div>
+            {{ form_row(form.pos_cons) }}
+            </div>
+        </td>
+        <td class="text-center">
+            <a href="#" class="collection-remove btn btn-default" title="Delete element"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="#" class="collection-add btn btn-default" title="Add element"><span class="glyphicon glyphicon-plus-sign"></span></a>
+        </td>
+    </tr>    
+{% endblock %}
+
+{% block collection_widget %}    
+    {% spaceless %}
+
+    {% if prototype is defined %}
+        {% set attr = attr|merge({'data-prototype': form_widget(prototype)}) %}
+        {% set attr = attr|merge({'data-prototype-name': prototype.vars.name}) %}
+    {% endif %}
+    {% set attr = attr|merge({'data-allow-add': allow_add ? 1 : 0}) %}
+    {% set attr = attr|merge({'data-allow-remove': allow_delete ? 1 : 0 }) %}
+    {% set attr = attr|merge({'data-name-prefix': full_name}) %}
+
+        {{ form_errors(form) }}
+
+        {# Don't forget to add the collection attributes in your markup #}
+        <table {{ block('widget_attributes') }}>
+            <thead>
+                <th>Activating event</th>
+                <th>Belief</th>
+                <th>Consequence</th>
+                <th>&nbsp;</th>
+            </thead>
+            <tbody>
+
+                {#
+                 # we can't form_widget(form) as it would render parent markup for a collection, so
+                 # we iterate manually on children
+                 #}
+                {% for item in form %}
+                    {{ form_widget(item) }}
+                {% endfor %}
+
+            </tbody>
+        </table>
+    {% endspaceless %}
+{% endblock %}
+{% block custom_styles %}
+    textarea.form-control {
+  height: 100%;
+}
+{% endblock %}
+{% block main_content %}
+          <h1 class="page-header">Review Progress and Learn New Skills</h1>
+
+          <div class="row">
+            <h2 class="sub-header">Learning your A.B.C.'s</h2>
+            <img src="{{asset('topRight.png')}}" width="100" height="100" style="float:right" >
+          </div>
+          <div class="row">    
+             <p> Have you ever had negative feelings (sadness, anger, frustration), but you didn’t know why you felt that way? Have those feelings ever affected your behavior? “Learning your A, B, Cs” can help you understand why you are having those feelings, and it can help you change your feelings and behaviors. Here is what A, B, and C stand for: </p>
+             <img src="{{asset('ABCs.png')}}" alt="ABCs" align="center">
+             <p> Example: Tanya and John are working on math homework. Tanya feels happy, and she finishes her homework quickly. John feels sad, and he does not finish his homework. </p>
+             <p> Let's look at Tanya's A, B, C: </p>
+             <div class="table-responsive">
+                <table class="table table-striped">
+                   <thead>
+                      <tr>
+                         <th>
+                            <h2> Activating event </h2>
+                         </th>
+                         <th>
+                            <h2> Belief </h2>
+                         </th>
+                         <th>
+                            <h2> Consequence </h2>
+                         </th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <tr>
+                         <td> Tanya is working on her homework </td>
+                         <td>
+                            <!-- react-text: 142 --> <!-- /react-text -->
+                            <p> Tanya thinks, "Doing math homework </p>
+                            <p>gives me more practice </p>
+                            <p>so I can do well on my math test next week"</p>
+                            <!-- react-text: 146 --> <!-- /react-text -->
+                         </td>
+                         <td> Tanya is happy, and she finishes her homework quickly</td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+             <p> Let's look at John's A, B, C: </p>
+             <div class="table-responsive">
+                <table class="table table-striped">
+                   <thead>
+                      <tr>
+                         <th>
+                            <h2> Activating event </h2>
+                         </th>
+                         <th>
+                            <h2> Belief </h2>
+                         </th>
+                         <th>
+                            <h2> Consequence </h2>
+                         </th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <tr>
+                         <td> John is working on her homework </td>
+                         <td>
+                            <!-- react-text: 163 --> <!-- /react-text -->
+                            <p> John thinks, "Doing math homework </p>
+                            <p>prevents me from hanging out with my friends" </p>
+                            <p>so I can do well on my math test next week"</p>
+                            <!-- react-text: 167 --> <!-- /react-text -->
+                         </td>
+                         <td> John is stand, and does not finish his homework.</td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+             <p> If Tanya and John have the same activating event, why do they have different consequences? The answer is that John and Tanya have different beliefs. </p>
+          </div>
+          <div class="row">
+            <h3>How to Change Beliefs</h3>
+            <p>Changing our beliefs is one step towards changing how we feel and act. In the case of John, if he changed his belief about doing his homework, he could change how he felt and acted. How can he change his beliefs, though?</p>
+            <ol>
+              <li><h4>Notice negative thoughts</h4></li>
+              <p>If I am sad, angry, or upset, I may be experiencing negative thoughts.
+              If I am thinking about something a lot in a way that makes the situation seem worse, I may be experiencing negative thoughts.</p>
+              <br>
+              <p style="font-style:italic">Example</p>
+              <p>John feels sad about doing his homework. He thinks, “I am feeling sad because I am thinking about how doing homework prevents me from hanging out with my friends. I am having a negative thought about my homework.”</p>
+
+              <li><h4>Ask if the negative thoughts are reasonable</h4></li>
+              <p>When I realize I am having negative thoughts, I should ask myself if the thoughts I am having are the only way I can think about the situation. If they are not, I should consider other ways of thinking about the situation</p>
+              <br>
+              <p style="font-style:italic">Example</p>
+              <p>When John realizes he is having a negative thought about his homework, he should think if there are other ways to think about doing his homework. He thinks, “I am having a negative thought about my homework, and it isn’t very reasonable. There is another way I can think about my homework.”</p>
+
+              <li><h4>Think of a positive thought that you could have instead</h4></li>
+              <p>When I can think about the situation in another way, I want to try to choose a thought that is positive. What thoughts can I have that will make me happy, hopeful, or excited?</p>
+              <br>
+              <p style="font-style:italic">Example</p>
+              <p>When John realizes he can have other thoughts about doing his homework, he starts thinking about positive ways he could view his homework. He thinks, “When I finish my math homework, I will have time to hang out with my friends. I should concentrate really hard right now and finish my homework. Then, I will get to hang out with my friends later!”</p>
+            </ol>
+
+          </div>
+          <div class="row">
+             <p> Directions: First think of an activating event, and record it in the table in the “Activating Event” column. Then, think of a negative consequence of that event, and record it in the “Negative Consequence” column. Think about what belief caused that consequence to occur, and record it in the “Negative Belief” column.  </p>
+             <p>Now, think about a positive thought that you could have instead. Record that in the “Positive Belief” column. How does that change the consequence? Write your new consequence in the “Positive Consequence” column. Refer to the example if you have questions. </p>
+             {{ form(form) }}
+          </div>   
+{% endblock %}
+{% block custom_scripts %}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.abc-collection').collection({
+                allow_up: false,
+                allow_down: false,
+                add: '<a href="#" class="btn btn-default" title="Add element"><span class="glyphicon glyphicon-plus-sign"></span></a>',
+                elements_selector: 'tr.item',
+                elements_parent_selector: '%id% tbody'
+            });            
+        })
+    </script>   
+{% endblock %}
