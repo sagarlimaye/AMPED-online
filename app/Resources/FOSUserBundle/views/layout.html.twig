@@ -29,7 +29,7 @@
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                    <div class="flash-{{ type }}">
+                    <div class="container flash-{{ type }}">
                         {{ message }}
                     </div>
                 {% endfor %}
