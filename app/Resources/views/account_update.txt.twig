@@ -1,0 +1,16 @@
+Hi {{ name }}!
+
+Your account information has been updated. Your new information is given below, please keep it secure:
+
+The email associated with your account is {{ email }}
+Your username is {{ uname }}
+Date of birth: {{ dob | date('m/d/Y') }}
+
+{% if mentor is not null %}
+Your mentor's name is {{ mentor.name }} 
+{% endif %}
+
+Have a nice day!
+
+Regards,
+UH AMPED team

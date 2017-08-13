@@ -25,5 +25,60 @@ class AdminController extends BaseAdminController {
         }       
         parent::prePersistEntity($entity);
     }
+    public function prePersistUserEntity($user)
+    {
+        $mailer = $this->get('swiftmailer.mailer');
+        
+        $message = (new \Swift_Message('UH AMPED: Welcome!'))
+        ->setFrom('sagarl3232@gmail.com')
+        ->setTo($user->getEmail())
+        ->setBody(
+            $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                'password_new.txt.twig',
+                array('name' => $user->getName(), 'email' => $user->getEmail(), 'uname' => $user->getUserName(), 'password' => $user->getPlainPassword(), 'dob' => $user->getDob(), 'mentor' => $user->getMentor())
+            ), 'text/plain'
+        )
+        /*
+         * If you also want to include a plaintext version of the message
+        ->addPart(
+            $this->renderView(
+                'Emails/registration.txt.twig',
+                array('name' => $name)
+            ),
+            'text/plain'
+        )
+        */
+    ;
+
+        $mailer->send($message);
+    }
     
+    public function preUpdateUserEntity($user)
+    {
+        $mailer = $this->get('swiftmailer.mailer');
+        $message = (new \Swift_Message('UH AMPED: Changes to your account'))
+        ->setFrom('sagarl3232@gmail.com')
+        ->setTo($user->getEmail())
+        ->setBody(
+            $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                'account_update.txt.twig',
+                array('name' => $user->getName(), 'email' => $user->getEmail(), 'uname' => $user->getUserName(), 'password' => $user->getPlainPassword())
+            ), 'text/plain'
+        )
+        /*
+         * If you also want to include a plaintext version of the message
+        ->addPart(
+            $this->renderView(
+                'Emails/registration.txt.twig',
+                array('name' => $name)
+            ),
+            'text/plain'
+        )
+        */
+    ;
+
+        $mailer->send($message);        
+    }
 }
