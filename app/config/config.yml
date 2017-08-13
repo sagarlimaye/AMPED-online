@@ -75,12 +75,8 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
-    host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
-    port: 587
-    encryption: tls
-    spool: { type: memory }
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
@@ -89,9 +85,13 @@ fos_user:
     service:
         mailer: fos_user.mailer.default 
     from_email:
-        address: sagarl3232@hotmail.com
-        sender_name: lala
-
+        address:        sagarl3232@gmail.com
+        sender_name:    UH AMPED (gmail)    
+    resetting:
+        email:
+            from_email:
+                address:        sagarl3232@gmail.com
+                sender_name:    UH AMPED (gmail)
 ivory_ck_editor:
     default_config: my_config
     configs:
