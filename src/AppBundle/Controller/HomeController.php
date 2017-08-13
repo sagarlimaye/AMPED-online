@@ -830,7 +830,6 @@ class HomeController extends Controller
         ];
         $completed = $this->getDoctrine()->getRepository('AppBundle\Entity\Session')->getModulesCompleted($user);
         
-        var_dump($completed);
         $category = array_diff($allModules[$slug], $completed);
         
         return $this->render('student/module_selection.html.twig', ['amped' => $amped, 'category_name'=> ucfirst($slug), 'category'=>$category, 'modules' => $moduleNames]);
