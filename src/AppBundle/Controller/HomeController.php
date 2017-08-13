@@ -704,14 +704,13 @@ class HomeController extends Controller
         if(null === $answers)
         {
             //create goal sheet form
-            $form = $this->createForm(Form\ActiveNoteType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 11])));
+            $form = $this->createForm(Form\ActiveNoteType::class, null, array('action'=> $this->generateUrl('module', ['num'=>$amped->getNum(), 'module' => 13])));
                 
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
                 $em = $this->getDoctrine()->getEntityManager();
                 $notetakinganswerSet = new \AppBundle\Entity\NoteTakingAnswers();
-                $notetakinganswerSet->setUser($user);
                 $answers = $form->getData();
                 $notetakinganswerSet->setAnswers($answers);
                 $notetakinganswerSet->setSession($session);
