@@ -64,16 +64,15 @@
        </ul>
     </div>
     <div class="row">
-        {{form_start(form) }}
        <p>Where are the three places motivation starts? ** Mention the two that are the easiest to control. **</p>
        <ol>
-        <li>{{ answers.motivation_place_1 }}</li>
-        <li>{{ answers.motivation_place_2 }}</li>
-        <li>{{ answers.motivation_place_3 }}</li>
+        <li class="well">{{ answers.motivation_place_1 }}</li>
+        <li class="well">{{ answers.motivation_place_2 }}</li>
+        <li class="well">{{ answers.motivation_place_3 }}</li>
        </ol>
 
        <p>List of some rewards you can give yourself.</p>
-       {{ answers.rewards }}
+       <div class="well">{{ answers.rewards }}</div>
 
        <h4>Motivation Chart</h4>
        <p>In the following chart, think of some activities that may require motivation to complete. Think
@@ -89,7 +88,7 @@ motivation. An example is provided.</p>
                     <th class="text-center">What will you change?</th>
                 </thead>
                 <tbody>
-        {% for row in answers.motivation_activity %}
+        {% for row in answers.motivation_chart %}
             <tr>
                 <td>{{row.activities}}</td>
                 <td>{{row.thought_emotions}}</td>
