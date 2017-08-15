@@ -799,6 +799,8 @@ class HomeController extends Controller
             case 5:
                 $session->setModuleCompleted(5);
                 $this->getDoctrine()->getEntityManager()->flush();                
+                if($this->checkIfSessionComplete($session))
+                   $this->advanceSession($session, $user);
                 return $this->render('student/module5.html.twig');
                 break;
             case 6:
@@ -810,11 +812,15 @@ class HomeController extends Controller
             case 9:
                 $session->setModuleCompleted(9);
                 $this->getDoctrine()->getEntityManager()->flush();                
+                if($this->checkIfSessionComplete($session))
+                    $this->advanceSession($session, $user);                
                 return $this->render('student/module9.html.twig');
                 break;
             case 10:
                 $session->setModuleCompleted(10);
                 $this->getDoctrine()->getEntityManager()->flush();
+                if($this->checkIfSessionComplete($session))
+                    $this->advanceSession($session, $user);
                 return $this->render('student/module10.html.twig');
                 break;
             case 11:
@@ -823,6 +829,8 @@ class HomeController extends Controller
             case 12:
                 $session->setModuleCompleted(12);
                 $this->getDoctrine()->getEntityManager()->flush();
+                if($this->checkIfSessionComplete($session))
+                    $this->advanceSession($session, $user);
                 return $this->render('student/module12.html.twig');
                 break;
             case 13:
@@ -889,6 +897,9 @@ class HomeController extends Controller
         
         $session->setIcebreakerCompleted(true);
         $this->getDoctrine()->getEntityManager()->flush();
+        if($this->checkIfSessionComplete($session))
+            $this->advanceSession($session, $user);
+
         return $this->render('student/me_shield.html.twig');
     }    
     /**
@@ -905,6 +916,9 @@ class HomeController extends Controller
         
         $session->setIcebreakerCompleted(true);
         $this->getDoctrine()->getEntityManager()->flush();
+        if($this->checkIfSessionComplete($session))
+            $this->advanceSession($session, $user);
+
         return $this->render('student/back_to_back.html.twig');
     }    
     
