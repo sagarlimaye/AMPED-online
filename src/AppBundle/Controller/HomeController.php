@@ -1043,17 +1043,21 @@ class HomeController extends Controller
         $session->setEnd(new \DateTime(null, new \DateTimeZone('America/Chicago')));
         $amped = $em->getRepository('AppBundle\Entity\ampedsession')
                 ->findOneBy(['num' => $session->getAmpedSession()->getNum() + 1]);
+        
         if(null !== $amped)
         {
-            $newSession = new Session();
-            $start = new \DateTime(null, new \DateTimeZone('America/Chicago'));
-            
-            $newSession->setStart($start);
-            $newSession->setAmpedSession($amped);
-            $newSession->setStudent($user);
-            $newSession->setMentor($user->getMentor());
-            
-            $em->persist($newSession);
+            if(null === $em->getRepository('AppBundle\Entity\Session')->findOneBy(['ampedSession'=>$amped]))
+            {
+                $newSession = new Session();
+                $start = new \DateTime(null, new \DateTimeZone('America/Chicago'));
+
+                $newSession->setStart($start);
+                $newSession->setAmpedSession($amped);
+                $newSession->setStudent($user);
+                $newSession->setMentor($user->getMentor());
+
+                $em->persist($newSession);                
+            }
         }
         $em->flush();            
     }    
