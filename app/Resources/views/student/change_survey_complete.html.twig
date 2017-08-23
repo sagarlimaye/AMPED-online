@@ -6,7 +6,7 @@
               <p class="test"><b>What is the change you are considering? Write it here: </b></p>
               <i>{{ answers[0] }}</i>
               {% set choiceAnswers = answers|slice(1) %}
-            {% for answerBatch in choiceAnswers|batch(questions|length, 'Couldn\'t retrieve answer for this question') %}
+            {% for answerBatch in choiceAnswers|batch(questions|length - 1, 'Couldn\'t retrieve answer for this question') %}
                 {% for key, answer in answerBatch %}
                     <p class = "test"><b>{{questions[key].text}}</b></p> 
                     <p class ="test"><i>

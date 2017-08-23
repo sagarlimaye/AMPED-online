@@ -331,7 +331,7 @@ class HomeController extends Controller
                     $this->advanceSession($session, $user);
                     return $this->render ('student/session_complete.html.twig');
                 }
-                return $this->render('student/change_survey_complete.html.twig', ['questions'=>$questions, 'answers'=>$answers]);
+                return $this->render('student/change_survey_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers)]);
             }
             return $this->render('student/change_survey.html.twig', array('form'=>$form->createView()));
         }
