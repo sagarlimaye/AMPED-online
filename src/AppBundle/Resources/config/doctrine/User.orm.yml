@@ -63,5 +63,10 @@ AppBundle\Entity\User:
 #          inverseJoinColumns:
 #            student_id:
 #              referencedColumnName: id
-#              unique: true              
+#              unique: true           
+    attributeOverride:
+        emailCanonical:
+            type: string
+            length: 180
+            unique: false
     lifecycleCallbacks: {  }
