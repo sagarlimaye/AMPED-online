@@ -1060,7 +1060,7 @@ class HomeController extends Controller
         
         if(null !== $amped)
         {
-            if(null === $em->getRepository('AppBundle\Entity\Session')->findOneBy(['ampedSession'=>$amped]))
+            if(null === $em->getRepository('AppBundle\Entity\Session')->findOneBy(['ampedSession'=>$amped, 'student' => $user]))
             {
                 $newSession = new Session();
                 $start = new \DateTime(null, new \DateTimeZone('America/Chicago'));
