@@ -37,17 +37,6 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
             $sessionMenu = 'Session '.$amped->getNum();
             $menu->addChild($sessionMenu);
             
-            if(null !== $amped->getPages())
-            {
-                $pages = $amped->getPages();
-                for($i=0;$i<$pages->count();$i++)
-                {
-                    $menu[$sessionMenu]->addChild($pages[$i]->getTitle(), [
-                        'route' => 'simple_page',
-                        'routeParameters' => ['num' => $amped->getNum(), 'pageno' => $i]
-                    ]);
-                }
-            }
             if(null !== $amped->getMAFQuestions())
             {
                 $menu[$sessionMenu]->addChild('Mentorship agreement form', [
@@ -57,7 +46,48 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
             }
             if($amped->hasIcebreakers())
             {
-                $icebreaker = $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($session);
+                $completed = $session->getIcebreakerCompleted();
+                if($completed != null)
+                {
+                    //$icebreaker = $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($user);
+                    $icebreaker = "";
+                        $icebreaker_text = ''; $route = ''; 
+                        switch($completed)
+                        {
+                            case 1:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\ThingsInCommonAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Things in Common';
+                                $route = 'things_common';
+                                break;
+                            case 2:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\MeShieldAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Me Shield';
+                                $route = 'me_shield';
+                                break;
+                            case 3:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\ABMAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'All about me';
+                                $route = 'all_about_me';
+                                break;
+                            case 4:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\SevenWordsAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Seven Words';
+                                $route = 'seven_words';
+                                break;
+                            case 5:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\BackpackScavengerAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Backpack scavenger hunt';
+                                $route = 'backpack';
+                                break;
+                            case 6:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\TimeTravelingAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Time traveling';
+                                $route = 'time_travel';
+                                break; 
+                        }
+                }
+                /*
+                $icebreaker = $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($user);
                 $icebreaker_text = ''; $route = ''; 
                 if($icebreaker instanceof Entity\MeShieldAnswers)
                 {
@@ -89,9 +119,23 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
                     $icebreaker_text = 'Time traveling';
                     $route = 'time_travel';
                 }
+                 * *
+                 */
+                
                 if($icebreaker_text != '' && $route != '')
                 $menu[$sessionMenu]->addChild($icebreaker_text, ['route' => $route, 'routeParameters' => ['num' => $amped->getNum()]]);                
-            }
+            }            
+            if(null !== $amped->getPages())
+            {
+                $pages = $amped->getPages();
+                for($i=0;$i<$pages->count();$i++)
+                {
+                    $menu[$sessionMenu]->addChild($pages[$i]->getTitle(), [
+                        'route' => 'simple_page',
+                        'routeParameters' => ['num' => $amped->getNum(), 'pageno' => $i]
+                    ]);
+                }
+            }            
             if($amped->getHasModules())
             {
                 $menu[$sessionMenu]->addChild('Skill Building', ['route' => 'module', 'routeParameters' => ['num' => $amped->getNum(), 'module'=>$session->getModuleCompleted()]]);            
@@ -149,17 +193,6 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
         
         $menu->addChild($sessionMenu);
 
-            if(null !== $amped->getPages())
-            {
-                $pages = $amped->getPages();
-                for($i=0;$i<$pages->count();$i++)
-                {
-                    $menu[$sessionMenu]->addChild($pages[$i]->getTitle(), [
-                        'route' => 'simple_page',
-                        'routeParameters' => ['num' => $amped->getNum(), 'pageno' => $i]
-                    ]);
-                }
-            }
             if(null !== $amped->getMAFQuestions())
             {
                 $menu[$sessionMenu]->addChild('Mentorship agreement form', [
@@ -169,12 +202,46 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
             }
             if($amped->hasIcebreakers())
             {
-                if($currentSession->getIcebreakerCompleted())
+                $completed = $currentSession->getIcebreakerCompleted();
+                if($completed != null)
                 {
-                    $icebreaker = $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($currentSession);
-                    if(null !== $icebreaker)
-                    {
+                    //$icebreaker = $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($user);
+                    $icebreaker = "";
                         $icebreaker_text = ''; $route = ''; 
+                        switch($completed)
+                        {
+                            case 1:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\ThingsInCommonAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Things in Common';
+                                $route = 'things_common';
+                                break;
+                            case 2:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\MeShieldAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Me Shield';
+                                $route = 'me_shield';
+                                break;
+                            case 3:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\ABMAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'All about me';
+                                $route = 'all_about_me';
+                                break;
+                            case 4:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\SevenWordsAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Seven Words';
+                                $route = 'seven_words';
+                                break;
+                            case 5:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\BackpackScavengerAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Backpack scavenger hunt';
+                                $route = 'backpack';
+                                break;
+                            case 6:
+                                $icebreaker = $em->getRepository('AppBundle\Entity\TimeTravelingAnswers')->findOneBy(['user'=>$user]);
+                                $icebreaker_text = 'Time traveling';
+                                $route = 'time_travel';
+                                break; 
+                        }
+                        /*
                         if($icebreaker instanceof Entity\MeShieldAnswers)
                         {
                             $icebreaker_text = 'Me Shield';
@@ -205,14 +272,26 @@ class Builder implements \Symfony\Component\DependencyInjection\ContainerAwareIn
                             $icebreaker_text = 'Time traveling';
                             $route = 'time_travel';
                         }
-                        $menu[$sessionMenu]->addChild($icebreaker_text, ['route' => $route, 'routeParameters' => ['num' => $amped->getNum()]]);
-                    }
+                         * *
+                         */
+                        $menu[$sessionMenu]->addChild($icebreaker_text, ['route' => $route, 'routeParameters' => ['num' => $amped->getNum()]]);                    
                 }
                 else
                 {
                     $menu[$sessionMenu]->addChild('Fun activity', ['route' => 'icebreaker_select', 'routeParameters' => ['num' => $amped->getNum()]]);
                 }
-            }
+            }            
+            if(null !== $amped->getPages())
+            {
+                $pages = $amped->getPages();
+                for($i=0;$i<$pages->count();$i++)
+                {
+                    $menu[$sessionMenu]->addChild($pages[$i]->getTitle(), [
+                        'route' => 'simple_page',
+                        'routeParameters' => ['num' => $amped->getNum(), 'pageno' => $i]
+                    ]);
+                }
+            }            
             if($amped->getHasModules())
             {
                 if(null === $currentSession->getModuleCompleted())

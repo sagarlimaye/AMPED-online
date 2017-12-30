@@ -49,7 +49,7 @@ class HomeController extends Controller
         if(null === $session || !$this->isAllowedToStart($session))
             return $this->redirectToRoute ('index_list');        
         
-        if(!$session->getIcebreakerCompleted())
+        if($session->getIcebreakerCompleted() == null)
         // go to the icebreaker selection page
         return $this->render('student/icebreaker_selection.html.twig', ['current' => $amped] );
     }
@@ -207,7 +207,8 @@ class HomeController extends Controller
         
         // check if already completed
         $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ThingsInCommonAnswers');
-        $answers = $rep->findOneBy(['session'=>$session]);
+        $answers = $rep->findOneBy(['user'=>$user]);
+        $em = $this->getDoctrine()->getEntityManager();
         
         if(null === $answers)
         {
@@ -218,14 +219,13 @@ class HomeController extends Controller
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-                $em = $this->getDoctrine()->getEntityManager();
                 $ticanswerSet = new \AppBundle\Entity\ThingsInCommonAnswers();
                 $ticanswerSet->setUser($user);
                 $ticanswerSet->setQuestionSet($amped->getTic());
                 $answers = $form->getData();
                 $ticanswerSet->setAnswers($answers);
                 $ticanswerSet->setSession($session);
-                $session->setIcebreakerCompleted(true);
+                $session->setIcebreakerCompleted(1);
                 $em->persist($ticanswerSet);
                 $em->flush();
                 if($this->checkIfSessionComplete($session))
@@ -236,6 +236,11 @@ class HomeController extends Controller
                 return $this->render('student/things_common_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers)]);
             }
             return $this->render('student/things_common.html.twig', array('form'=>$form->createView()));
+        }
+        if($session->getIcebreakerCompleted() == null)
+        {
+            $session->setIcebreakerCompleted(1);
+            $em->flush();            
         }
         return $this->render('student/things_common_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers->getAnswers())]);
     }    
@@ -255,7 +260,8 @@ class HomeController extends Controller
         $questions = $amped->getAbm()->getQuestions()->toArray();
         // check if already completed
         $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ABMAnswers');
-        $answers = $rep->findOneBy(['session'=>$session]);
+        $answers = $rep->findOneBy(['user'=>$user]);
+        $em = $this->getDoctrine()->getEntityManager();
         
         if(null === $answers)
         {
@@ -266,14 +272,13 @@ class HomeController extends Controller
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-                $em = $this->getDoctrine()->getEntityManager();
                 $abmanswerSet = new \AppBundle\Entity\ABMAnswers();
                 $abmanswerSet->setUser($user);
                 $abmanswerSet->setQuestionSet($amped->getTic());
                 $answers = $form->getData();
                 $abmanswerSet->setAnswers($answers);
                 $abmanswerSet->setSession($session);
-                $session->setIcebreakerCompleted(true);
+                $session->setIcebreakerCompleted(3);
                 $em->persist($abmanswerSet);
                 $em->flush();
                 if($this->checkIfSessionComplete($session))
@@ -285,6 +290,11 @@ class HomeController extends Controller
             }
             return $this->render('student/all_about_me.html.twig', array('form'=>$form->createView()));
         }
+        if($session->getIcebreakerCompleted() == null)
+        {
+            $session->setIcebreakerCompleted(3);
+            $em->flush();            
+        }        
         return $this->render('student/all_about_me_complete.html.twig', ['questions'=>$questions, 'answers'=>array_values($answers->getAnswers())]);
     }    
     
@@ -448,7 +458,8 @@ class HomeController extends Controller
         
         // check if already completed
         $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\BackpackScavengerAnswers');
-        $answers = $rep->findOneBy(['session'=>$session]);
+        $answers = $rep->findOneBy(['user'=>$user]);
+        $em = $this->getDoctrine()->getEntityManager();
         if(null === $answers)
         {
             //create goal sheet form
@@ -457,13 +468,12 @@ class HomeController extends Controller
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-                $em = $this->getDoctrine()->getEntityManager();
                 $backpackSet = new \AppBundle\Entity\BackpackScavengerAnswers();
                 $backpackSet->setUser($user);
                 $answers = $form->getData();
                 $backpackSet->setAnswers($answers);
                 $backpackSet->setSession($session);
-                $session->setIcebreakerCompleted(true);
+                $session->setIcebreakerCompleted(5);
                 $em->persist($backpackSet);
                 if($this->checkIfSessionComplete($session))
                 {
@@ -475,6 +485,11 @@ class HomeController extends Controller
             }
             return $this->render('student/backpack_scavenger.html.twig', array('form'=>$form->createView()));
         }
+        if($session->getIcebreakerCompleted() == null)
+        {
+            $session->setIcebreakerCompleted(5);
+            $em->flush();            
+        }        
         return $this->render('student/backpack_scavenger_complete.html.twig', ['answers'=>$answers->getAnswers()]);
     }
 
@@ -492,7 +507,8 @@ class HomeController extends Controller
         if(null === $session || !$this->isAllowedToStart($session))
             return $this->redirectToRoute ('index_list');
         
-        $answers = $rep->findOneBy(['session'=>$session]);
+        $answers = $rep->findOneBy(['user'=>$user]);
+        $em = $this->getDoctrine()->getEntityManager();
         if(null === $answers)
         {
             //create goal sheet form
@@ -501,13 +517,12 @@ class HomeController extends Controller
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-                $em = $this->getDoctrine()->getEntityManager();
                 $sevenwordsSet = new \AppBundle\Entity\SevenWordsAnswers();
                 $sevenwordsSet->setUser($user);
                 $answers = $form->getData();
                 $sevenwordsSet->setAnswers($answers);
                 $sevenwordsSet->setSession($session);
-                $session->setIcebreakerCompleted(true);
+                $session->setIcebreakerCompleted(4);
                 $em->persist($sevenwordsSet);
                 if($this->checkIfSessionComplete($session))
                 {
@@ -519,6 +534,11 @@ class HomeController extends Controller
             }
             return $this->render('student/seven_words.html.twig', array('form'=>$form->createView()));
         }
+        if($session->getIcebreakerCompleted() == null)
+        {
+            $session->setIcebreakerCompleted(4);
+            $em->flush();            
+        }        
         return $this->render('student/seven_words_complete.html.twig', ['answers'=>$answers->getAnswers()]);
     }
 
@@ -858,7 +878,7 @@ class HomeController extends Controller
         $allModules = [
             'academic' => [2,4,5,6,9,13,12],
             'emotional' => [1, 4,7,10,11,3],
-            'self-regulation' => [1, 3,4,7,11,12],
+            'self-regulation' => [1,3,4,7,11,12],
             'social' => [3,5,10,1,4]
         ];
         $moduleNames = [
@@ -895,8 +915,11 @@ class HomeController extends Controller
         if(null === $session || !$this->isAllowedToStart($session))
             return $this->redirectToRoute ('index_list');
         
-        $session->setIcebreakerCompleted(true);
-        $this->getDoctrine()->getEntityManager()->flush();
+        if($session->getIcebreakerCompleted()==null)
+        {
+            $session->setIcebreakerCompleted(2);
+            $this->getDoctrine()->getEntityManager()->flush();            
+        }
         if($this->checkIfSessionComplete($session))
             $this->advanceSession($session, $user);
 
@@ -936,7 +959,8 @@ class HomeController extends Controller
 
         // check if already completed
         $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\TimeTravelingAnswers');
-        $answers = $rep->findOneBy(['session'=>$session]);
+        $answers = $rep->findOneBy(['user'=>$user]);
+        $em = $this->getDoctrine()->getEntityManager();
         if(null === $answers)
         {
             //create form
@@ -945,13 +969,12 @@ class HomeController extends Controller
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-                $em = $this->getDoctrine()->getEntityManager();
                 $timetravelSet = new \AppBundle\Entity\TimeTravelingAnswers();
                 $timetravelSet->setUser($user);
                 $answers = $form->getData();
                 $timetravelSet->setAnswers($answers);
                 $timetravelSet->setSession($session);
-                $session->setIcebreakerCompleted(true);
+                $session->setIcebreakerCompleted(6);
                 $em->persist($timetravelSet);
                 $em->flush();
                 if($this->checkIfSessionComplete($session))
@@ -963,6 +986,11 @@ class HomeController extends Controller
             }
             return $this->render('student/time_travel.html.twig', array('form'=>$form->createView()));
         }
+        if($session->getIcebreakerCompleted() == null)
+        {
+            $session->setIcebreakerCompleted(6);
+            $em->flush();            
+        }        
         return $this->render('student/time_travel_complete.html.twig', ['answers'=>$answers->getAnswers()]);
     }   
 
@@ -1017,7 +1045,7 @@ class HomeController extends Controller
         $complete = true;
         $em = $this->getDoctrine()->getEntityManager();
         if($amped->hasIcebreakers())
-            if(null === $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($session) && !$session->getIcebreakerCompleted())
+            if(null === $em->getRepository('AppBundle\Entity\AnswerSet')->getIcebreakerAnswers($session) && ($session->getIcebreakerCompleted() == null))
                 $complete = false;
         if($amped->getHasModules())
             if(null === $em->getRepository('AppBundle\Entity\AnswerSet')->getModuleAnswers($session) && (null === $session->getModuleCompleted()))
@@ -1075,6 +1103,7 @@ class HomeController extends Controller
         }
         $em->flush();            
     }    
+ 
 }
 ?>
 

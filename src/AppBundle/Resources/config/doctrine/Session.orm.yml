@@ -11,6 +11,7 @@ AppBundle\Entity\Session:
     fields:
         start:
             type: datetime
+            nullable: true
         end:
             type: datetime
             nullable: true
@@ -18,7 +19,7 @@ AppBundle\Entity\Session:
             type: integer
             nullable: true
         icebreakerCompleted:
-            type: boolean
+            type: integer
             nullable: true
     manyToOne:
         ampedSession:
