@@ -77,6 +77,11 @@ swiftmailer:
     transport: '%mailer_transport%'
     username: '%mailer_user%'
     password: '%mailer_password%'
+    host: mail.myuhamped.com
+    port:                 465
+    encryption:           ssl
+    auth_mode:            login
+
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
