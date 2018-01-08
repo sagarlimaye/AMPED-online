@@ -17,6 +17,7 @@ class HomeController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
+            
         if($user->hasRole('ROLE_PROTEGE'))
         {
             $sessions = $this->queryForAllStudentSessions($user);
@@ -36,6 +37,15 @@ class HomeController extends Controller
                 else return $this->render('student/session_complete.html.twig');
             }
         }
+        else if($user->hasRole('ROLE_MENTOR'))
+        {
+            return $this->render('mentor/base.html.twig', ['menteeName' => $user->getName()]);
+        }
+        else if($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            return $this->redirect($this->generateUrl('easyadmin'));
+        }
+        
     }
 
     /**
