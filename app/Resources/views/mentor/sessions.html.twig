@@ -1,0 +1,18 @@
+{% extends 'mentor/base.html.twig' %}
+
+{% block main_content %}
+    <h1 class="page-header">Review session progress</h1>
+    {% for row in sessions|batch(3) %}
+        <div class="row placeholder">
+            {% for name, session in row %}
+                <div class="col-sm-4">
+                    <a class="thumbnail" href="{{session}}">
+                        <h4 class="text-center">{{ name }}</h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}          
+          
+{% endblock %}
+     

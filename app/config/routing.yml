@@ -76,3 +76,7 @@ easy_admin_bundle:
     type:     annotation
     prefix:   /admin    
      
+mentor_review:
+    path: /sessions
+    defaults: {_controller: AppBundle:Mentor:reviewSessions }
+    
