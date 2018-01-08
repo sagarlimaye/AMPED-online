@@ -70,7 +70,7 @@ class AdminController extends BaseAdminController {
             $this->renderView(
                 // app/Resources/views/Emails/registration.html.twig
                 'account_update.txt.twig',
-                array('name' => $user->getName(), 'email' => $user->getEmail(), 'uname' => $user->getUserName(), 'password' => $user->getPlainPassword())
+                array('name' => $user->getName(), 'email' => $user->getEmail(), 'dob' => $user->getDob(), 'uname' => $user->getUserName(), 'password' => $user->getPlainPassword(), 'mentor' => $user->getMentor())
             ), 'text/plain'
         )
         /*
