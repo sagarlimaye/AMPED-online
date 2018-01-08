@@ -13,4 +13,11 @@
         </div>
         {% endfor %}
     {% endfor %}
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+        {% set session = app.request.attributes.get('num') %}
+        {% set type = app.request.attributes.get('type') %}
+        
+        <a class="btn btn-warning col-sm-6 col-md-1" href="{{ path('answers_save', {'id':session,'type':'self-assess-' ~ type}) }}">Save<a>
+    {% endif %}
+
 {% endblock %}

@@ -6,6 +6,11 @@
     <div class="row">
     {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
     </div>    
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+        <a class="btn btn-warning col-sm-6 col-md-12" href="{{path('answers_save_all')}}">Save all answers</a>
+    {% endif %}
+
+{% endblock %}
 {% block navbar %}
     {{ parent() }}
     {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
