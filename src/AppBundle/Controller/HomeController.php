@@ -10,12 +10,14 @@ use AppBundle\Form;
 use Doctrine\Common\Collections\Criteria;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\File\File;
 
 class HomeController extends Controller
 {
     public function indexAction()
     {
         $user = $this->getUser();
+            
         if($user->hasRole('ROLE_PROTEGE'))
         {
             $sessions = $this->queryForAllStudentSessions($user);
@@ -35,6 +37,15 @@ class HomeController extends Controller
                 else return $this->render('student/session_complete.html.twig');
             }
         }
+        else if($user->hasRole('ROLE_MENTOR'))
+        {
+            return $this->render('mentor/base.html.twig', ['menteeName' => $user->getName()]);
+        }
+        else if($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            return $this->redirect($this->generateUrl('easyadmin'));
+        }
+        
     }
 
     /**
@@ -1074,7 +1085,139 @@ class HomeController extends Controller
             }
         }
         $em->flush();            
-    }    
+    }
+    
+    /*
+     * @Security(is_granted('ROLE_PREVIOUS_ADMIN'))
+     */
+    public function saveAnswerAction(ampedSession $amped, Request $request, $type)
+    {
+        $user = $this->getUser();
+        $session = $this->queryForStudentSession($amped, $user);
+        $filename = '';
+        $answers = null;
+        switch($type)
+        {
+            case 'self-assess-academic':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\SelfAssessmentAnswers');
+                $questionSet = $amped->getSelfAssessmentAcademicQuestions();
+                $questions = $questionSet->getQuestions()->toArray();
+                
+                $answers = $rep->findOneBy(['session'=>$session, 'questionSet' => $questionSet]);
+                $filename = 'self-assessment-academic-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'self-assess-self-reg':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\SelfAssessmentAnswers');
+                $questionSet = $amped->getSelfAssessmentSelfRegQuestions();
+                $questions = $questionSet->getQuestions()->toArray();
+                
+                $answers = $rep->findOneBy(['session'=>$session, 'questionSet' => $questionSet]);
+                
+                $filename = 'self-assessment-self-reg-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'self-assess-social':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\SelfAssessmentAnswers');
+                $questionSet = $amped->getSelfAssessmentSocialQuestions();
+                $questions = $questionSet->getQuestions()->toArray();
+                
+                $answers = $rep->findOneBy(['session'=>$session, 'questionSet' => $questionSet]);
+                
+                $filename = 'self-assessment-social-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'self-assess-emotional':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\SelfAssessmentAnswers');
+                $questionSet = $amped->getSelfAssessmentEmotionalQuestions();
+                $questions = $questionSet->getQuestions()->toArray();
+                
+                $answers = $rep->findOneBy(['session'=>$session, 'questionSet' => $questionSet]);
+                
+                $filename = 'self-assessment-emotional-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'mentorship-agree':
+                $questions = $amped->getMAFQuestions()->getQuestions()->toArray();
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\MAFAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+                
+                $filename = 'mentorship-agreement-'.$user->getUsernameCanonical().'.csv';
+                                
+                break;
+            case 'change-survey':
+                $questions = $amped->getChangeFormQuestions()->getQuestions()->toArray();
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ChangeSurveyAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+                
+                $filename = 'change-survey-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'things-common':
+                $questions = $amped->getTic()->getQuestions()->toArray();
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ThingsInCommonAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+                
+                $filename = 'things-common-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'all-about-me':
+                $questions = $amped->getAbm()->getQuestions()->toArray();
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ABMAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+                $filename = 'all-about-me-'.$user->getUsernameCanonical().'.csv';
+                
+                break;
+            case 'goal-sheet':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\GoalSheetAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+                
+                $questions = ['My Goal is to...', 
+                    'Things I am already doing that will help me reach my goal: ', 
+                    'My plan to help me reach my goal: ',
+                    ];
+                break;
+            case 'scrol':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\ScrolAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+                
+                $filename = 'scrol-'.$user->getUsernameCanonical().'.csv';
+                $questions = ['Identify current homework or study materials the student could use the SCROL method with, and write them in the box below.'];
+                
+                break;
+            case 'seven-words':
+                $rep = $this->getDoctrine()->getRepository('AppBundle\Entity\SevenWordsAnswers');
+                $answers = $rep->findOneBy(['session'=>$session]);
+
+                $filename = 'seven-words'.$user->getUsernameCanonical().'.csv';
+                $questions = ['Think of a goal or an issue (however big or small) that you would like some clarity on or to mae a decision around. Express the issue/goal in EXACTLY 7 words'];
+                
+                break;
+        }
+        if($answers != null)
+            return $this->createFile ($questions, $answers, $filename);
+        else
+        {
+            $this->addFlash('danger', 'This form has not been submitted by the student yet!');
+            return $this->redirect('index_list');
+        }
+
+        
+       
+    }
+    public function createFile($questions, $answers, $filename)
+    {
+        $fp = fopen($filename, 'w');
+        fputcsv($fp, ['Question', 'Answer']);
+
+        foreach(array_values($answers->getAnswers()) as $key=>$answer)
+        {
+            fputcsv($fp, [$questions[$key], $answer]);
+        }                    
+
+        return $this->file(new File($filename));
+        
+    }
 }
 ?>
 

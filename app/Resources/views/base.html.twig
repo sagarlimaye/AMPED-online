@@ -36,8 +36,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            {% block navbar %}  
             <li><a id="home" href="{{ path('index_list') }}">Home</a></li>
             <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+            {% endblock %}
           </ul>
         </div>
       </div>
@@ -55,6 +57,13 @@
             {% endblock %}
         </div>
         <div id="main" class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             {% block main_content %}
 
             {% endblock %}

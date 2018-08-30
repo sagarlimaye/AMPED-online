@@ -1,0 +1,14 @@
+{% extends app.request.isXmlHttpRequest ? 'base_ajax.html.twig' : 'base.html.twig' %}
+
+{% block mainContent %}
+          <h1 class="page-header">Welcome, {{ menteeName }}</h1>
+          
+          
+{% endblock %}
+
+{% block sidebar_options %}
+    <ul>
+    <li><a href="{{ path('mentor_review') }} ">Review session progress</a></li>
+    <li><a href="#">Example dialogues</a></li>           
+    </ul>
+{% endblock %}            

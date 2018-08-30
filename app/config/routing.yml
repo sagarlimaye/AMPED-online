@@ -75,4 +75,15 @@ easy_admin_bundle:
     resource: "@AppBundle/Controller/AdminController.php"
     type:     annotation
     prefix:   /admin    
-     
+
+mentor_review:
+    path: /sessions
+    defaults: {_controller: AppBundle:Mentor:reviewSessions }
+    
+answers_save:
+    path: /save/{id}/{type}
+    defaults: {_controller: AppBundle:Home:saveAnswer}
+
+answers_save_all:
+    path: /save/all
+    defaults: {_controller: AppBundle:Home:saveAnswer}    
