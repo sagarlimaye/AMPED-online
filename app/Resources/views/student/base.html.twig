@@ -11,14 +11,6 @@
     {% endif %}
 
 {% endblock %}
-{% block navbar %}
-    {{ parent() }}
-    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-        <li><a class="btn btn-danger" href="{{ path('index_list', {'_switch_user': '_exit'}) }}">Back to my account</a></li>
-    {% endif %}
-{% endblock %}
-        
-    
 
 {#
 {% block scripts %}

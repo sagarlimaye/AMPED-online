@@ -36,4 +36,8 @@
           <div class="alert alert-danger" role="alert">We're sorry, there was a problem retrieving your answers. Please contact the website owner for assistance.</div>
       {% endif %}    
     </div>
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+        <a class="btn btn-warning col-sm-6 col-md-1" href="{{ path('answers_save', {'id':session,'type':'things-common'}) }}">Save<a>
+    {% endif %}
+      
 {% endblock %}

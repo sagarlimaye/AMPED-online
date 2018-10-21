@@ -13,5 +13,9 @@
             {% endfor %}
         {% endfor %}
     </div>
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+        {% set session = app.request.attributes.get('num') %}        
+        <a class="btn btn-warning col-sm-6 col-md-1" href="{{ path('answers_save', {'id':session,'type':'all-about-me'}) }}">Save<a>
+    {% endif %}
     
 {% endblock %}
