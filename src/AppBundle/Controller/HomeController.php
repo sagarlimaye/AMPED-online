@@ -1087,8 +1087,9 @@ class HomeController extends Controller
         $em->flush();            
     }
     
-    /*
-     * @Security(is_granted('ROLE_PREVIOUS_ADMIN'))
+    /**
+     * 
+     * @Security("is_granted('ROLE_PREVIOUS_ADMIN')")
      */
     public function saveAnswerAction(ampedSession $amped, Request $request, $type)
     {

@@ -8,6 +8,8 @@
 
 namespace AppBundle\Controller;
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 /**
  * Description of AdminController
  *
@@ -87,5 +89,13 @@ class AdminController extends BaseAdminController {
 
         $mailer->send($message);        
         $this->get('fos_user.user_manager')->updateUser($user, false);
+    }
+
+    public function switchToAction()
+    {
+        $id = $this->request->query->get('id');
+        $entity = $this->em->getRepository('AppBundle\Entity\User')->find($id);
+
+        return $this->redirectToRoute('index_list', ['_switch_user'=>$entity->getUsernameCanonical()]);
     }
 }

@@ -58,6 +58,9 @@ class SwitchUserVoter extends Voter {
         
         $user = $subject;
         
+        if($impersonatorUser->isSuperAdmin() && !$user->isSuperAdmin())
+            return true;
+
         if($impersonatorUser == null)
             return false;
 

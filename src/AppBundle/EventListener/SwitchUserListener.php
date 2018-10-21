@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class SwitchUserListener implements EventSubscriberInterface
 {
     public $authChecker;
-    public function __construct(Registry $doctrine, AuthorizationChecker $authChecker) {
+    public function __construct(AuthorizationChecker $authChecker) {
         $this->authChecker = $authChecker;
     }
     public function onSwitchUser(SwitchUserEvent $event)
